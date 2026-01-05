@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Multa Rescisï¿½ria - Draence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-section">
+                <img src="pes_drae.png" alt="Draence Logo">
+                <div class="logo-text">
+                    <h1>DRAENCE</h1>
+                    <p>Simulador de Multas Mï¿½xima</p>
+                </div>
+            </div>
+            <div class="header-spacer"></div>
+            <div class="status-badge">Sistema Online</div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <div class="container">
+            <!-- ERROR MESSAGE -->
+            <div class="error-box" id="erro"></div>
+
+            <!-- FORM SECTION -->
+            <form id="formCalculo">
+                <div class="sections-wrapper">
+                    <!-- DADOS DO JOGADOR -->
+                    <div class="card">
+                        <div class="card-title">Dados do Jogador</div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="posicao">Posiï¿½ï¿½o *</label>
+                                <select id="posicao" required>
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                                <p class="help-text">Selecione a posiï¿½ï¿½o</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="idade">Idade *</label>
+                                <input type="number" id="idade" min="15" max="45" step="1" placeholder="25" required>
+                                <p class="help-text">15-45 anos</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="overall">Overall *</label>
+                                <input type="number" id="overall" min="60" max="94" step="1" placeholder="85" required>
+                                <p class="help-text">60-94</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DADOS DA NEGOCIAï¿½ï¿½O - CONTRATO -->
+                    <div class="card">
+                        <div class="card-title">Contrato</div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="anosContrato">Duraï¿½ï¿½o do Contrato (Anos) *
+                                    <span class="tooltip-icon" data-tooltip="Define a seguranï¿½a do jogador. Contratos longos (3+ anos) podem reduzir o multiplicador da multa se o salï¿½rio nï¿½o for proporcionalmente alto.">?</span>
+                                </label>
+                                <input type="number" id="anosContrato" min="1" max="5" step="1" value="3" required>
+                                <p class="help-text">1-5 anos</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="salarioOferecido">Salï¿½rio (R$) *
+                                    <span class="tooltip-icon" data-tooltip="Pagamento mensal recorrente. Tem peso maior (0.5) na fï¿½rmula pois representa estabilidade.">?</span>
+                                </label>
+                                <input type="number" id="salarioOferecido" min="0" step="1000" placeholder="50000" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="luvasOferecidas">Luvas (R$) *
+                                    <span class="tooltip-icon" data-tooltip="Pagamento ï¿½nico na assinatura. Tem peso menor (0.2) e ï¿½ diluï¿½do pelo tempo de contrato.">?</span>
+                                </label>
+                                <input type="number" id="luvasOferecidas" min="0" step="1000" placeholder="100000" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DADOS DA NEGOCIAï¿½ï¿½O - CONSTANTES -->
+                    <div class="card">
+                        <div class="card-title">Constantes da Fï¿½rmula</div>
+
+                        <div class="form-group-checkbox">
+                            <input type="checkbox" id="usarDeltaReputacao" checked>
+                            <label for="usarDeltaReputacao">Incluir Delta Reputaï¿½ï¿½o</label>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="reputacaoTime">Rep. Time
+                                    <span class="tooltip-icon" data-tooltip="A diferenï¿½a entre as reputaï¿½ï¿½es cria um Delta. Se o time for maior que o jogador, a multa sobe.">?</span>
+                                </label>
+                                <input type="number" id="reputacaoTime" min="0" max="100" step="1" value="50">
+                                <p class="help-text">0-100</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reputacaoJogador">Rep. Jogador
+                                    <span class="tooltip-icon" data-tooltip="A diferenï¿½a entre as reputaï¿½ï¿½es cria um Delta. Se o time for maior que o jogador, a multa sobe.">?</span>
+                                </label>
+                                <input type="number" id="reputacaoJogador" min="0" max="100" step="1" value="50">
+                                <p class="help-text">0-100</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kBase">Mult. Base (K) *
+                                    <span class="tooltip-icon" data-tooltip="Fator multiplicador inicial. Define o lucro mï¿½nimo desejado sobre o valor de mercado (Ex: 1.2 = 20% de lucro).">?</span>
+                                </label>
+                                <input type="number" id="kBase" min="0.5" max="5" step="0.1" value="1.2" required>
+                                <p class="help-text">Mï¿½nimo 20% acima do valor</p>
+                            </div>
+                        </div>
+
+                        <!-- INFLUï¿½NCIAS EXTERNAS -->
+                        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                            <label style="display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9em; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">
+                                Influï¿½ncias Externas
+                                <span class="tooltip-icon" data-tooltip="Valores manuais somados ao multiplicador. Ex: 0.10 aumenta a multa em 10% do valor de mercado.">?</span>
+                            </label>
+                            <div class="influencia-container" id="influenciasContainer"></div>
+                            <button type="button" class="btn-add-dashed" id="btnAdicionarInfluencia">
+                                + Adicionar Influï¿½ncia
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="button-group">
+                    <button type="submit" class="btn-primary">Calcular Multa</button>
+                    <button type="reset" class="btn-secondary">Limpar</button>
+                </div>
+            </form>
+
+            <!-- RESULT SECTION -->
+            <div class="result-section" id="resultado">
+                <div class="result-header">
+                    <div class="result-label">Multa Rescisï¿½ria Mï¿½xima - BRL</div>
+                    <div class="result-value" id="multaFinal">R$ 0</div>
+                </div>
+
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-item-label">Valor de Mercado</div>
+                        <div class="result-item-value" id="valorMercado">R$ 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Jogador</div>
+                        <div class="result-item-value" id="dadosJogador">-</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Salï¿½rio Base</div>
+                        <div class="result-item-value" id="salarioBase">R$ 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Salï¿½rio Oferecido</div>
+                        <div class="result-item-value has-percent" id="salarioOferecidoShow">
+                            <span id="salarioOferecidoValue">R$ 0</span>
+                            <span class="percent-badge" id="percentSalario"></span>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Luvas Base</div>
+                        <div class="result-item-value" id="luvasBase">R$ 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Luvas Oferecidas</div>
+                        <div class="result-item-value has-percent" id="luvasOferecidasShow">
+                            <span id="luvasOferecidasValue">R$ 0</span>
+                            <span class="percent-badge" id="percentLuvas"></span>
+                        </div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">VTC Base (Total do Contrato)</div>
+                        <div class="result-item-value" id="vtcBase">R$ 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">VTC Oferecido (Total Oferta)</div>
+                        <div class="result-item-value has-percent" id="vtcOferecidoShow">
+                            <span id="vtcOferecidoValue">R$ 0</span>
+                            <span class="percent-badge" id="percentVTC"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-multiplier">
+                    <div class="multiplier-title">Fï¿½rmula Aplicada</div>
+                    <div style="background: var(--bg-body); padding: 15px; border-radius: 6px; margin-bottom: 20px; font-family: monospace; overflow-x: auto;">
+                        <div style="color: var(--text-secondary); font-size: 0.85em; margin-bottom: 10px;">
+                            M = V_mercado  (K_base + ?_rep + ?_salï¿½rio + ?_luvas + Se)
+                        </div>
+                        <div style="color: var(--text-primary); font-size: 0.95em;">
+                            M = <span id="formulaValorMercado">0</span>  (<span id="formulaKBase">0</span> + <span id="formulaDeltaRep">0</span> + <span id="formulaDeltaSal">0</span> + <span id="formulaDeltaLuv">0</span> + <span id="formulaEpsilon">0</span>)
+                        </div>
+                        <div style="color: var(--text-primary); font-size: 0.95em; margin-top: 10px;">
+                            M = <span id="formulaValorMercado2">0</span>  <span id="formulaMultiplicador">0</span> = <strong style="color: var(--accent-success);" id="formulaResultado">R$ 0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-multiplier">
+                    <div class="multiplier-title">Detalhamento do Multiplicador</div>
+
+                    <div class="multiplier-row">
+                        <span class="multiplier-label">K Base</span>
+                        <span class="multiplier-value" id="multDetKBase">0.00</span>
+                    </div>
+
+                    <div class="multiplier-row">
+                        <span class="multiplier-label">? Reputaï¿½ï¿½o</span>
+                        <span class="multiplier-value" id="multDetDeltaRep">+0.00</span>
+                    </div>
+
+                    <div class="multiplier-row">
+                        <span class="multiplier-label">? Salï¿½rio</span>
+                        <span class="multiplier-value" id="multDetDeltaSal">+0.00</span>
+                    </div>
+
+                    <div class="multiplier-row">
+                        <span class="multiplier-label">? Luvas</span>
+                        <span class="multiplier-value" id="multDetDeltaLuv">+0.00</span>
+                    </div>
+
+                    <div class="multiplier-row">
+                        <span class="multiplier-label">S Influï¿½ncias</span>
+                        <span class="multiplier-value" id="multDetEpsilon">+0.00</span>
+                    </div>
+
+                    <div class="multiplier-row">
+                        <span class="multiplier-label">Multiplicador Total</span>
+                        <span class="multiplier-value" id="multDetTotal">0.00x</span>
+                    </div>
+                </div>
+
+                <div class="result-header" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));">
+                    <div class="result-label">Multa Rescisï¿½ria Mï¿½xima - EUR</div>
+                    <div class="result-value" id="multaFinalEuro" style="color: var(--accent-primary);"> 0</div>
+                </div>
+
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-item-label">Valor de Mercado (EUR)</div>
+                        <div class="result-item-value" id="valorMercadoEuro"> 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Salï¿½rio Base (EUR)</div>
+                        <div class="result-item-value" id="salarioBaseEuro"> 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Salï¿½rio Oferecido (EUR)</div>
+                        <div class="result-item-value" id="salarioOferecidoEuroShow"> 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Luvas Base (EUR)</div>
+                        <div class="result-item-value" id="luvasBaseEuro"> 0</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-item-label">Luvas Oferecidas (EUR)</div>
+                        <div class="result-item-value" id="luvasOferecidasEuroShow"> 0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dados_inline.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
