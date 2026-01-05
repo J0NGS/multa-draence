@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Valores - Draence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-section">
+                <img src="pes_drae.png" alt="Draence Logo">
+                <div class="logo-text">
+                    <h1>DRAENCE</h1>
+                    <p>Tabela de Valores</p>
+                </div>
+            </div>
+            <div class="header-spacer"></div>
+            <a href="index.html" class="status-badge" style="cursor: pointer; text-decoration: none;">← Voltar</a>
+            <div class="status-badge">Base de Dados</div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <div class="container">
+            <!-- CARD DE FILTROS -->
+            <div class="card">
+                <div class="card-title">🔍 Filtros</div>
+
+                <div class="form-grid" style="gap: 15px;">
+                    <div class="form-group">
+                        <label for="filterPosicao">Posição</label>
+                        <select id="filterPosicao">
+                            <option value="">Todas as Posições</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterOverallMin">Overall Mínimo</label>
+                        <input type="number" id="filterOverallMin" min="60" max="99" placeholder="60">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterOverallMax">Overall Máximo</label>
+                        <input type="number" id="filterOverallMax" min="60" max="99" placeholder="99">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterIdadeMin">Idade Mínima</label>
+                        <input type="number" id="filterIdadeMin" min="15" max="45" placeholder="15">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterIdadeMax">Idade Máxima</label>
+                        <input type="number" id="filterIdadeMax" min="15" max="45" placeholder="45">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+                    <button id="btnFiltrar" class="btn-primary" style="cursor: pointer;">🔎 Filtrar</button>
+                    <button id="btnLimpar" class="btn-secondary" style="cursor: pointer; background: rgba(239, 68, 68, 0.1); border: 1px solid var(--accent-danger); color: var(--accent-danger);">Limpar</button>
+                </div>
+            </div>
+
+            <!-- CARD DE RESULTADOS -->
+            <div class="card" style="overflow-x: auto;">
+                <div class="card-title"> Resultados</div>
+
+                <div id="tabelaContainer" style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th><button class="sort-btn" data-sort="posicao">Posição <span class="sort-icon">⇅</span></button></th>
+                                <th><button class="sort-btn" data-sort="idade">Idade <span class="sort-icon">⇅</span></button></th>
+                                <th><button class="sort-btn" data-sort="overall">Overall <span class="sort-icon">⇅</span></button></th>
+                                <th><button class="sort-btn" data-sort="valor_brl">Valor Mercado <span class="sort-icon">⇅</span></button></th>
+                                <th><button class="sort-btn" data-sort="salario_brl">Salário Base <span class="sort-icon">⇅</span></button></th>
+                                <th><button class="sort-btn" data-sort="luvas_brl">Luvas Base Anuais <span class="sort-icon">⇅</span></button></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaBody">
+                            <!-- Preenchido por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PAGINAÇÃO -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; flex-wrap: wrap; gap: 15px;">
+                    <div id="contadorRegistros" style="color: var(--text-secondary); font-size: 0.9em;">
+                        Exibindo 0 de 0 registros
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button id="btnAnterior" class="btn-paginacao" style="cursor: pointer;">← Anterior</button>
+                        <div id="paginacaoInfo" style="color: var(--text-secondary); min-width: 100px; text-align: center;">Página 1 de 1</div>
+                        <button id="btnProximo" class="btn-paginacao" style="cursor: pointer;">Próximo →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9em;">
+            Desenvolvido por <a href="https://github.com/J0NGS" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 500;">J0NGS</a><br>
+            Todos os direitos reservados © 2026
+        </p>
+    </footer>
+
+    <script src="dados_inline.js"></script>
+    <script>
+        // ============================================
+        // TABELA DE VALORES - SCRIPT COM SORTING E PAGINAÇÃO
+        // ============================================
+
+        const TAXA_BRL_EUR = 0.1667;
+        const REGISTROS_POR_PAGINA = 50;
+
+        // Estado da aplicação
+        let todosOsDados = [];
+        let dadosFiltrados = [];
+        let posicoes = new Set();
+        let paginaAtual = 1;
+        let sortAtual = { coluna: null, direcao: 'asc' };
+
+        // Funções Auxiliares
+        function formatarBRL(valor) {
+            if (!valor || isNaN(valor)) return 'N/A';
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(valor);
+        }
+
+        function formatarEUR(valor) {
+            if (!valor || isNaN(valor)) return 'N/A';
+            const valorEur = valor * TAXA_BRL_EUR;
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(valorEur);
+        }
+
+        function obterSalarioBase(overall) {
+            let registro = DB_SALARIO.find(r => r.overall === overall);
+            
+            if (!registro && typeof overall === 'number') {
+                const menores = DB_SALARIO.filter(r => typeof r.overall === 'number' && r.overall <= overall);
+                if (menores.length > 0) {
+                    registro = menores[menores.length - 1];
+                }
+            }
+
+            return registro ? {
+                salario_base: registro.salario_base,
+                luvas_base: registro.luvas_base
+            } : { salario_base: 0, luvas_base: 0 };
+        }
+
+        function preencherPosicoes() {
+            DB_MERCADO.forEach(item => {
+                posicoes.add(item.posicao);
+            });
+
+            const select = document.getElementById('filterPosicao');
+            const posicoesSordenadas = Array.from(posicoes).sort();
+            
+            posicoesSordenadas.forEach(pos => {
+                const option = document.createElement('option');
+                option.value = pos;
+                option.textContent = pos;
+                select.appendChild(option);
+            });
+        }
+
+        function prepararDados() {
+            todosOsDados = [];
+
+            DB_MERCADO.forEach(itemMercado => {
+                const salarioBase = obterSalarioBase(itemMercado.overall);
+
+                todosOsDados.push({
+                    posicao: itemMercado.posicao,
+                    idade: itemMercado.idade,
+                    overall: itemMercado.overall,
+                    valor_brl: itemMercado.valor_brl,
+                    valor_eur: itemMercado.valor_eur,
+                    salario_brl: salarioBase.salario_base,
+                    salario_eur: salarioBase.salario_base * TAXA_BRL_EUR,
+                    luvas_brl: salarioBase.luvas_base,
+                    luvas_eur: salarioBase.luvas_base * TAXA_BRL_EUR
+                });
+            });
+        }
+
+        function ordenarDados(coluna) {
+            if (sortAtual.coluna === coluna) {
+                sortAtual.direcao = sortAtual.direcao === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortAtual.coluna = coluna;
+                sortAtual.direcao = 'asc';
+            }
+
+            dadosFiltrados.sort((a, b) => {
+                let valorA = a[coluna];
+                let valorB = b[coluna];
+
+                if (typeof valorA === 'string') {
+                    valorA = valorA.toUpperCase();
+                    valorB = valorB.toUpperCase();
+                }
+
+                if (valorA < valorB) return sortAtual.direcao === 'asc' ? -1 : 1;
+                if (valorA > valorB) return sortAtual.direcao === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            paginaAtual = 1;
+            atualizarBotoesSorting();
+            exibirPagina();
+        }
+
+        function atualizarBotoesSorting() {
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.classList.remove('sort-asc', 'sort-desc');
+                
+                if (btn.dataset.sort === sortAtual.coluna) {
+                    btn.classList.add(`sort-${sortAtual.direcao}`);
+                }
+            });
+        }
+
+        function filtrarDados() {
+            const posicao = document.getElementById('filterPosicao').value;
+            const overallMin = parseInt(document.getElementById('filterOverallMin').value) || 60;
+            const overallMax = parseInt(document.getElementById('filterOverallMax').value) || 99;
+            const idadeMin = parseInt(document.getElementById('filterIdadeMin').value) || 15;
+            const idadeMax = parseInt(document.getElementById('filterIdadeMax').value) || 45;
+
+            dadosFiltrados = todosOsDados.filter(item => {
+                const matchPosicao = posicao === '' || item.posicao === posicao;
+                const matchOverall = item.overall >= overallMin && item.overall <= overallMax;
+                const matchIdade = item.idade >= idadeMin && item.idade <= idadeMax;
+
+                return matchPosicao && matchOverall && matchIdade;
+            });
+
+            paginaAtual = 1;
+            exibirPagina();
+        }
+
+        function exibirPagina() {
+            const totalPaginas = Math.ceil(dadosFiltrados.length / REGISTROS_POR_PAGINA);
+            const inicio = (paginaAtual - 1) * REGISTROS_POR_PAGINA;
+            const fim = inicio + REGISTROS_POR_PAGINA;
+            const dadosPagina = dadosFiltrados.slice(inicio, fim);
+
+            preencherTabela(dadosPagina);
+            atualizarContador(dadosPagina.length, dadosFiltrados.length);
+            atualizarPaginacao(totalPaginas);
+        }
+
+        function preencherTabela(dados) {
+            const tbody = document.getElementById('tabelaBody');
+            tbody.innerHTML = '';
+
+            if (dados.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhum registro encontrado</td></tr>';
+                return;
+            }
+
+            dados.forEach(item => {
+                const tr = document.createElement('tr');
+                
+                tr.innerHTML = `
+                    <td><span class="badge-posicao">${item.posicao}</span></td>
+                    <td>${item.idade}</td>
+                    <td class="font-bold">${item.overall}</td>
+                    <td>
+                        <div class="money-brl">${formatarBRL(item.valor_brl)}</div>
+                        <div class="money-eur">${formatarEUR(item.valor_brl)}</div>
+                    </td>
+                    <td>
+                        <div class="money-brl">${formatarBRL(item.salario_brl)}</div>
+                        <div class="money-eur">${formatarEUR(item.salario_brl)}</div>
+                    </td>
+                    <td>
+                        <div class="money-brl">${formatarBRL(item.luvas_brl)}</div>
+                        <div class="money-eur">${formatarEUR(item.luvas_brl)}</div>
+                    </td>
+                `;
+                
+                tbody.appendChild(tr);
+            });
+        }
+
+        function atualizarContador(exibidos, total) {
+            const contador = document.getElementById('contadorRegistros');
+            contador.textContent = `Exibindo ${exibidos} de ${total} registros`;
+        }
+
+        function atualizarPaginacao(totalPaginas) {
+            const paginacaoInfo = document.getElementById('paginacaoInfo');
+            const btnAnterior = document.getElementById('btnAnterior');
+            const btnProximo = document.getElementById('btnProximo');
+
+            paginacaoInfo.textContent = `Página ${paginaAtual} de ${totalPaginas}`;
+            
+            btnAnterior.disabled = paginaAtual === 1;
+            btnProximo.disabled = paginaAtual === totalPaginas || totalPaginas === 0;
+
+            btnAnterior.style.opacity = paginaAtual === 1 ? '0.5' : '1';
+            btnProximo.style.opacity = paginaAtual === totalPaginas || totalPaginas === 0 ? '0.5' : '1';
+        }
+
+        function limparFiltros() {
+            document.getElementById('filterPosicao').value = '';
+            document.getElementById('filterOverallMin').value = '';
+            document.getElementById('filterOverallMax').value = '';
+            document.getElementById('filterIdadeMin').value = '';
+            document.getElementById('filterIdadeMax').value = '';
+            
+            filtrarDados();
+        }
+
+        // Event Listeners - Filtros
+        document.getElementById('btnFiltrar').addEventListener('click', filtrarDados);
+        document.getElementById('btnLimpar').addEventListener('click', limparFiltros);
+
+        // Event Listeners - Paginação
+        document.getElementById('btnAnterior').addEventListener('click', () => {
+            if (paginaAtual > 1) {
+                paginaAtual--;
+                exibirPagina();
+                document.querySelector('.data-table').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        document.getElementById('btnProximo').addEventListener('click', () => {
+            const totalPaginas = Math.ceil(dadosFiltrados.length / REGISTROS_POR_PAGINA);
+            if (paginaAtual < totalPaginas) {
+                paginaAtual++;
+                exibirPagina();
+                document.querySelector('.data-table').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        // Event Listeners - Sorting
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                ordenarDados(btn.dataset.sort);
+            });
+        });
+
+        // Permitir ENTER para filtrar
+        ['filterPosicao', 'filterOverallMin', 'filterOverallMax', 'filterIdadeMin', 'filterIdadeMax'].forEach(id => {
+            document.getElementById(id).addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') filtrarDados();
+            });
+        });
+
+        // Inicializar ao carregar a página
+        window.addEventListener('load', () => {
+            preencherPosicoes();
+            prepararDados();
+            filtrarDados();
+        });
+    </script>
+</body>
+</html>
