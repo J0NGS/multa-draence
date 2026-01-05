@@ -10,7 +10,7 @@
 
 **Simulador Estratégico de Multas Rescisórias e Contratos para o RPG Draence**
 
-[Acessar Calculadora Online](https://j0ngs.github.io/draence-calculator) •
+[Acessar Calculadora Online](https://j0ngs.github.io/multa-draence/) •
 [Funcionalidades](#-funcionalidades) •
 [Lógica de Cálculo](#-lógica-e-matemática) •
 [Tecnologias](#-tecnologias)
