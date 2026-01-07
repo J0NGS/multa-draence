@@ -179,10 +179,10 @@ function enforceLimits(event) {
 // ============================================
 
 const PERFIS = {
-    padrao: { sal: 0.25, luv: 0.12, k_factor: 0.60, label: "Padrão" },
-    mercenario: { sal: 0.20, luv: 0.08, k_factor: 0.75, label: "Mercenário" },
-    fiel: { sal: 0.30, luv: 0.06, k_factor: 0.80, label: "Fiel" },
-    ambicioso: { sal: 0.15, luv: 0.06, k_factor: 0.30, label: "Ambicioso" }
+    padrao: { sal: 0.1, luv: 0.04, k_factor: 0.5, label: "Padrão" },
+    mercenario: {sal: 0.1, luv: 0.15, k_factor: 0.35, label: "Mercenário" },
+    fiel: { sal: 0.35, luv: 0.05, k_factor: 0.9, label: "Fiel" },
+    ambicioso: { sal: 0.25, luv: 0.07, k_factor: 0.25, label: "Ambicioso" }
 };
 
 const MAX_PESO_SAL = 0.35;
@@ -460,6 +460,52 @@ function limparErro() {
 }
 
 // ============================================
+// FUNÇÕES DE AJUSTE (BOTÕES +/-)
+// ============================================
+
+/**
+ * Ajusta um valor de entrada monetária seguindo o padrão de arredondamento
+ * Acima de 1M: incrementa/decrementa 100 mil
+ * Abaixo de 1M: incrementa/decrementa 1 mil
+ */
+function ajustarValorMonetario(inputId, incrementar = true) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    
+    const valorAtual = parseMoney(input.value) || 0;
+    
+    // Determinar o incremento baseado no valor
+    let incremento;
+    if (valorAtual >= 1000000) {
+        incremento = 100000; // 100 mil
+    } else {
+        incremento = 1000; // 1 mil
+    }
+    
+    // Calcular novo valor
+    let novoValor = incrementar ? valorAtual + incremento : valorAtual - incremento;
+    
+    // Obter limites
+    const min = Number(input.dataset.min || input.min) || 0;
+    const max = Number(input.dataset.max || input.max) || 999999999;
+    
+    // Aplicar limites
+    if (novoValor < min) novoValor = min;
+    if (novoValor > max) novoValor = max;
+    
+    // Atualizar o input com o novo valor formatado
+    const valorFormatado = formatMoneyDisplay(novoValor);
+    input.value = valorFormatado;
+    
+    // Trigger evento de mudança para atualizar a interface
+    const event = new Event('blur', { bubbles: true });
+    input.dispatchEvent(event);
+    
+    // Calcular automaticamente
+    calcularMulta();
+}
+
+// ============================================
 // CÁLCULO PRINCIPAL
 // ============================================
 
@@ -609,10 +655,29 @@ function calcularMulta() {
     }
 
     // 6. RENDERIZAÇÃO DOS RESULTADOS
-    const multaSugeridaFinal = valorMercado * multiplicadorSug;
-    const multaMaximaFinal = valorMercado * multiplicadorMax;
-    const multaSugeridaEuro = multaSugeridaFinal * TAXA_BRL_EUR;
-    const multaMaximaEuro = multaMaximaFinal * TAXA_BRL_EUR;
+    let multaSugeridaFinal = valorMercado * multiplicadorSug;
+    let multaMaximaFinal = valorMercado * multiplicadorMax;
+    
+    // Arredondar para valores fechados: 
+    // Acima de 1M: arredondar para 100 mil em 100 mil
+    // Abaixo de 1M: arredondar para 1 mil em 1 mil
+    const arredondarMulta = (valor) => {
+        if (valor >= 1000000) {
+            return Math.round(valor / 100000) * 100000;
+        } else {
+            return Math.round(valor / 1000) * 1000;
+        }
+    };
+    
+    multaSugeridaFinal = arredondarMulta(multaSugeridaFinal);
+    multaMaximaFinal = arredondarMulta(multaMaximaFinal);
+    
+    // Converter para Euro e depois arredondar
+    let multaSugeridaEuro = multaSugeridaFinal * TAXA_BRL_EUR;
+    let multaMaximaEuro = multaMaximaFinal * TAXA_BRL_EUR;
+    
+    multaSugeridaEuro = arredondarMulta(multaSugeridaEuro);
+    multaMaximaEuro = arredondarMulta(multaMaximaEuro);
 
     // NOVO LAYOUT - SCOREBOARD
     document.getElementById('multaSugBRL').textContent = formatarBRL(multaSugeridaFinal);
@@ -850,6 +915,42 @@ document.addEventListener('DOMContentLoaded', () => {
             input.addEventListener('blur', enforceLimits);
         }
     });
+
+    // ============================================
+    // INICIALIZAR BOTÕES DE AJUSTE (+/-)
+    // ============================================
+    
+    // Botões para Salário
+    const btnSalarioMais = document.getElementById('btnSalarioMais');
+    const btnSalarioMenos = document.getElementById('btnSalarioMenos');
+    if (btnSalarioMais) {
+        btnSalarioMais.addEventListener('click', (e) => {
+            e.preventDefault();
+            ajustarValorMonetario('salarioOferecido', true);
+        });
+    }
+    if (btnSalarioMenos) {
+        btnSalarioMenos.addEventListener('click', (e) => {
+            e.preventDefault();
+            ajustarValorMonetario('salarioOferecido', false);
+        });
+    }
+    
+    // Botões para Luvas
+    const btnLuvasMais = document.getElementById('btnLuvasMais');
+    const btnLuvasMenos = document.getElementById('btnLuvasMenos');
+    if (btnLuvasMais) {
+        btnLuvasMais.addEventListener('click', (e) => {
+            e.preventDefault();
+            ajustarValorMonetario('luvasOferecidas', true);
+        });
+    }
+    if (btnLuvasMenos) {
+        btnLuvasMenos.addEventListener('click', (e) => {
+            e.preventDefault();
+            ajustarValorMonetario('luvasOferecidas', false);
+        });
+    }
 
     // Botão adicionar influência (se existe - apenas admin)
     const btnAdicionarInfluencia = document.getElementById('btnAdicionarInfluencia');

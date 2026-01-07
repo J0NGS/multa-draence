@@ -92,7 +92,11 @@
                                 <label for="salarioOferecido">Salário (£D) *
                                     <span class="tooltip-icon" data-tooltip="Pagamento mensal. É o fator de maior peso na estabilidade. Aumentos aqui geram mais impacto na multa do que nas luvas (exceto para Mercenários).">?</span>
                                 </label>
-                                <input type="text" id="salarioOferecido" class="input-money" placeholder="50000" data-min="0" data-max="999999999" required>
+                                <div class="input-group-with-buttons">
+                                    <button type="button" class="btn-adjust" id="btnSalarioMenos" title="Diminuir">−</button>
+                                    <input type="text" id="salarioOferecido" class="input-money" placeholder="50000" data-min="0" data-max="999999999" required>
+                                    <button type="button" class="btn-adjust" id="btnSalarioMais" title="Aumentar">+</button>
+                                </div>
                                 <span class="magnitude-badge"></span>
                             </div>
 
@@ -100,7 +104,11 @@
                                 <label for="luvasOferecidas">Luvas (£D) *
                                     <span class="tooltip-icon" data-tooltip="Prêmio de assinatura (pagamento único). O sistema dilui esse valor pelos anos de contrato. Para contratos longos, luvas baixas têm pouco efeito na multa.">?</span>
                                 </label>
-                                <input type="text" id="luvasOferecidas" class="input-money" placeholder="100000" data-min="0" data-max="999999999" required>
+                                <div class="input-group-with-buttons">
+                                    <button type="button" class="btn-adjust" id="btnLuvasMenos" title="Diminuir">−</button>
+                                    <input type="text" id="luvasOferecidas" class="input-money" placeholder="100000" data-min="0" data-max="999999999" required>
+                                    <button type="button" class="btn-adjust" id="btnLuvasMais" title="Aumentar">+</button>
+                                </div>
                                 <span class="magnitude-badge"></span>
                             </div>
                         </div>
@@ -129,9 +137,9 @@
 
                             <div class="form-group">
                                 <label for="kBase">Mult. Base (K) *
-                                    <span class="tooltip-icon" data-tooltip="Sua margem de lucro inicial. 1.2 significa que você quer vender por 20% a mais que comprou. Perfis 'Ambiciosos' rejeitam margens altas.">?</span>
+                                    <span class="tooltip-icon" data-tooltip="Sua margem de lucro inicial. 1.1 significa que você quer vender por 10% a mais que comprou. Perfis 'Ambiciosos' rejeitam margens altas.">?</span>
                                 </label>
-                                <input type="number" id="kBase" min="0.5" max="5" step="0.1" value="1.2" required>
+                                <input type="number" id="kBase" min="0.5" max="5" step="0.1" value="1.1" required>
                                 <p class="help-text" id="helpTextKBase">Multiplicador de 20.0% acima do valor</p>
                             </div>
                         </div>

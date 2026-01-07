@@ -86,7 +86,11 @@
                                 <label for="salarioOferecido">Salário (£D) *
                                     <span class="tooltip-icon" data-tooltip="Pagamento mensal. Fator de maior peso na estabilidade.">?</span>
                                 </label>
-                                <input type="text" id="salarioOferecido" class="input-money" placeholder="50000" data-min="0" data-max="999999999" required>
+                                <div class="input-group-with-buttons">
+                                    <button type="button" class="btn-adjust" id="btnSalarioMenos" title="Diminuir">−</button>
+                                    <input type="text" id="salarioOferecido" class="input-money" placeholder="50000" data-min="0" data-max="999999999" required>
+                                    <button type="button" class="btn-adjust" id="btnSalarioMais" title="Aumentar">+</button>
+                                </div>
                                 <span class="magnitude-badge"></span>
                             </div>
 
@@ -94,7 +98,11 @@
                                 <label for="luvasOferecidas">Luvas (£D) *
                                     <span class="tooltip-icon" data-tooltip="Prêmio de assinatura (pagamento único).">?</span>
                                 </label>
-                                <input type="text" id="luvasOferecidas" class="input-money" placeholder="100000" data-min="0" data-max="999999999" required>
+                                <div class="input-group-with-buttons">
+                                    <button type="button" class="btn-adjust" id="btnLuvasMenos" title="Diminuir">−</button>
+                                    <input type="text" id="luvasOferecidas" class="input-money" placeholder="100000" data-min="0" data-max="999999999" required>
+                                    <button type="button" class="btn-adjust" id="btnLuvasMais" title="Aumentar">+</button>
+                                </div>
                                 <span class="magnitude-badge"></span>
                             </div>
                         </div>
