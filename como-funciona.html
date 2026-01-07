@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia do Manager - Calculadora de Multa Rescisória</title>
+    <title>Como Funciona - Calculadora de Multa Rescisória</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,200 +12,149 @@
         <!-- HEADER -->
         <header>
             <div class="logo-section">
-                <img src="Pes_drae.png" alt="Draence Logo">
+                <img src="pes_drae.png" alt="Draence Logo">
                 <div class="logo-text">
-                    <h1>DRAENCE</h1>
-                    <p>Guia do sistema</p>
+                    <h1>MULTAS DRAENCE</h1>
+                    <p>Como Funciona</p>
                 </div>
             </div>
             <div class="header-spacer"></div>
-            <a href="index.html" class="status-badge" style="cursor: pointer; text-decoration: none; background: rgba(59, 130, 246, 0.2); border-color: var(--accent-primary); color: var(--accent-primary);">← Voltar para Calculadora</a>
+            <a href="index.html" class="status-badge" style="cursor: pointer; text-decoration: none;">← Voltar</a>
         </header>
 
         <!-- HERO SECTION -->
         <div class="guide-hero">
-            <h1 style="font-size: 2em; margin-bottom: 10px; color: var(--text-primary);">Domine o Mercado do Draence</h1>
-            <p style="font-size: 1.05em; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
-                Entenda cada factor da fórmula.
-            </p>
+            <h1 class="hero-title"> O Guia Prático de como usar o simulador de multas</h1>
+            <p class="hero-subtitle">Como gerar contratos justos e propostas oficiais em 4 passos simples</p>
         </div>
 
         <!-- MAIN CONTENT -->
         <div class="container">
-            <!-- CARD 1: A REGRA DE OURO -->
+            <!-- STEP 1: OS DADOS (INPUT) -->
             <div class="card">
-                <div class="guide-section-title">
-                    <span>A Regra de Ouro: VTC</span>
+                <div class="step-card">
+                    <div class="step-number">1️⃣</div>
+                    <div class="step-content">
+                        <h3>Os Dados (Posição, Idade, Overall)</h3>
+                        <p>
+                            Tudo começa aqui. Você insere os <strong>atributos do jogador</strong>: sua posição no campo, idade e rating (Overall). 
+                            O sistema busca na <strong>tabela oficial da liga</strong> qual é o "Valor de Mercado Base" — o preço padrão para um jogador com esse perfil e gera uma multa baseado na sua proposta de contrato e do valor base.
+                        </p>
+                        <p>
+                            Pense assim: um goleiro 24 anos com Overall 85 tem um valor diferente de um zagueiro 32 anos com Overall 78 além de cobrarem valores diferentes. O sistema já sabe isso.
+                        </p>
+                    </div>
                 </div>
-                
-                <div style="margin: 20px 0;">
-                    <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.6; font-size: 0.95em;">
-                        o primeiro fato analisado não é o salário mensal. O que importa é o <strong>Valor Total do Contrato (VTC)</strong> — tudo que você gasta com o jogador nos X anos.
+            </div>
+
+            <!-- STEP 2: O CONTRATO (AJUSTE) -->
+            <div class="card">
+                <div class="step-card">
+                    <div class="step-number">2️⃣</div>
+                    <div class="step-content">
+                        <h3>O Contrato (Você Ajusta os Termos)</h3>
+                        <p>
+                            Agora você <strong>negocia com o jogador</strong>. Aqui é onde a mágica acontece:
+                        </p>
+                        <ul>
+                            <li><strong>Salário:</strong> Quanto ele ganha por mês. Aumentar o salário valoriza o jogador e força a multa para cima.</li>
+                            <li><strong>Luvas:</strong> Dinheiro na assinatura do contrato. Ajuda a subir a multa com dinheiro rápido, especialmente com jogadores mercenários.</li>
+                            <li><strong>Duração:</strong> Quantos anos dura o contrato. Contratos mais longos podem diminuir a multa para jogadores que querem ter a opção de sair - Lembrem-se que o jogador também quer estabilidade, um contrato de 2 anos é o minimo esperado por um jogador.</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic; color: var(--text-primary);">
+                            <strong>Exemplo:</strong> R$50k/mês por 3 anos + R$100k de luva = um contrato sólido. A multa será calculada baseada nesse valor total de 3 anos de salário mais as luvas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: A MULTA SUGERIDA (O RESULTADO) -->
+            <div class="card">
+                <div class="step-card">
+                    <div class="step-number">3️⃣</div>
+                    <div class="step-content">
+                        <h3>A Multa Sugerida (O Resultado)</h3>
+                        <p>
+                            Você clica em <strong>"Calcular"</strong> e o sistema faz toda a matemática. 
+                            Ele considera automaticamente:
+                        </p>
+                        <ul>
+                            <li><strong>Satisfação dos Jogadores:</strong> Um valor de 0 a 100 que indica a satisfação do jogador com clube que ele está/vai.</li>
+                            <li><strong>Perfil Psicológico do Jogador:</strong> A CDF pode simular perfis psicologico dos jogadores, Se ele quer sair fácil ou quer ficar. Por isso os jogadores podem exigir multa um pouco menor do que a sugerida, assim como também podem aceitar multa um pouco maior.</li>
+                            <li><strong>Valores da Liga:</strong> Todos os valores utilizados como base são os valores oficiais disponibilizados pela CDF, podendo ser consultado na tabela de valores.</li>
+                        </ul>
+                        <p style="margin-top: 15px;">
+                            <strong>Resultado:</strong> Uma multa rescisória <strong>justa e realista</strong>, sem você precisar brigar com contas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: A PROPOSTA (AÇÃO) -->
+            <div class="card">
+                <div class="step-card">
+                    <div class="step-number">4️⃣</div>
+                    <div class="step-content">
+                        <h3>A Proposta (Gera o Documento)</h3>
+                        <p>
+                            Clique em <strong>"Montar Proposta"</strong> e o sistema gera automaticamente o <strong>texto padrão</strong> pronto para enviar para a CDF.
+                        </p>
+                        <p>
+                            O texto já vem formatado com:
+                        </p>
+                        <ul>
+                            <li>Tipo de negociação (Compra, Empréstimo, Renovação, etc)</li>
+                            <li>Dados do jogador e clubes</li>
+                            <li>Salário, luvas, duração</li>
+                            <li>Multas calculadas</li>
+                            <li>Premiações e cláusulas especiais (se adicionadas)</li>
+                        </ul>
+                        <p style="margin-top: 15px;">
+                            <strong>Tudo pronto:</strong> Copie e cole na conversa com o agente. Sem erros, sem retrabalho.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CURIOSIDADE: BASTIDORES -->
+            <div class="curiosity-box">
+                <div class="curiosity-title">🔍 Curiosidade: Como a Mágica Acontece?</div>
+                <div class="curiosity-text">
+                    <p style="margin: 0 0 12px;">
+                        Por trás daquela multa "sugerida" tem muita coisa acontecendo:
                     </p>
-                    
-                    <div class="vtc-highlight">
-                        (Salário × 12 × Anos) + Luvas = VTC
-                    </div>
-
-                    <p style="color: var(--text-secondary); margin-top: 15px; line-height: 1.6; font-size: 0.95em;">
-                        <strong>Exemplo rápido:</strong> R$10k/mês por 3 anos + R$50k de luva = R$410k total.
+                    <p style="margin: 0 0 12px;">
+                        🛡️ <strong>CDF tem um sistema parecido:</strong> A CDF tem disponivel um sistema parecido, porém com algumas diferenças sutis para poder fazer a simulação mais realista. O sistema disponibilizado hoje é totalmente baseado no da CDF gerando uma multa próxima mas não igual a que a CDF gera.
                     </p>
-
-                    <div class="deficit-alert">
-                        <strong>A Armadilha do Déficit:</strong> Se seu VTC ficar abaixo do mínimo exigido, a multa não sobe — ela cai. E aquelas influências positivas que você adicionou? Ignoradas. Déficit mata lucro.
-                    </div>
+                    <p style="margin: 0 0 12px;">
+                        ⚙️ <strong>Perfil Psicológico do Jogador:</strong> O sistema da detecta automaticamente se ele é mercenário (quer grana), fiel (quer estabilidade), ambicioso (quer sair para Europa) ou padrão (equilibrado). Cada tipo reage diferente aos termos do contrato.
+                    </p>
+                    <p style="margin: 0 0 12px;">
+                        📊 <strong>Satisfação do jogador:</strong> O jogador tem uma satisfação de 0 a 100 que influencia diretamente na multa, quanto menor a satisfação com aquele clube, menor a multa que ele quer.
+                    </p>
+                    <p style="margin: 0 0 12px;">
+                        ⚡ <strong>Fair Play Financeiro:</strong> O sistema respeita as regras da liga para evitar que propostas fiquem absurdas ou irrealistas.
+                    </p>
+                    <p style="margin: 0;">
+                        <strong>Resultado:</strong> Uma multa que é justa, realista e que os agentes entendem. Você não precisa entender a fórmula — mas pode ter certeza que funciona.
+                    </p>
                 </div>
             </div>
 
-            <!-- CARD 2: ARQUÉTIPOS -->
-            <div class="card">
-                <div class="guide-section-title">
-                    <span>Os 4 Arquétipos</span>
-                </div>
-                
-                <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.6; font-size: 0.95em;">
-                    Cada jogador tem um "tipo" que influencia na sua multa sugerida.
+            <!-- CTA -->
+            <div class="cta-section">
+                <p class="cta-text">
+                    <strong>Pronto para começar?</strong> Volte para a Calculadora, teste alguns cenários e veja a mágica acontecer. 
+                    Cada contrato é diferente — mas agora você tem a ferramenta certa para cada negociação.
                 </p>
-
-                <div class="profile-grid">
-                    <!-- Padrão -->
-                    <div class="profile-card p-padrao">
-                        <div class="profile-header">
-                            <span class="profile-name">Padrão</span>
-                            <span class="profile-emoji">⚖️</span>
-                        </div>
-                        <p class="profile-trait">Equilibra salário e luvas</p>
-                        <p class="profile-behavior">Aceita números justos. Não exige nada extremo.</p>
-                    </div>
-
-                    <!-- Mercenário -->
-                    <div class="profile-card p-mercenario">
-                        <div class="profile-header">
-                            <span class="profile-name">Mercenário</span>
-                            <span class="profile-emoji">💰</span>
-                        </div>
-                        <p class="profile-trait">Exige dinheiro na mão (luvas altas)</p>
-                        <p class="profile-behavior">Pague uma luva suculenta e ele fecha uma multa mais alta. ofereça luvas baixas e veja a multa despencar. Simples: o pix que fala.</p>
-                    </div>
-
-                    <!-- Fiel -->
-                    <div class="profile-card p-fiel">
-                        <div class="profile-header">
-                            <span class="profile-name">Fiel</span>
-                            <span class="profile-emoji">📊</span>
-                        </div>
-                        <p class="profile-trait">Valoriza estabilidade (salário + tempo)</p>
-                        <p class="profile-behavior">Salários altos geram multas altíssimas com esse tipo. As luvas importam bem menos pra ele. Se for oferecido um contrato longo e bem pago, a multa sobe de verdade.</p>
-                    </div>
-
-                    <!-- Ambicioso -->
-                    <div class="profile-card p-ambicioso">
-                        <div class="profile-header">
-                            <span class="profile-name">Ambicioso</span>
-                            <span class="profile-emoji">🚀</span>
-                        </div>
-                        <p class="profile-trait">Quer saída fácil</p>
-                        <p class="profile-behavior">O mais complicado. Ele reduz a multa BASE propositalmente para facilitar uma revenda futura. Pensa a longo prazo, não no lucro imediato.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD 3: OS FATORES -->
-            <div class="card">
-                <div class="guide-section-title">
-                    <span>Os Fatores da Multa</span>
-                </div>
-
-                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; font-size: 0.95em;">
-                    Cada bloco da fórmula influencia no valor final da multa.
-                </p>
-
-                <div class="factors-grid">
-                    <div class="factor-item">
-                        <h4> K Base</h4>
-                        <p>Sua margem inicial. 1.2 = "a multa base minima é 20% acima do valor de mercado". Suba para aumentar os valores de multa. Baixe pra diminuir, esse será o aumento base nas formulas caso nada influencie no contrato.</p>
-                    </div>
-
-                    <div class="factor-item">
-                        <h4> Reputação</h4>
-                        <p>O Peso da Camisa importa. Time maior que o Jogador = +multa (vitrine). Jogador maior = -multa (ele sairia facilmente).</p>
-                    </div>
-
-                    <div class="factor-item">
-                        <h4> Salário</h4>
-                        <p>O fator de maior peso. Aumentos aqui impactam a multa de forma maior (especialmente para Fiéis).</p>
-                    </div>
-
-                    <div class="factor-item">
-                        <h4>Luvas</h4>
-                        <p>Dinheiro na assinatura. O sistema dilui esse valor nos anos do contrato. Contrato de 5 anos? Aumento baixo de luvas vira insignificante.</p>
-                    </div>
-
-                    <div class="factor-item">
-                        <h4>Influências</h4>
-                        <p>Ajustes de cenário. Lesão? Rivalidade? Marketing? Use para simular a realidade. (Mas lembre: em Déficit, influências positivas não contam!)</p>
-                    </div>
-
-                    <div class="factor-item">
-                        <h4> Déficit vs Superávit</h4>
-                        <p>Acima do mínimo = todas as influências contam. Abaixo = só as negativas. Déficit é sempre uma derrota.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD 4: FAQ RÁPIDO -->
-            <div class="card">
-                <div class="guide-section-title">
-                    <span>❓</span>
-                    <span>Perguntas Rápidas</span>
-                </div>
-
-                <div style="margin: 20px 0;">
-                    <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
-                        <h4 style="color: var(--accent-primary); margin-bottom: 8px;">P: Qual é a diferença entre Multa Sugerida e Teto Máximo?</h4>
-                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95em; margin: 0;">
-                            <strong>Sugerida:</strong> Usa os pesos do perfil do jogador. <strong>Teto:</strong> O pior cenário para você (melhor para ele). Use a Sugerida para negociar, o Teto para saber o limite.
-                        </p>
-                    </div>
-
-                    <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
-                        <h4 style="color: var(--accent-primary); margin-bottom: 8px;">P: Aumentei a duração e a multa caiu. Por quê?</h4>
-                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95em; margin: 0;">
-                            Entrou em <strong>Déficit</strong>. Contrato mais longo = VTC mínimo exigido maior. Se o salário não subir proporcionalmente, você paga menos do esperado. Sistema penaliza.
-                        </p>
-                    </div>
-
-                    <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
-                        <h4 style="color: var(--accent-primary); margin-bottom: 8px;">P: Como descubro qual é o perfil do jogador?</h4>
-                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95em; margin: 0;">
-                            Teste todos os 4 na Calculadora. O perfil correto será aquele cuja multa fica mais próxima do que vocês realmente negociaram. Ou pergunte ao agente diretamente.
-                        </p>
-                    </div>
-
-                    <div style="margin-bottom: 0;">
-                        <h4 style="color: var(--accent-primary); margin-bottom: 8px;">P: Posso usar a Calculadora para revisar contratos antigos?</h4>
-                        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95em; margin: 0;">
-                            Sim! Jogue os números antigos e veja qual teria sido a multa "correta". Ótimo para aprender onde você ganhou ou perdeu.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD 5: PRÓXIMOS PASSOS -->
-            <div class="card">
-                <div class="guide-section-title">
-                    <span>Está Pronto?</span>
-                </div>
-
-                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; font-size: 0.95em;">
-                    Volte para a Calculadora e domine. Teste scenarios. Entenda cada lever. A multa vai deixar de ser mistério.
-                </p>
-
-                <div style="text-align: center;">
-                    <a href="index.html" class="btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none;">Ir para a Calculadora</a>
-                </div>
+                <a href="index.html" class="btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none;">Ir para a Calculadora</a>
             </div>
         </div>
     </div>
-</body>
-</html>
+
+    <footer class="main-footer">
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9em;">
+            Desenvolvido por <a href="https://github.com/J0NGS" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 500;">J0NGS</a><br>
+            Draence Calculator v4.0.0 • Todos os direitos reservados © <span onclick="this.textContent = '2024 (Ei, achou o easter egg!)'" style="cursor: pointer;">2026</span>
+        </p>
+    </footer>

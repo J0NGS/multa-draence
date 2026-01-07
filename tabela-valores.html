@@ -12,7 +12,7 @@
         <!-- HEADER -->
         <header>
             <div class="logo-section">
-                <img src="Pes_drae.png" alt="Draence Logo">
+                <img src="pes_drae.png" alt="Draence Logo">
                 <div class="logo-text">
                     <h1>DRAENCE</h1>
                     <p>Tabela de Valores</p>
@@ -66,7 +66,7 @@
 
             <!-- CARD DE RESULTADOS -->
             <div class="card" style="overflow-x: auto;">
-                <div class="card-title"> Resultados</div>
+                <div class="card-title">📊 Resultados</div>
 
                 <div id="tabelaContainer" style="overflow-x: auto;">
                     <table class="data-table">
@@ -126,11 +126,9 @@
         let sortAtual = { coluna: null, direcao: 'asc' };
 
         // Funções Auxiliares
-        function formatarBRL(valor) {
+        function formatarLD(valor) {
             if (!valor || isNaN(valor)) return 'N/A';
-            return new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
+            return '£D ' + new Intl.NumberFormat('pt-BR', {
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0
             }).format(valor);
@@ -139,9 +137,7 @@
         function formatarEUR(valor) {
             if (!valor || isNaN(valor)) return 'N/A';
             const valorEur = valor * TAXA_BRL_EUR;
-            return new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'EUR',
+            return '€ ' + new Intl.NumberFormat('pt-BR', {
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0
             }).format(valorEur);
@@ -283,15 +279,15 @@
                     <td>${item.idade}</td>
                     <td class="font-bold">${item.overall}</td>
                     <td>
-                        <div class="money-brl">${formatarBRL(item.valor_brl)}</div>
+                        <div class="money-brl">${formatarLD(item.valor_brl)}</div>
                         <div class="money-eur">${formatarEUR(item.valor_brl)}</div>
                     </td>
                     <td>
-                        <div class="money-brl">${formatarBRL(item.salario_brl)}</div>
+                        <div class="money-brl">${formatarLD(item.salario_brl)}</div>
                         <div class="money-eur">${formatarEUR(item.salario_brl)}</div>
                     </td>
                     <td>
-                        <div class="money-brl">${formatarBRL(item.luvas_brl)}</div>
+                        <div class="money-brl">${formatarLD(item.luvas_brl)}</div>
                         <div class="money-eur">${formatarEUR(item.luvas_brl)}</div>
                     </td>
                 `;

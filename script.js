@@ -1,15 +1,188 @@
+/**
+ * ============================================
+ * DRAENCE CALCULATOR v4.0.0
+ * ============================================
+ * 
+ * Simulador Estratégico de Multas Rescisórias
+ * Sistema de Negociação Avançado para RPG Draence
+ * 
+ * Autor: João Gonçalo (J0NGS)
+ * Data: Janeiro 2026
+ * 
+ * Funcionalidades:
+ * ✓ Cálculo inteligente de VTC
+ * ✓ 4 Perfis psicológicos dinâmicos
+ * ✓ Detecção automática de déficit
+ * ✓ Montador de propostas automáticas
+ * ✓ Validação e formatação de inputs
+ * ✓ Interface totalmente responsiva
+ * ✓ Análises comparativas avançadas
+ * 
+ * ============================================
+ */
+
 // Taxa de conversão BRL para EUR (derivada dos valores na base de dados)
 const TAXA_BRL_EUR = 96049800 / 576298800; // ~0.1667
+
+// ============================================
+// FUNÇÕES UTILITÁRIAS DE MOEDA
+// ============================================
+
+/**
+ * Converte string de valor monetário formatado para float numérico
+ * Ex: "1.200.000" -> 1200000
+ */
+function parseMoney(valorString) {
+    if (!valorString) return 0;
+    if (typeof valorString === 'number') return valorString;
+    
+    // Remove todos os pontos (separadores de milhar)
+    const valorLimpo = String(valorString).replace(/\./g, '');
+    const numero = parseFloat(valorLimpo);
+    
+    return isNaN(numero) ? 0 : numero;
+}
+
+/**
+ * Formata número com pontos como separadores de milhar
+ * Ex: 1200000 -> "1.200.000"
+ */
+function formatMoneyDisplay(valor) {
+    if (!valor || isNaN(valor)) return '';
+    
+    const numero = Math.floor(valor);
+    return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+/**
+ * Event listener para inputs de dinheiro
+ * Formata visualmente e atualiza badge de magnitude
+ */
+function formatMoneyInput(event) {
+    const input = event.target;
+    
+    // 1. Salvar posição do cursor e tamanho atual
+    const cursorPosition = input.selectionStart;
+    const originalLength = input.value.length;
+    
+    // 2. Limpar e Formatar
+    let valorLimpo = input.value.replace(/\D/g, '');
+    let valorFormatado = '';
+    
+    if (valorLimpo) {
+        valorFormatado = parseInt(valorLimpo).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+    
+    // 3. Atualizar o input
+    input.value = valorFormatado;
+    
+    // 4. Restaurar posição do cursor (Lógica inteligente)
+    const newLength = input.value.length;
+    let newCursorPosition = cursorPosition + (newLength - originalLength);
+    
+    // Correção para casos de deleção ou inserção de ponto
+    if (newCursorPosition < 0) newCursorPosition = 0;
+    if (newCursorPosition > newLength) newCursorPosition = newLength;
+    
+    // Define a nova posição
+    input.setSelectionRange(newCursorPosition, newCursorPosition);
+
+    // 5. Atualizar Badge (Lógica existente)
+    const wrapper = input.parentElement;
+    const badge = wrapper.querySelector('.magnitude-badge');
+    if (badge) {
+        const num = parseMoney(valorFormatado);
+        badge.className = 'magnitude-badge';
+        if (num >= 1000000) { 
+            badge.textContent = 'M'; 
+            badge.classList.add('magnitude-M'); 
+        }
+        else if (num >= 1000) { 
+            badge.textContent = 'm'; 
+            badge.classList.add('magnitude-m'); 
+        }
+        else { 
+            badge.textContent = ''; 
+        }
+    }
+}
+
+/**
+ * Valida limites de valor para inputs (numéricos e monetários)
+ * Executa no evento 'blur' (quando usuário sai do campo)
+ * Força o valor para o mínimo ou máximo se ultrapassado
+ */
+function enforceLimits(event) {
+    const input = event.target;
+    
+    // Identificar se é input monetário ou numérico
+    const isMoneyInput = input.classList.contains('input-money');
+    
+    // Obter o valor atual
+    let valorAtual;
+    if (isMoneyInput) {
+        valorAtual = parseMoney(input.value);
+    } else {
+        valorAtual = Number(input.value);
+    }
+    
+    // Obter limites (de atributos HTML ou data-attributes)
+    const min = Number(input.dataset.min !== undefined ? input.dataset.min : input.min) || 0;
+    const max = Number(input.dataset.max !== undefined ? input.dataset.max : input.max) || 999999999;
+    
+    // Validar e corrigir se necessário
+    let valorCorrigido = valorAtual;
+    if (valorAtual < min) {
+        valorCorrigido = min;
+    } else if (valorAtual > max) {
+        valorCorrigido = max;
+    }
+    
+    // Se houve alteração, atualizar o input
+    if (valorCorrigido !== valorAtual) {
+        if (isMoneyInput) {
+            // Para inputs monetários, formatar com pontos
+            const valorFormatado = formatMoneyDisplay(valorCorrigido);
+            input.value = valorFormatado;
+            
+            // Atualizar badge de magnitude
+            const badge = input.parentElement.querySelector('.magnitude-badge');
+            if (badge) {
+                badge.className = 'magnitude-badge';
+                if (valorCorrigido >= 1000000) { 
+                    badge.textContent = 'M'; 
+                    badge.classList.add('magnitude-M'); 
+                }
+                else if (valorCorrigido >= 1000) { 
+                    badge.textContent = 'm'; 
+                    badge.classList.add('magnitude-m'); 
+                }
+                else { 
+                    badge.textContent = ''; 
+                }
+            }
+        } else {
+            // Para inputs numéricos, apenas atualizar o valor
+            input.value = valorCorrigido;
+        }
+        
+        // Adicionar feedback visual de correção
+        input.classList.add('input-corrected');
+        setTimeout(() => {
+            input.classList.remove('input-corrected');
+        }, 1000);
+    }
+}
 
 // ============================================
 // CONSTANTES DE PERFIS
 // ============================================
 
 const PERFIS = {
-    padrao: { sal: 0.25, luv: 0.12, k_factor: 0.85, label: "Padrão" },
-    mercenario: { sal: 0.20, luv: 0.08, k_factor: 0.90, label: "Mercenário" },
-    fiel: { sal: 0.30, luv: 0.06, k_factor: 0.95, label: "Fiel" },
-    ambicioso: { sal: 0.15, luv: 0.06, k_factor: 0.60, label: "Ambicioso" }
+    padrao: { sal: 0.25, luv: 0.12, k_factor: 0.60, label: "Padrão" },
+    mercenario: { sal: 0.20, luv: 0.08, k_factor: 0.75, label: "Mercenário" },
+    fiel: { sal: 0.30, luv: 0.06, k_factor: 0.80, label: "Fiel" },
+    ambicioso: { sal: 0.15, luv: 0.06, k_factor: 0.30, label: "Ambicioso" }
 };
 
 const MAX_PESO_SAL = 0.35;
@@ -54,6 +227,8 @@ function removerInfluencia(id) {
 function renderizarInfluencias() {
     const container = document.getElementById('influenciasContainer');
     
+    if (!container) return; // Protege em visualizações que não têm o container
+    
     if (influenciasExternas.length === 0) {
         container.innerHTML = '';
         return;
@@ -93,18 +268,12 @@ function atualizarInfluencia(id, campo, valor) {
 }
 
 // ============================================
-// CONTROLE DE REPUTAÇÃO
+// CAMPO DE SATISFAÇÃO DO JOGADOR
 // ============================================
-
-const checkboxDeltaRep = document.getElementById('usarDeltaReputacao');
-const inputReputacaoTime = document.getElementById('reputacaoTime');
-const inputReputacaoJogador = document.getElementById('reputacaoJogador');
-
-checkboxDeltaRep.addEventListener('change', (e) => {
-    const habilitado = e.target.checked;
-    inputReputacaoTime.disabled = !habilitado;
-    inputReputacaoJogador.disabled = !habilitado;
-});
+// Satisfação será capturada dinamicamente em calcularMulta()
+// Modelo conservador: (satisfacao - 50) / fatorSatisfacao
+// Default (fatorSatisfacao=500): intervalo de -0.10 a +0.10 (±10%)
+// Editável no admin, fixo no index
 
 // ============================================
 // CONTROLE DE AUTO-FILL
@@ -115,8 +284,11 @@ const inputIdade = document.getElementById('idade');
 const inputOverall = document.getElementById('overall');
 const inputSalario = document.getElementById('salarioOferecido');
 const inputLuvas = document.getElementById('luvasOferecidas');
+const inputAnosContrato = document.getElementById('anosContrato');
 
 function preencherSalariosLuvas() {
+    if (!selectPosicao) return;
+    
     const posicao = selectPosicao.value;
     const idade = parseInt(inputIdade.value);
     const overall = parseInt(inputOverall.value);
@@ -127,24 +299,71 @@ function preencherSalariosLuvas() {
     if (dadosBase) {
         inputSalario.value = dadosBase.salario_base;
         inputLuvas.value = dadosBase.luvas_base;
+        
+        // Formatar os valores que foram carregados
+        const eventSalario = { target: inputSalario };
+        formatMoneyInput(eventSalario);
+        
+        const eventLuvas = { target: inputLuvas };
+        formatMoneyInput(eventLuvas);
+        
+        // Atualizar valor das luvas multiplicado pelos anos
+        atualizarValorLuvas();
     }
 }
 
-selectPosicao.addEventListener('change', preencherSalariosLuvas);
-inputIdade.addEventListener('change', preencherSalariosLuvas);
-inputOverall.addEventListener('change', preencherSalariosLuvas);
+// ============================================
+// ATUALIZAR VALOR DAS LUVAS DINAMICAMENTE
+// ============================================
+
+function atualizarValorLuvas() {
+    if (!inputLuvas || !inputAnosContrato) return;
+    
+    const anos = parseInt(inputAnosContrato.value) || 1;
+    const overall = parseInt(inputOverall.value);
+    
+    if (!overall || !inputLuvas.value) {
+        return;
+    }
+    
+    // Pegar o valor base das luvas (valor atual dividido pelo número de anos anterior)
+    // Se o usuário já tem um valor, precisamos atualizar baseado nos anos
+    const dadosBase = buscarDadosBaseSalarial(overall);
+    
+    if (dadosBase) {
+        // Luva base por ano * quantidade de anos
+        const novoValorLuvas = Math.floor(dadosBase.luvas_base * anos);
+        
+        // Atualizar o valor do input
+        inputLuvas.value = novoValorLuvas;
+        
+        // Formatar visualmente
+        const event = { target: inputLuvas };
+        formatMoneyInput(event);
+    }
+}
+
+if (selectPosicao) {
+    selectPosicao.addEventListener('change', preencherSalariosLuvas);
+}
+if (inputIdade) {
+    inputIdade.addEventListener('change', preencherSalariosLuvas);
+}
+if (inputOverall) {
+    inputOverall.addEventListener('change', preencherSalariosLuvas);
+}
+if (inputAnosContrato) {
+    inputAnosContrato.addEventListener('change', atualizarValorLuvas);
+}
 
 // ============================================
 // FUNÇÕES UTILITÁRIAS
 // ============================================
 
 function formatarBRL(valor) {
-    return new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    }).format(valor);
+    if (!valor || isNaN(valor)) return '£D 0';
+    const numero = Math.floor(valor);
+    return '£D ' + numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
 function formatarEUR(valor) {
@@ -247,20 +466,23 @@ function limparErro() {
 function calcularMulta() {
     document.getElementById('erro').classList.remove('show');
 
-    // 1. CAPTURA DE DADOS
+    // 1. CAPTURA DE DADOS COM FALLBACKS PARA VISÃO USUÁRIO
     const posicao = document.getElementById('posicao').value;
     const idade = parseInt(document.getElementById('idade').value);
     const overall = parseInt(document.getElementById('overall').value);
     const inputAnos = document.getElementById('anosContrato');
     const anosContrato = inputAnos ? parseInt(inputAnos.value) : 1; 
     
-    const kBase = parseFloat(document.getElementById('kBase').value);
-    const salarioOferecido = parseFloat(document.getElementById('salarioOferecido').value);
-    const luvasOferecidas = parseFloat(document.getElementById('luvasOferecidas').value);
+    // FALLBACKS: Se elementos não existem (visão usuário), usar valores padrão
+    const kBaseElement = document.getElementById('kBase');
+    const kBase = kBaseElement ? parseFloat(kBaseElement.value) : 1.1;
     
-    const reputacaoTime = parseInt(document.getElementById('reputacaoTime').value);
-    const reputacaoJogador = parseInt(document.getElementById('reputacaoJogador').value);
-    const usarDeltaRep = document.getElementById('usarDeltaReputacao').checked;
+    const salarioOferecido = parseMoney(document.getElementById('salarioOferecido').value);
+    const luvasOferecidas = parseMoney(document.getElementById('luvasOferecidas').value);
+    
+    // NOVO: Captura de Satisfação do Jogador (Modelo Conservador)
+    const satisfacaoElement = document.getElementById('satisfacao');
+    const satisfacao = satisfacaoElement ? parseInt(satisfacaoElement.value) : 50;
 
     if (!posicao || !idade || !overall) return mostrarErro('Preencha os dados obrigatórios.');
 
@@ -281,12 +503,20 @@ function calcularMulta() {
     // Delta Global (Diferença percentual do pacote total)
     const deltaGlobal = (vtcOferecido - vtcBase) / vtcBase;
 
-    // 4. LÓGICA DE MULTIPLICADOR (DUPLO: Máxima e Sugerida)
+    // 4. CÁLCULO DA SATISFAÇÃO (Modelo Conservador)
+    // Fórmula: (Satisfação - 50) / fatorSatisfacao
+    // Default (500): 50 -> 0.00 (Neutro), 100 -> +0.10 (Máximo bônus), 0 -> -0.10 (Máxima penalidade)
+    // Admin pode editar o fator (divisor) para aumentar/diminuir impacto
+    const fatorSatisfacaoElement = document.getElementById('fatorSatisfacao');
+    const fatorSatisfacao = fatorSatisfacaoElement ? parseFloat(fatorSatisfacaoElement.value) : 500;
+    const detalheSat = (satisfacao - 50) / fatorSatisfacao;
+
+    // 5. LÓGICA DE MULTIPLICADOR (DUPLO: Máxima e Sugerida)
     let multiplicadorMax = 0;
     let multiplicadorSug = 0;
     
     // Variáveis para detalhamento visual
-    let detalheK = 0, detalheRep = 0, detalheSal = 0, detalheLuv = 0;
+    let detalheK = 0, detalheSal = 0, detalheLuv = 0;
     
     // Influências Externas
     // Em cenário de DÉFICIT, apenas influências negativas são consideradas
@@ -329,8 +559,6 @@ function calcularMulta() {
         // Ajustes para o detalhamento
         detalheK = 1.0; 
         detalheSal = deltaGlobal * (2 - perfilDados.k_factor);
-        detalheRep = 0;
-        detalheLuv = 0;
 
     } else {
         // --- SUPERÁVIT / NEUTRO ---
@@ -344,12 +572,10 @@ function calcularMulta() {
         multiplicadorSug = kSugCalculado;
         detalheK = kBase;
 
-        // 2. Delta Reputação (Igual para ambos)
-        if (usarDeltaRep) {
-            detalheRep = (reputacaoTime - reputacaoJogador) / 100;
-            multiplicadorMax += detalheRep;
-            multiplicadorSug += detalheRep;
-        }
+        // 2. NOVO: Satisfação do Jogador (Modelo Conservador)
+        // Aplicada igual para Max e Sug
+        multiplicadorMax += detalheSat;
+        multiplicadorSug += detalheSat;
 
         // 3. Deltas Financeiros
         // Salário
@@ -382,7 +608,7 @@ function calcularMulta() {
         multiplicadorSug += epsilon;
     }
 
-    // 5. RENDERIZAÇÃO DOS RESULTADOS
+    // 6. RENDERIZAÇÃO DOS RESULTADOS
     const multaSugeridaFinal = valorMercado * multiplicadorSug;
     const multaMaximaFinal = valorMercado * multiplicadorMax;
     const multaSugeridaEuro = multaSugeridaFinal * TAXA_BRL_EUR;
@@ -391,50 +617,69 @@ function calcularMulta() {
     // NOVO LAYOUT - SCOREBOARD
     document.getElementById('multaSugBRL').textContent = formatarBRL(multaSugeridaFinal);
     document.getElementById('multaSugEUR').textContent = formatarEUR(multaSugeridaEuro);
-    document.getElementById('multaMaxBRL').textContent = formatarBRL(multaMaximaFinal);
-    document.getElementById('multaMaxEUR').textContent = formatarEUR(multaMaximaEuro);
-    document.getElementById('labelPerfil').textContent = perfilDados.label;
+    
+    // Verificar se elemento de teto máximo existe (visão admin)
+    const multaMaxBRLElement = document.getElementById('multaMaxBRL');
+    if (multaMaxBRLElement) {
+        multaMaxBRLElement.textContent = formatarBRL(multaMaximaFinal);
+    }
+    
+    const multaMaxEURElement = document.getElementById('multaMaxEUR');
+    if (multaMaxEURElement) {
+        multaMaxEURElement.textContent = formatarEUR(multaMaximaEuro);
+    }
+    
+    const labelPerfilElement = document.getElementById('labelPerfil');
+    if (labelPerfilElement) labelPerfilElement.textContent = perfilDados.label;
 
     // Adicionar badges de percentagem para as multas
     const percentMultaSug = calcularPercentual(multaSugeridaFinal, valorMercado);
     const percentMultaMax = calcularPercentual(multaMaximaFinal, valorMercado);
     
     const badgeMultaSug = document.getElementById('percentMultaSug');
-    badgeMultaSug.textContent = (percentMultaSug >= 0 ? '+' : '') + percentMultaSug.toFixed(1) + '%';
-    badgeMultaSug.classList.remove('aumentou', 'diminuiu');
-    if (percentMultaSug > 0) {
-        badgeMultaSug.classList.add('aumentou');
-    } else if (percentMultaSug < 0) {
-        badgeMultaSug.classList.add('diminuiu');
+    if (badgeMultaSug) {
+        badgeMultaSug.textContent = (percentMultaSug >= 0 ? '+' : '') + percentMultaSug.toFixed(1) + '%';
+        badgeMultaSug.classList.remove('aumentou', 'diminuiu');
+        if (percentMultaSug > 0) {
+            badgeMultaSug.classList.add('aumentou');
+        } else if (percentMultaSug < 0) {
+            badgeMultaSug.classList.add('diminuiu');
+        }
     }
 
-    const badgeMultaMax = document.getElementById('percentMultaMax');
-    badgeMultaMax.textContent = (percentMultaMax >= 0 ? '+' : '') + percentMultaMax.toFixed(1) + '%';
-    badgeMultaMax.classList.remove('aumentou', 'diminuiu');
-    if (percentMultaMax > 0) {
-        badgeMultaMax.classList.add('aumentou');
-    } else if (percentMultaMax < 0) {
-        badgeMultaMax.classList.add('diminuiu');
+    const badgeMultaMaxElement = document.getElementById('percentMultaMax');
+    if (badgeMultaMaxElement) {
+        badgeMultaMaxElement.textContent = (percentMultaMax >= 0 ? '+' : '') + percentMultaMax.toFixed(1) + '%';
+        badgeMultaMaxElement.classList.remove('aumentou', 'diminuiu');
+        if (percentMultaMax > 0) {
+            badgeMultaMaxElement.classList.add('aumentou');
+        } else if (percentMultaMax < 0) {
+            badgeMultaMaxElement.classList.add('diminuiu');
+        }
     }
 
-    // NOVO LAYOUT - MATH VISUAL
-    document.getElementById('mathK').textContent = deltaGlobal < 0 ? "1.00" : formatarDecimal(kBase, 2);
-    document.getElementById('mathRep').textContent = (detalheRep >= 0 ? '+' : '') + formatarDecimal(detalheRep, 4);
-    document.getElementById('mathSal').textContent = (detalheSal >= 0 ? '+' : '') + formatarDecimal(detalheSal, 4);
-    document.getElementById('mathLuv').textContent = (detalheLuv >= 0 ? '+' : '') + formatarDecimal(detalheLuv, 4);
-    document.getElementById('mathEps').textContent = (epsilon >= 0 ? '+' : '') + formatarDecimal(epsilon, 4);
-    document.getElementById('mathTotal').textContent = formatarDecimal(multiplicadorSug, 4) + 'x';
+    // NOVO LAYOUT - MATH VISUAL (apenas se existir container)
+    const mathVisualizationContainer = document.querySelector('.math-visual-container');
+    if (mathVisualizationContainer) {
+        document.getElementById('mathK').textContent = deltaGlobal < 0 ? "1.00" : formatarDecimal(kBase, 2);
+        document.getElementById('mathRep').textContent = (detalheSat >= 0 ? '+' : '') + formatarDecimal(detalheSat, 4);
+        document.getElementById('mathSal').textContent = (detalheSal >= 0 ? '+' : '') + formatarDecimal(detalheSal, 4);
+        document.getElementById('mathLuv').textContent = (detalheLuv >= 0 ? '+' : '') + formatarDecimal(detalheLuv, 4);
+        document.getElementById('mathEps').textContent = (epsilon >= 0 ? '+' : '') + formatarDecimal(epsilon, 4);
+        document.getElementById('mathTotal').textContent = formatarDecimal(multiplicadorSug, 4) + 'x';
     
-    // Math explanation
-    let explanation = '';
-    if (deltaGlobal < 0) {
-        explanation = `Cenário de DÉFICIT: ${formatarDecimal(deltaGlobal*100, 1)}% abaixo do VTC Base. Multiplicador reduzido conforme o perfil.`;
-    } else if (deltaGlobal > 0) {
-        explanation = `Cenário de SUPERÁVIT: ${formatarDecimal(deltaGlobal*100, 1)}% acima do VTC Base. Multiplicador composto por todos os fatores.`;
-    } else {
-        explanation = `Cenário NEUTRO: VTC oferecido igual ao VTC Base.`;
+        // Math explanation
+        let explanation = '';
+        if (deltaGlobal < 0) {
+            explanation = `Cenário de DÉFICIT: ${formatarDecimal(deltaGlobal*100, 1)}% abaixo do VTC Base. Multiplicador reduzido conforme o perfil.`;
+        } else if (deltaGlobal > 0) {
+            explanation = `Cenário de SUPERÁVIT: ${formatarDecimal(deltaGlobal*100, 1)}% acima do VTC Base. Multiplicador composto por todos os fatores.`;
+        } else {
+            explanation = `Cenário NEUTRO: VTC oferecido igual ao VTC Base.`;
+        }
+        const mathExplEl = document.getElementById('mathExplanation');
+        if (mathExplEl) mathExplEl.textContent = explanation;
     }
-    document.getElementById('mathExplanation').textContent = explanation;
 
     // ===== INJEÇÃO DE TOOLTIPS DIDÁTICOS (MATH-STEPS) =====
     
@@ -445,20 +690,12 @@ function calcularMulta() {
     } else {
         kText = `Sua pedida inicial foi ${formatarDecimal(kBase, 2)}. O perfil '${perfilDados.label}' aceitou ${formatarDecimal(perfilDados.k_factor * 100, 0)}% disso.`;
     }
-    document.getElementById('stepKBase').dataset.tooltip = kText;
-
-    // 2. Reputação
-    let repText = "";
-    if (deltaGlobal < 0) {
-        repText = "Bônus de reputação ignorado devido ao Déficit.";
-    } else if (usarDeltaRep) {
-        const repDiff = reputacaoTime - reputacaoJogador;
-        const repDirection = repDiff > 0 ? 'maior' : (repDiff < 0 ? 'menor' : 'igual');
-        repText = `O Time (${reputacaoTime}) é ${repDirection} que o Jogador (${reputacaoJogador}). Isso gerou um ajuste de ${detalheRep > 0 ? '+' : ''}${formatarDecimal(detalheRep, 4)} na multa.`;
-    } else {
-        repText = "Cálculo de reputação desativado.";
-    }
-    document.getElementById('stepRep').dataset.tooltip = repText;
+    const stepKBaseEl = document.getElementById('stepKBase');
+    if (stepKBaseEl) stepKBaseEl.dataset.tooltip = kText;
+    // 2. Satisfação do Jogador (NOVO - Modelo Conservador)
+    let satText = `Satisfação de ${satisfacao} gerou um ajuste conservador de ${detalheSat > 0 ? '+' : ''}${formatarDecimal(detalheSat, 4)} na multa. (Intervalo: -0.10 a +0.10)`;
+    const stepRepEl = document.getElementById('stepRep');
+    if (stepRepEl) stepRepEl.dataset.tooltip = satText;
 
     // 3. Salário
     let salText = "";
@@ -468,7 +705,8 @@ function calcularMulta() {
         const aumentoSal = dadosBase.salario_base > 0 ? ((salarioOferecido - dadosBase.salario_base) / dadosBase.salario_base) * 100 : 0;
         salText = `Você ofereceu +${formatarDecimal(aumentoSal, 1)}% de salário. O perfil '${perfilDados.label}' converteu isso com peso ${formatarDecimal(perfilDados.sal, 2)}.`;
     }
-    document.getElementById('stepSal').dataset.tooltip = salText;
+    const stepSalEl = document.getElementById('stepSal');
+    if (stepSalEl) stepSalEl.dataset.tooltip = salText;
 
     // 4. Luvas
     let luvText = "";
@@ -479,28 +717,38 @@ function calcularMulta() {
         const aumentoLuv = (luvaBaseTotalPeriodo > 0) ? ((luvasOferecidas - luvaBaseTotalPeriodo) / luvaBaseTotalPeriodo) * 100 : 0;
         luvText = `Comparado ao custo total (${anosContrato} anos), sua luva variou ${formatarDecimal(aumentoLuv, 1)}%. Peso aplicado: ${formatarDecimal(perfilDados.luv, 2)}.`;
     }
-    document.getElementById('stepLuv').dataset.tooltip = luvText;
+    const stepLuvEl = document.getElementById('stepLuv');
+    if (stepLuvEl) stepLuvEl.dataset.tooltip = luvText;
 
     // 5. Extras
-    document.getElementById('stepEps').dataset.tooltip = 
+    const stepEpsEl = document.getElementById('stepEps');
+    if (stepEpsEl) stepEpsEl.dataset.tooltip = 
         `Soma de ${influenciasExternas.length} fatores externos manuais.`;
 
 
     // Grid de detalhes (mantém os elementos para referência)
-    document.getElementById('valorMercado').textContent = formatarBRL(valorMercado);
-    document.getElementById('dadosJogador').textContent = `${posicao} • ${idade}a • OVR ${overall}`;
+    const valorMercadoEl = document.getElementById('valorMercado');
+    if (valorMercadoEl) valorMercadoEl.textContent = formatarBRL(valorMercado);
     
-    document.getElementById('salarioBase').textContent = formatarBRL(dadosBase.salario_base);
-    document.getElementById('luvasBase').textContent = formatarBRL(dadosBase.luvas_base * anosContrato);
+    const dadosJogadorEl = document.getElementById('dadosJogador');
+    if (dadosJogadorEl) dadosJogadorEl.textContent = `${posicao} • ${idade}a • OVR ${overall}`;
+    
+    const salarioBaseEl = document.getElementById('salarioBase');
+    if (salarioBaseEl) salarioBaseEl.textContent = formatarBRL(dadosBase.salario_base);
+    
+    const luvasBaseEl = document.getElementById('luvasBase');
+    if (luvasBaseEl) luvasBaseEl.textContent = formatarBRL(dadosBase.luvas_base * anosContrato);
 
     atualizarBadgePercentual('salarioOferecidoValue', 'salarioOferecidoShow', 'percentSalario', salarioOferecido, dadosBase.salario_base);
     atualizarBadgePercentual('luvasOferecidasValue', 'luvasOferecidasShow', 'percentLuvas', luvasOferecidas, (dadosBase.luvas_base * anosContrato));
 
-    document.getElementById('vtcBase').textContent = formatarBRL(vtcBase);
+    const vtcBaseEl = document.getElementById('vtcBase');
+    if (vtcBaseEl) vtcBaseEl.textContent = formatarBRL(vtcBase);
     atualizarBadgePercentual('vtcOferecidoValue', 'vtcOferecidoShow', 'percentVTC', vtcOferecido, vtcBase);
 
     // Mostrar resultado
-    document.getElementById('resultado').classList.add('show');
+    const resultadoEl = document.getElementById('resultado');
+    if (resultadoEl) resultadoEl.classList.add('show');
 }
 
 // ============================================
@@ -510,6 +758,9 @@ function calcularMulta() {
 function atualizarDescricaoKBase() {
     const kBaseInput = document.getElementById('kBase');
     const helpText = document.getElementById('helpTextKBase');
+    
+    if (!kBaseInput || !helpText) return;
+    
     const kValue = parseFloat(kBaseInput.value);
     const percentual = ((kValue - 1) * 100).toFixed(1);
     helpText.textContent = `Multiplicador de ${percentual}% acima do valor`;
@@ -520,49 +771,94 @@ function atualizarDescricaoKBase() {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Draence Calculator v3.0 iniciado');
+    console.log('Draence Calculator v4.0.0 iniciado - Sistema de Negociação Avançado');
 
-    // Popula posições
-    const posicoes = [...new Set(DB_MERCADO.map(r => r.posicao))].sort();
-    posicoes.forEach(pos => {
-        const option = document.createElement('option');
-        option.value = pos;
-        option.textContent = pos;
-        selectPosicao.appendChild(option);
-    });
+    // Popula posições (se elemento existe)
+    if (selectPosicao) {
+        const posicoes = [...new Set(DB_MERCADO.map(r => r.posicao))].sort();
+        posicoes.forEach(pos => {
+            const option = document.createElement('option');
+            option.value = pos;
+            option.textContent = pos;
+            selectPosicao.appendChild(option);
+        });
+    }
 
     // Formulário
     const form = document.getElementById('formCalculo');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        calcularMulta();
-    });
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            calcularMulta();
+        });
 
-    form.addEventListener('reset', () => {
+        form.addEventListener('reset', () => {
         document.getElementById('resultado').classList.remove('show');
         limparErro();
         influenciasExternas = [];
         contadorInfluencias = 0;
         renderizarInfluencias();
-        document.getElementById('reputacaoTime').value = 50;
-        document.getElementById('reputacaoJogador').value = 50;
-        document.getElementById('kBase').value = 1.2;
-        document.getElementById('anosContrato').value = 3;
-        document.getElementById('usarDeltaReputacao').checked = true;
-        inputReputacaoTime.disabled = false;
-        inputReputacaoJogador.disabled = false;
+        
+        // Elementos que podem não existir em index.html (visão usuário)
+        const satisfacaoEl = document.getElementById('satisfacao');
+        if (satisfacaoEl) satisfacaoEl.value = 50;
+        
+        const fatorSatisfacaoEl = document.getElementById('fatorSatisfacao');
+        if (fatorSatisfacaoEl) fatorSatisfacaoEl.value = 500;
+        
+        const kBaseEl = document.getElementById('kBase');
+        if (kBaseEl) kBaseEl.value = 1.2;
+        
+        const anosContratoEl = document.getElementById('anosContrato');
+        if (anosContratoEl) anosContratoEl.value = 3;
+        
         document.getElementById('salarioOferecido').value = '';
         document.getElementById('luvasOferecidas').value = '';
-        document.getElementById('posicao').value = '';
+        if (selectPosicao) selectPosicao.value = '';
         document.getElementById('idade').value = '';
         document.getElementById('overall').value = '';
+        document.getElementById('overall').value = '';
+        });
+    }
+
+    // ============================================
+    // INICIALIZAR FORMATAÇÃO DE INPUTS DE DINHEIRO
+    // ============================================
+    
+    // Seleciona todos os inputs com classe 'input-money'
+    const moneyInputs = document.querySelectorAll('.input-money');
+    moneyInputs.forEach(input => {
+        input.addEventListener('input', formatMoneyInput);
+        input.addEventListener('blur', enforceLimits);
+        
+        // Formata valor padrão se existir
+        if (input.value) {
+            const event = { target: input };
+            formatMoneyInput(event);
+        }
     });
 
-    // Botão adicionar influência
-    document.getElementById('btnAdicionarInfluencia').addEventListener('click', (e) => {
-        e.preventDefault();
-        adicionarInfluencia();
+    // ============================================
+    // INICIALIZAR VALIDAÇÃO DE INPUTS NUMÉRICOS
+    // ============================================
+    
+    // Adicionar listener 'blur' para campos numéricos com limites
+    const numericInputs = ['idade', 'overall', 'anosContrato', 'satisfacao', 'fatorSatisfacao', 'kBase'];
+    numericInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('blur', enforceLimits);
+        }
     });
+
+    // Botão adicionar influência (se existe - apenas admin)
+    const btnAdicionarInfluencia = document.getElementById('btnAdicionarInfluencia');
+    if (btnAdicionarInfluencia) {
+        btnAdicionarInfluencia.addEventListener('click', (e) => {
+            e.preventDefault();
+            adicionarInfluencia();
+        });
+    }
 
     // Event listener para atualizar descrição da multa base dinamicamente
     const kBaseInput = document.getElementById('kBase');
@@ -574,4 +870,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicializar com uma influência
     adicionarInfluencia();
+
+    // ============================================
+    // INTEGRAÇÃO COM MONTADOR DE PROPOSTAS
+    // ============================================
+
+    const btnIrParaProposta = document.getElementById('btnIrParaProposta');
+    if (btnIrParaProposta) {
+        btnIrParaProposta.addEventListener('click', () => {
+            // Capturar valores atuais do formulário (usando parseMoney para inputs formatados)
+            const salarioOferecido = parseMoney(document.getElementById('salarioOferecido').value) || 0;
+            const luvasOferecidas = parseMoney(document.getElementById('luvasOferecidas').value) || 0;
+            const anosContrato = parseInt(document.getElementById('anosContrato').value) || 1;
+            
+            // Obter valor da multa sugerida em £D (extrair apenas números do texto)
+            const multaSugElement = document.getElementById('multaSugBRL');
+            const multaSugTexto = multaSugElement.textContent.replace(/\D/g, '');
+            const multaSugDraence = parseInt(multaSugTexto) || 0;
+
+            // Converter multa sugerida para EUR (para Exterior)
+            const multaSugEuro = Math.floor(multaSugDraence * TAXA_BRL_EUR);
+
+            // Construir URL com parâmetros
+            // - multa: multa sugerida em £D (Draence)
+            // - multaExterior: multa sugerida em EUR (Exterior)
+            const url = `proposta.html?salario=${encodeURIComponent(salarioOferecido)}&luvas=${encodeURIComponent(luvasOferecidas)}&anos=${encodeURIComponent(anosContrato)}&multa=${encodeURIComponent(multaSugDraence)}&multaExterior=${encodeURIComponent(multaSugEuro)}`;
+            
+            // Redirecionar
+            window.location.href = url;
+        });
+    }
 });

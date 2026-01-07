@@ -5,7 +5,7 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Version](https://img.shields.io/badge/Version-3.5-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-4.0.0-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
 
 **Simulador Estratégico de Multas Rescisórias e Contratos para o RPG Draence**
@@ -42,6 +42,58 @@ A ferramenta permite:
 
 ---
 
+## ✨ Funcionalidades
+
+### 💰 Calculadora Principal (`index.html`)
+- **Cálculo Inteligente de Multas:** Baseado em VTC, reputação e perfil psicológico do jogador
+- **4 Perfis Psicológicos:** Padrão, Mercenário, Fiel e Ambicioso com comportamentos únicos
+- **Visualização em 2 Moedas:** BRL (Real Draence) e EUR (Euro) em tempo real
+- **Dashboard Analítico:** Composição visual da multa em blocos (Base, K, Salário, Luvas, Reputação)
+- **Validação de Déficit:** Alerta visual quando a oferta está abaixo do mercado
+- **Input Masking Avançado:** Formatação automática de valores monetários com preservação de cursor
+- **Responsividade Total:** Otimizado para desktop, tablet e mobile
+- **Admin View:** Interface alternativa para análises avançadas com campos ocultos
+
+### 📝 Montador de Propostas (`proposta.html`)
+- **Geração Automática de Textos:** Cria propostas formatadas prontas para WhatsApp
+- **Listas Dinâmicas:** Adicione premiações e cláusulas customizadas
+- **Pré-preenchimento por URL:** Parâmetros GET permitem reutilizar cálculos
+- **Botão Fixo Inteligente:** Acompanha o scroll e respeita o footer
+- **Preview em Tempo Real:** Visualize a proposta conforme edita
+- **Status Visual de Validação:** Indicadores de campos preenchidos
+
+### 📚 Guia "Como Funciona" (`como-funciona.html`)
+- **Jornada do Usuário Prática:** 4 passos simples (Dados → Contrato → Multa → Proposta)
+- **Design Didático:** Cards numerados com emojis e exemplos concretos
+- **Curiosidades:** Seção "Bastidores" explicando a mágica do cálculo
+- **Totalmente Responsivo:** Adapta-se a todas as telas
+
+### 🎨 UI/UX Melhorada (v4.0.0)
+- **Logo Responsiva:** Adapta tamanho automaticamente (desktop → mobile)
+- **Espaçamento Inteligente:** Cards separados com padding e bordas visuais
+- **Botões Centralizados:** Todos os botões com layout flexbox perfeito
+- **Sem Cadeados Visuais:** Campos readonly com estilo limpo
+- **Layout Fluido:** Containers ajustam-se perfeitamente sem sobreposições
+
+### 🛡️ Validação & Segurança
+- **Limites de Input:** Min/Max em valores monetários e numéricos
+- **Formatação Automática:** Pontos e virgulas em valores grandes
+- **Proteção contra Déficit:** Penalidades automáticas
+
+### 📊 Análises Avançadas (Admin)
+- **Tabela de Valores Oficiais:** Consulte preços de mercado por posição/idade/overall
+- **Perfis Comparativos:** Veja como cada arquétipo afeta a multa
+
+---
+
+## 👨‍💻 Desenvolvedor
+
+**João Gonçalo (J0NGS)**
+- 📧 Email: jnetogoncalo@gmail.com
+- 🔗 GitHub: [@J0NGS](https://github.com/J0NGS)
+
+---
+
 ## 🏗️ Estrutura do Projeto
 
 O projeto foi construído com foco em performance e manutenibilidade, utilizando **Vanilla JS** moderno sem dependências externas pesadas.
@@ -51,12 +103,15 @@ O projeto foi construído com foco em performance e manutenibilidade, utilizando
 ```text
 Draence-Calculator/
 │
-├── index.html          # Dashboard principal (Calculadora)
-├── como-funciona.html  # Guia do Manager (Documentação didática)
-├── style.css           # Estilos globais, temas e responsividade
-├── script.js           # Core lógico (Cálculos, DOM, Events)
-├── dados_inline.js     # Base de dados (Mock) de Salários e Mercado
-└── pes_drae.png        # Assets visuais
+├── index.html            # Dashboard principal (Calculadora)
+├── admin.html            # View admin com campos avançados
+├── proposta.html         # Montador de propostas automáticas
+├── como-funciona.html    # Guia prático (Jornada do usuário)
+├── tabela-valores.html   # Tabela de preços oficiais
+├── style.css             # Estilos globais + responsividade
+├── script.js             # Core lógico (v4.0.0)
+├── dados_inline.js       # Base de dados (Mock)
+└── pes_drae.png          # Logo Draence
 ```
 
 ---

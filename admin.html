@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Multa Rescisória - Draence</title>
+    <title>Calculadora de Multa Rescisória - Draence [ADMIN]</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,13 +15,14 @@
                 <img src="Pes_drae.png" alt="Draence Logo">
                 <div class="logo-text">
                     <h1>DRAENCE</h1>
-                    <p>Simulador de Multas</p>
+                    <p>Simulador de Multas [ADMIN]</p>
                 </div>
             </div>
             <div class="header-spacer"></div>
             <div class="header-actions">
                 <a href="tabela-valores.html" class="header-button">📊 Tabela de Valores</a>
                 <a href="como-funciona.html" class="header-button">❓ Como Funciona</a>
+                <a href="index.html" class="header-button" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: var(--accent-danger);">← Sair do Admin</a>
                 <div class="status-badge">🟢 Sistema Online</div>
             </div>
         </header>
@@ -33,7 +34,7 @@
 
             <!-- FORM SECTION -->
             <form id="formCalculo">
-                <div class="user-grid">
+                <div class="sections-wrapper">
                     <!-- DADOS DO JOGADOR -->
                     <div class="card">
                         <div class="card-title">Dados do Jogador</div>
@@ -49,22 +50,27 @@
 
                             <div class="form-group">
                                 <label for="idade">Idade *</label>
-                                <input type="number" id="idade" min="15" max="45" step="1" placeholder="25" data-min="15" data-max="45" required>
+                                <input type="number" id="idade" min="15" max="45" step="1" placeholder="25" required>
                                 <p class="help-text">15-45 anos</p>
                             </div>
 
                             <div class="form-group">
                                 <label for="overall">Overall *</label>
-                                <input type="number" id="overall" min="60" max="94" step="1" placeholder="85" data-min="60" data-max="94" required>
+                                <input type="number" id="overall" min="60" max="94" step="1" placeholder="85" required>
                                 <p class="help-text">60-94</p>
                             </div>
 
                             <div class="form-group">
-                                <label for="satisfacao">Satisfação com o Clube *
-                                    <span class="tooltip-icon" data-tooltip="Nível de felicidade do jogador. 0 = Quer sair (Reduz multa); 100 = Ama o clube (Aumenta multa).">?</span>
+                                <label for="perfilJogador">Perfil Psicológico
+                                    <span class="tooltip-icon" data-tooltip="A personalidade do jogador. 'Mercenários' exigem luvas altas para aceitar multas altas. 'Fiéis' valorizam salário longo. 'Ambiciosos' travam a multa para facilitar a saída.">?</span>
                                 </label>
-                                <input type="number" id="satisfacao" min="0" max="100" step="1" placeholder="50" value="50" data-min="0" data-max="100" required>
-                                <p class="help-text">0-100 (50 = Neutro)</p>
+                                <select id="perfilJogador" required>
+                                    <option value="padrao">Padrão / Equilibrado</option>
+                                    <option value="mercenario">Mercenário (Foco Luvas)</option>
+                                    <option value="fiel">Fiel / Estável (Foco Salário)</option>
+                                    <option value="ambicioso">Ambicioso (Multa Baixa)</option>
+                                </select>
+                                <p class="help-text">Escolha o perfil</p>
                             </div>
                         </div>
                     </div>
@@ -75,8 +81,8 @@
 
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="anosContrato">Duração (Anos) *
-                                    <span class="tooltip-icon" data-tooltip="Impacta o Valor Total (VTC). Contratos longos aumentam a exigência financeira.">?</span>
+                                <label for="anosContrato">Duração do Contrato (Anos) *
+                                    <span class="tooltip-icon" data-tooltip="Impacta o Valor Total (VTC). Contratos longos aumentam a exigência financeira. Se você não subir o salário proporcionalmente, a multa cairá (Déficit).">?</span>
                                 </label>
                                 <input type="number" id="anosContrato" min="1" max="5" step="1" value="1" required>
                                 <p class="help-text">1-5 anos</p>
@@ -84,7 +90,7 @@
 
                             <div class="form-group">
                                 <label for="salarioOferecido">Salário (£D) *
-                                    <span class="tooltip-icon" data-tooltip="Pagamento mensal. Fator de maior peso na estabilidade.">?</span>
+                                    <span class="tooltip-icon" data-tooltip="Pagamento mensal. É o fator de maior peso na estabilidade. Aumentos aqui geram mais impacto na multa do que nas luvas (exceto para Mercenários).">?</span>
                                 </label>
                                 <input type="text" id="salarioOferecido" class="input-money" placeholder="50000" data-min="0" data-max="999999999" required>
                                 <span class="magnitude-badge"></span>
@@ -92,11 +98,54 @@
 
                             <div class="form-group">
                                 <label for="luvasOferecidas">Luvas (£D) *
-                                    <span class="tooltip-icon" data-tooltip="Prêmio de assinatura (pagamento único).">?</span>
+                                    <span class="tooltip-icon" data-tooltip="Prêmio de assinatura (pagamento único). O sistema dilui esse valor pelos anos de contrato. Para contratos longos, luvas baixas têm pouco efeito na multa.">?</span>
                                 </label>
                                 <input type="text" id="luvasOferecidas" class="input-money" placeholder="100000" data-min="0" data-max="999999999" required>
                                 <span class="magnitude-badge"></span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- DADOS DA NEGOCIAÇÃO - CONSTANTES -->
+                    <div class="card">
+                        <div class="card-title">Constantes da Fórmula</div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="satisfacao">Satisfação do Jogador *
+                                    <span class="tooltip-icon" data-tooltip="Nível de felicidade do jogador com o clube. Impacto conservador: até ±10%.">?</span>
+                                </label>
+                                <input type="number" id="satisfacao" min="0" max="100" step="1" placeholder="50" value="50" data-min="0" data-max="100" required>
+                                <p class="help-text">0-100 (50 = Neutro)</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fatorSatisfacao">Fator de Satisfação *
+                                    <span class="tooltip-icon" data-tooltip="Divisor da fórmula de satisfação. 500 = ±10%, 250 = ±20%, 1000 = ±5%. Menor valor = maior impacto.">?</span>
+                                </label>
+                                <input type="number" id="fatorSatisfacao" min="100" max="2000" step="50" value="500" data-min="100" data-max="2000" required>
+                                <p class="help-text">Default: 500 (±10%)</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kBase">Mult. Base (K) *
+                                    <span class="tooltip-icon" data-tooltip="Sua margem de lucro inicial. 1.2 significa que você quer vender por 20% a mais que comprou. Perfis 'Ambiciosos' rejeitam margens altas.">?</span>
+                                </label>
+                                <input type="number" id="kBase" min="0.5" max="5" step="0.1" value="1.2" required>
+                                <p class="help-text" id="helpTextKBase">Multiplicador de 20.0% acima do valor</p>
+                            </div>
+                        </div>
+
+                        <!-- INFLUÊNCIAS EXTERNAS -->
+                        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                            <label style="display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9em; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">
+                                Influências Externas
+                                <span class="tooltip-icon" data-tooltip="Ajustes manuais de cenário. Use para simular lesões (-), rivalidade (+), liderança (+) ou problemas extracampo (-).">?</span>
+                            </label>
+                            <div class="influencia-container" id="influenciasContainer"></div>
+                            <button type="button" class="btn-add-dashed" id="btnAdicionarInfluencia">
+                                + Adicionar Influência
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -110,8 +159,8 @@
 
             <!-- RESULT SECTION -->
             <div class="result-section" id="resultado">
-                <!-- SCOREBOARD: Card Centrado (Apenas Multa Sugerida) -->
-                <div class="single-result-container">
+                <!-- SCOREBOARD: Cards lado a lado -->
+                <div class="result-scoreboard">
                     <div class="score-card suggested">
                         <div class="score-label">
                             Multa Sugerida <span class="score-badge" id="labelPerfil">Padrão</span>
@@ -120,6 +169,50 @@
                         <div class="score-percent-badge" id="percentMultaSug"></div>
                         <div class="score-value-eur" id="multaSugEUR">€ 0</div>
                     </div>
+
+                    <div class="score-card maximum">
+                        <div class="score-label">Teto Máximo (Limite)</div>
+                        <div class="score-value-brl" id="multaMaxBRL">£D 0</div>
+                        <div class="score-percent-badge" id="percentMultaMax"></div>
+                        <div class="score-value-eur" id="multaMaxEUR">€ 0</div>
+                    </div>
+                </div>
+
+                <!-- FÓRMULA VISUAL -->
+                <div class="math-visual-container">
+                    <div class="math-title">Composição do Multiplicador (Sugerido)</div>
+                    <div class="math-steps">
+                        <div class="math-step" id="stepKBase" data-tooltip="">
+                            <span class="step-label">K Base</span>
+                            <span class="step-value" id="mathK">1.00</span>
+                        </div>
+                        <div class="math-operator">+</div>
+                        <div class="math-step" id="stepRep" data-tooltip="">
+                            <span class="step-label">Reputação</span>
+                            <span class="step-value" id="mathRep">0.00</span>
+                        </div>
+                        <div class="math-operator">+</div>
+                        <div class="math-step" id="stepSal" data-tooltip="">
+                            <span class="step-label">Salário</span>
+                            <span class="step-value" id="mathSal">0.00</span>
+                        </div>
+                        <div class="math-operator">+</div>
+                        <div class="math-step" id="stepLuv" data-tooltip="">
+                            <span class="step-label">Luvas</span>
+                            <span class="step-value" id="mathLuv">0.00</span>
+                        </div>
+                        <div class="math-operator">+</div>
+                        <div class="math-step" id="stepEps" data-tooltip="">
+                            <span class="step-label">Extras</span>
+                            <span class="step-value" id="mathEps">0.00</span>
+                        </div>
+                        <div class="math-operator">=</div>
+                        <div class="math-step result">
+                            <span class="step-label">Total</span>
+                            <span class="step-value" id="mathTotal">0.00x</span>
+                        </div>
+                    </div>
+                    <div class="math-footer-text" id="mathExplanation"></div>
                 </div>
 
                 <div class="result-grid">
@@ -186,37 +279,11 @@
     <footer class="main-footer">
         <p style="color: var(--text-secondary); margin: 0; font-size: 0.9em;">
             Desenvolvido por <a href="https://github.com/J0NGS" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 500;">J0NGS</a><br>
-            Draence Calculator v4.0.0 • Todos os direitos reservados © <span id="yearClickable" style="cursor: default;">2026</span>
+            Draence Calculator v4.0.0 • Todos os direitos reservados © 2026
         </p>
     </footer>
 
     <script src="dados_inline.js"></script>
     <script src="script.js"></script>
-    <script>
-        // ============================================
-        // EASTER EGG: Acesso ao Modo Admin (Clique no 2026)
-        // ============================================
-        let yearClickCount = 0;
-        let yearClickTimeout;
-
-        const yearClickableEl = document.getElementById('yearClickable');
-        if (yearClickableEl) {
-            yearClickableEl.addEventListener('click', function() {
-                yearClickCount++;
-                
-                // Reseta o contador após 2 segundos
-                clearTimeout(yearClickTimeout);
-                yearClickTimeout = setTimeout(() => {
-                    yearClickCount = 0;
-                }, 2000);
-
-                // Se atingiu 5 cliques em 2 segundos, redireciona para admin
-                if (yearClickCount === 5) {
-                    yearClickCount = 0;
-                    globalThis.location.href = 'admin.html';
-                }
-            });
-        }
-    </script>
 </body>
 </html>
