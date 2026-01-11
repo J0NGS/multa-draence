@@ -111,7 +111,7 @@ Draence-Calculator/
 ├── style.css             # Estilos globais + responsividade
 ├── script.js             # Core lógico (v4.0.0)
 ├── dados_inline.js       # Base de dados (Mock)
-└── pes_drae.png          # Logo Draence
+└── Pes_drae.png          # Logo Draence
 ```
 
 ---
