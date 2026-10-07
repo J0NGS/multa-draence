@@ -1,0 +1,269 @@
+/* ============================================
+   DRAENCE — MONTADOR DE PROPOSTAS (proposta.html)
+   ============================================ */
+
+.proposal-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 24px;
+    align-items: start;
+}
+
+.proposal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.proposal-form .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Indicador de preenchimento dos cards */
+.card-status {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    transform: skewX(var(--skew));
+    font-stretch: 112%;
+    letter-spacing: 0.06em;
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+    font-size: 0.72em;
+    font-weight: 600;
+    cursor: default;
+}
+
+.card-status::after {
+    content: "Pendente";
+}
+
+.card-status.ok {
+    background: var(--brand);
+    color: var(--brand-ink);
+}
+
+.card-status.ok::after {
+    content: "✓ Completo";
+}
+
+/* Input monetário com badge de magnitude */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding-right: 44px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Multas vindas da calculadora (destacadas) */
+.input-readonly input {
+    color: var(--brand-bright);
+    font-weight: 800;
+    font-stretch: 112%;
+    background: rgba(181, 211, 138, 0.06);
+    border-color: var(--border-strong);
+}
+
+/* Listas dinâmicas (premiações / cláusulas) */
+.dynamic-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.dynamic-input-group input {
+    flex: 1;
+    min-width: 0;
+}
+
+.btn-add-item {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: var(--brand);
+    color: var(--brand-ink);
+    font-weight: 700;
+    font-size: 1.3em;
+    line-height: 1;
+    transition: background 0.15s ease;
+}
+
+.btn-add-item:hover {
+    background: var(--brand-bright);
+}
+
+.dynamic-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.dynamic-list-container:empty {
+    display: none;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 6px 6px 14px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.9em;
+    animation: fadeIn 0.2s ease;
+    word-break: break-word;
+}
+
+.btn-remove-item {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.3em;
+    line-height: 1;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-remove-item:hover {
+    background: var(--accent-danger-soft);
+    color: var(--accent-danger);
+}
+
+/* Prévia estilo WhatsApp */
+.proposal-preview-sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72em;
+    font-weight: 800;
+    font-stretch: 118%;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.preview-header__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00a884;
+    box-shadow: 0 0 0 3px rgba(0, 168, 132, 0.2);
+}
+
+.preview-box {
+    position: relative;
+    background: #0b141a;
+    border: 1px solid #1f2c34;
+    border-left: 4px solid #00a884;
+    border-radius: 0 12px 12px 12px;
+    color: #e9edef;
+    font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    padding: 18px 20px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 300px;
+    max-height: calc(100vh - var(--header-height) - 180px);
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.full-width-btn {
+    width: 100% !important;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 760px) {
+    .proposal-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .proposal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .proposal-preview-sidebar {
+        position: static;
+    }
+
+    .preview-box {
+        max-height: 480px;
+        font-size: 0.85rem;
+    }
+
+    /* Botão de copiar fixo no rodapé da tela */
+    .action-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        background: rgba(18, 23, 15, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45);
+        z-index: 150;
+    }
+
+    body {
+        padding-bottom: 76px;
+    }
+}
+
+/* ---------- Ícones ---------- */
+.btn-add-item .icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.6;
+}
+
+.preview-header__icon {
+    width: 16px;
+    height: 16px;
+    color: #00a884;
+}
+
+/* Ícone do botão de copiar via CSS: o script troca o textContent do botão
+   ("✅ Copiado!") e um <svg> no HTML seria apagado ao restaurar o texto. */
+.btn-copy::after {
+    content: "";
+    order: -1;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2' /%3E %3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' /%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2' /%3E %3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' /%3E%3C/svg%3E") center / contain no-repeat;
+}

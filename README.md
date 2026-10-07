@@ -101,18 +101,36 @@ O projeto foi construído com foco em performance e manutenibilidade, utilizando
 ### 📁 Diretórios
 
 ```text
-Draence-Calculator/
+multa-draence/
 │
-├── index.html            # Dashboard principal (Calculadora)
-├── admin.html            # View admin com campos avançados
-├── proposta.html         # Montador de propostas automáticas
-├── como-funciona.html    # Guia prático (Jornada do usuário)
-├── tabela-valores.html   # Tabela de preços oficiais
-├── style.css             # Estilos globais + responsividade
-├── script.js             # Core lógico (v4.0.0)
-├── dados_inline.js       # Base de dados (Mock)
-└── Pes_drae.png          # Logo Draence
+├── index.html              # Calculadora (página principal)
+├── admin.html              # View admin com campos avançados
+├── proposta.html           # Montador de propostas automáticas
+├── como-funciona.html      # Guia prático (Jornada do usuário)
+├── tabela-valores.html     # Tabela de preços oficiais
+│
+├── assets/
+│   ├── css/
+│   │   ├── base.css         # Tokens, layout, header/nav, formulários, botões, footer
+│   │   ├── calculadora.css  # Calculadora e admin (resultado, comparativo, fórmula)
+│   │   ├── proposta.css     # Montador de propostas
+│   │   ├── tabela.css       # Tabela de valores
+│   │   └── guia.css         # Página "Como Funciona"
+│   ├── js/
+│   │   ├── calculadora.js   # Core lógico (cálculo da multa, máscaras de input)
+│   │   ├── proposta.js      # Montador de propostas
+│   │   ├── tabela-valores.js# Filtros, ordenação e paginação da tabela
+│   │   ├── easter-egg.js    # Acesso ao modo admin pelo rodapé
+│   │   └── icons.js         # Conjunto de ícones (sprite SVG, Lucide - ISC)
+│   └── img/
+│       └── pes-drae.png     # Logo Draence
+│
+└── data/
+    ├── dados_inline.js      # Base de dados usada pelas páginas
+    └── csv/                 # Planilhas de origem da base de dados
 ```
+
+> As páginas HTML ficam na raiz para manter as URLs do GitHub Pages (ex.: `/proposta.html`, `/admin.html`).
 
 ---
 

@@ -1,0 +1,208 @@
+/* ============================================
+   DRAENCE — GUIA "COMO FUNCIONA" (como-funciona.html)
+   ============================================ */
+
+.guide {
+    max-width: 900px;
+}
+
+.guide-hero {
+    text-align: center;
+    margin: 12px auto 36px;
+}
+
+/* Passos */
+.step-card {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 48px;
+    flex-shrink: 0;
+    transform: skewX(var(--skew));
+    background: linear-gradient(180deg, var(--brand-bright), var(--brand));
+    color: var(--brand-ink);
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-size: 1.5em;
+    font-weight: 900;
+    box-shadow: 0 10px 24px -12px rgba(181, 211, 138, 0.8);
+}
+
+.step-content {
+    min-width: 0;
+}
+
+.step-content h3 {
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1.05em;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.step-content p:last-child {
+    margin-bottom: 0;
+}
+
+.step-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.step-content ul {
+    list-style: none;
+    margin: 12px 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.step-content li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.step-content li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+.step-note {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--brand-soft);
+    border-left: 3px solid var(--brand);
+    color: var(--text-primary) !important;
+    font-style: italic;
+}
+
+/* Curiosidade */
+.curiosity-box {
+    margin-top: 12px;
+    padding: 24px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-strong);
+    border-left: 4px solid var(--brand);
+    background:
+        repeating-linear-gradient(90deg, rgba(181, 211, 138, 0.035) 0 44px, transparent 44px 88px),
+        linear-gradient(135deg, rgba(181, 211, 138, 0.10), rgba(18, 23, 15, 0.6));
+}
+
+.curiosity-title {
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.curiosity-text p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95em;
+    margin-bottom: 12px;
+}
+
+.curiosity-text p:last-child {
+    margin-bottom: 0;
+}
+
+.curiosity-text strong {
+    color: var(--text-primary);
+}
+
+/* Chamada final */
+.cta-section {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-color);
+}
+
+.cta-text {
+    max-width: 620px;
+    margin: 0 auto 20px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.cta-text strong {
+    color: var(--text-primary);
+}
+
+.easter-egg {
+    cursor: pointer;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 760px) {
+    .guide-hero {
+        margin-bottom: 24px;
+    }
+
+    .step-card {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .step-number {
+        width: 46px;
+        height: 40px;
+        font-size: 1.2em;
+    }
+
+    .step-content h3 {
+        font-size: 1.1em;
+    }
+
+    .curiosity-box {
+        padding: 18px 16px;
+    }
+}
+
+/* ---------- Ícones ---------- */
+.step-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: var(--brand);
+    vertical-align: -0.2em;
+}
+
+.curiosity-title .icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    color: var(--brand);
+    vertical-align: -0.25em;
+}
+
+.curiosity-text .icon-inline {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: -0.2em;
+}
