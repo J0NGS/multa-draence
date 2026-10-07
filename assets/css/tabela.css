@@ -63,7 +63,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    background: #172138;
+    background: #151c11;
     padding: 12px 16px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
@@ -107,11 +107,11 @@
 .badge-posicao {
     display: inline-block;
     min-width: 44px;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    background: var(--accent-primary-soft);
-    color: var(--accent-primary);
-    font-weight: 600;
+    padding: 2px 10px;
+    transform: skewX(var(--skew));
+    background: var(--brand);
+    color: var(--brand-ink);
+    font-weight: 800;
     font-size: 0.9em;
     text-align: center;
 }
@@ -127,12 +127,14 @@
 }
 
 .font-bold {
-    font-weight: 700;
-    color: var(--accent-primary);
+    font-weight: 800;
+    font-stretch: 118%;
+    color: var(--brand);
 }
 
 /* Ordenação */
 .sort-btn {
+    font-stretch: 112%;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -164,7 +166,7 @@
 
 .sort-btn.sort-asc,
 .sort-btn.sort-desc {
-    color: var(--accent-primary);
+    color: var(--brand);
 }
 
 .sort-btn.sort-asc .sort-icon {
@@ -194,6 +196,9 @@
 }
 
 .btn-paginacao {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     padding: 8px 16px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-color);
@@ -205,8 +210,9 @@
 }
 
 .btn-paginacao:hover:not(:disabled) {
-    background: var(--accent-primary-soft);
-    border-color: var(--accent-primary);
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--brand-ink);
 }
 
 .btn-paginacao:disabled {

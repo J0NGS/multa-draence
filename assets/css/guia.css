@@ -22,15 +22,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
+    width: 56px;
     height: 48px;
     flex-shrink: 0;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-success));
-    color: #fff;
-    font-size: 1.3em;
-    font-weight: 700;
-    box-shadow: 0 8px 20px -10px rgba(59, 130, 246, 0.8);
+    transform: skewX(var(--skew));
+    background: linear-gradient(180deg, var(--brand-bright), var(--brand));
+    color: var(--brand-ink);
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-size: 1.5em;
+    font-weight: 900;
+    box-shadow: 0 10px 24px -12px rgba(181, 211, 138, 0.8);
 }
 
 .step-content {
@@ -38,8 +40,12 @@
 }
 
 .step-content h3 {
-    font-size: 1.2em;
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1.05em;
+    font-weight: 800;
     color: var(--text-primary);
     margin-bottom: 10px;
 }
@@ -85,8 +91,8 @@
 .step-note {
     padding: 12px 14px;
     border-radius: var(--radius-sm);
-    background: var(--accent-primary-soft);
-    border-left: 3px solid var(--accent-primary);
+    background: var(--brand-soft);
+    border-left: 3px solid var(--brand);
     color: var(--text-primary) !important;
     font-style: italic;
 }
@@ -96,13 +102,19 @@
     margin-top: 12px;
     padding: 24px;
     border-radius: var(--border-radius);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.10), rgba(16, 185, 129, 0.08));
+    border: 1px solid var(--border-strong);
+    border-left: 4px solid var(--brand);
+    background:
+        repeating-linear-gradient(90deg, rgba(181, 211, 138, 0.035) 0 44px, transparent 44px 88px),
+        linear-gradient(135deg, rgba(181, 211, 138, 0.10), rgba(18, 23, 15, 0.6));
 }
 
 .curiosity-title {
-    font-size: 1.1em;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 800;
     color: var(--text-primary);
     margin-bottom: 12px;
 }
@@ -157,10 +169,9 @@
     }
 
     .step-number {
-        width: 40px;
+        width: 46px;
         height: 40px;
-        font-size: 1.1em;
-        border-radius: 12px;
+        font-size: 1.2em;
     }
 
     .step-content h3 {

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b1120">
+    <meta name="theme-color" content="#0a0d09">
     <title>Tabela de Valores - Draence</title>
     <link rel="icon" type="image/png" href="assets/img/pes-drae.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/tabela.css">
 </head>
@@ -24,9 +24,9 @@
                 </span>
             </a>
             <nav class="site-nav" aria-label="Navegação principal">
-                <a href="index.html" class="nav-link">🧮 Calculadora</a>
-                <a href="tabela-valores.html" class="nav-link is-active" aria-current="page">📊 Tabela de Valores</a>
-                <a href="como-funciona.html" class="nav-link">❓ Como Funciona</a>
+                <a href="index.html" class="nav-link">Calculadora</a>
+                <a href="tabela-valores.html" class="nav-link is-active" aria-current="page">Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link">Como Funciona</a>
             </nav>
         </div>
     </header>
@@ -35,14 +35,14 @@
     <main class="page-wrapper">
         <section class="page-intro">
             <span class="eyebrow">Base de dados</span>
-            <h1>Tabela de valores oficiais</h1>
+            <h1>Tabela de <span class="hl">valores oficiais</span></h1>
             <p>Valor de mercado, salário base e luvas base anuais por posição, idade e overall.</p>
         </section>
 
         <div class="container">
             <!-- FILTROS -->
             <section class="card">
-                <h2 class="card-title">🔍 Filtros</h2>
+                <h2 class="card-title">Filtros</h2>
 
                 <div class="filters-grid">
                     <div class="form-group">
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="filters-actions">
-                    <button id="btnFiltrar" class="btn-primary">🔎 Filtrar</button>
+                    <button id="btnFiltrar" class="btn-primary">Filtrar</button>
                     <button id="btnLimpar" class="btn-ghost-danger">Limpar</button>
                 </div>
             </section>
@@ -82,7 +82,7 @@
             <!-- RESULTADOS -->
             <section class="card card--table">
                 <div class="table-toolbar">
-                    <h2 class="card-title">📊 Resultados</h2>
+                    <h2 class="card-title">Resultados</h2>
                     <div id="contadorRegistros" class="table-counter">Exibindo 0 de 0 registros</div>
                 </div>
 
