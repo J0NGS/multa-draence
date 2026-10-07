@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/guia.css">
 </head>
 <body>
+    <script src="assets/js/icons.js"></script>
     <!-- HEADER -->
     <header class="site-header">
         <div class="site-header__inner">
@@ -24,9 +25,9 @@
                 </span>
             </a>
             <nav class="site-nav" aria-label="Navegação principal">
-                <a href="index.html" class="nav-link">Calculadora</a>
-                <a href="tabela-valores.html" class="nav-link">Tabela de Valores</a>
-                <a href="como-funciona.html" class="nav-link is-active" aria-current="page">Como Funciona</a>
+                <a href="index.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-calculator"></use></svg>Calculadora</a>
+                <a href="tabela-valores.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-table-2"></use></svg>Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link is-active" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-circle-help"></use></svg>Como Funciona</a>
             </nav>
         </div>
     </header>
@@ -44,7 +45,7 @@
             <article class="card step-card">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h3>Os dados (posição, idade, overall)</h3>
+                    <h3><svg class="icon step-icon" aria-hidden="true"><use href="#i-shirt"></use></svg>Os dados (posição, idade, overall)</h3>
                     <p>
                         Tudo começa aqui. Você insere os <strong>atributos do jogador</strong>: sua posição no campo, idade e rating (Overall).
                         O sistema busca na <strong>tabela oficial da liga</strong> qual é o "Valor de Mercado Base" — o preço padrão para um jogador com esse perfil e gera uma multa baseado na sua proposta de contrato e do valor base.
@@ -59,7 +60,7 @@
             <article class="card step-card">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>O contrato (você ajusta os termos)</h3>
+                    <h3><svg class="icon step-icon" aria-hidden="true"><use href="#i-file-signature"></use></svg>O contrato (você ajusta os termos)</h3>
                     <p>
                         Agora você <strong>negocia com o jogador</strong>. Aqui é onde a mágica acontece:
                     </p>
@@ -78,7 +79,7 @@
             <article class="card step-card">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>A multa sugerida (o resultado)</h3>
+                    <h3><svg class="icon step-icon" aria-hidden="true"><use href="#i-shield"></use></svg>A multa sugerida (o resultado)</h3>
                     <p>
                         Você clica em <strong>"Calcular"</strong> e o sistema faz toda a matemática.
                         Ele considera automaticamente:
@@ -98,7 +99,7 @@
             <article class="card step-card">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>A proposta (gera o documento)</h3>
+                    <h3><svg class="icon step-icon" aria-hidden="true"><use href="#i-send"></use></svg>A proposta (gera o documento)</h3>
                     <p>
                         Clique em <strong>"Montar Proposta"</strong> e o sistema gera automaticamente o <strong>texto padrão</strong> pronto para enviar para a CDF.
                     </p>
@@ -118,20 +119,20 @@
 
             <!-- CURIOSIDADE: BASTIDORES -->
             <section class="curiosity-box">
-                <h2 class="curiosity-title">Curiosidade: como a mágica acontece?</h2>
+                <h2 class="curiosity-title"><svg class="icon" aria-hidden="true"><use href="#i-lightbulb"></use></svg>Curiosidade: como a mágica acontece?</h2>
                 <div class="curiosity-text">
                     <p>Por trás daquela multa "sugerida" tem muita coisa acontecendo:</p>
                     <p>
-                        🛡️ <strong>CDF tem um sistema parecido:</strong> A CDF tem disponivel um sistema parecido, porém com algumas diferenças sutis para poder fazer a simulação mais realista. O sistema disponibilizado hoje é totalmente baseado no da CDF gerando uma multa próxima mas não igual a que a CDF gera.
+                        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-shield"></use></svg><strong>CDF tem um sistema parecido:</strong> A CDF tem disponivel um sistema parecido, porém com algumas diferenças sutis para poder fazer a simulação mais realista. O sistema disponibilizado hoje é totalmente baseado no da CDF gerando uma multa próxima mas não igual a que a CDF gera.
                     </p>
                     <p>
-                        ⚙️ <strong>Perfil Psicológico do Jogador:</strong> O sistema da detecta automaticamente se ele é mercenário (quer grana), fiel (quer estabilidade), ambicioso (quer sair para Europa) ou padrão (equilibrado). Cada tipo reage diferente aos termos do contrato.
+                        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-cog"></use></svg><strong>Perfil Psicológico do Jogador:</strong> O sistema da detecta automaticamente se ele é mercenário (quer grana), fiel (quer estabilidade), ambicioso (quer sair para Europa) ou padrão (equilibrado). Cada tipo reage diferente aos termos do contrato.
                     </p>
                     <p>
-                        <strong>Satisfação do jogador:</strong> O jogador tem uma satisfação de 0 a 100 que influencia diretamente na multa, quanto menor a satisfação com aquele clube, menor a multa que ele quer.
+                        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-chart-column"></use></svg><strong>Satisfação do jogador:</strong> O jogador tem uma satisfação de 0 a 100 que influencia diretamente na multa, quanto menor a satisfação com aquele clube, menor a multa que ele quer.
                     </p>
                     <p>
-                        ⚡ <strong>Fair Play Financeiro:</strong> O sistema respeita as regras da liga para evitar que propostas fiquem absurdas ou irrealistas.
+                        <svg class="icon icon-inline" aria-hidden="true"><use href="#i-zap"></use></svg><strong>Fair Play Financeiro:</strong> O sistema respeita as regras da liga para evitar que propostas fiquem absurdas ou irrealistas.
                     </p>
                     <p>
                         <strong>Resultado:</strong> Uma multa que é justa, realista e que os agentes entendem. Você não precisa entender a fórmula — mas pode ter certeza que funciona.
@@ -145,7 +146,7 @@
                     <strong>Pronto para começar?</strong> Volte para a Calculadora, teste alguns cenários e veja a mágica acontecer.
                     Cada contrato é diferente — mas agora você tem a ferramenta certa para cada negociação.
                 </p>
-                <a href="index.html" class="btn-primary">Ir para a Calculadora</a>
+                <a href="index.html" class="btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-ball"></use></svg>Ir para a Calculadora<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
             </section>
         </div>
     </main>

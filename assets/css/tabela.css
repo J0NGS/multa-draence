@@ -260,3 +260,28 @@
         flex: 1;
     }
 }
+
+/* ---------- Ícones ---------- */
+.card-title__lead {
+    width: 20px;
+    height: 20px;
+    color: var(--brand);
+}
+
+.sort-icon .icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+.btn-paginacao {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-paginacao .icon {
+    width: 15px;
+    height: 15px;
+    stroke-width: 2.4;
+}

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/calculadora.css">
 </head>
 <body>
+    <script src="assets/js/icons.js"></script>
     <!-- HEADER -->
     <header class="site-header">
         <div class="site-header__inner">
@@ -24,9 +25,9 @@
                 </span>
             </a>
             <nav class="site-nav" aria-label="Navegação principal">
-                <a href="tabela-valores.html" class="nav-link">Tabela de Valores</a>
-                <a href="como-funciona.html" class="nav-link">Como Funciona</a>
-                <a href="index.html" class="nav-link nav-link--danger">← Sair do Admin</a>
+                <a href="tabela-valores.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-table-2"></use></svg>Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-circle-help"></use></svg>Como Funciona</a>
+                <a href="index.html" class="nav-link nav-link--danger"><svg class="icon" aria-hidden="true"><use href="#i-log-out"></use></svg>Sair do Admin</a>
             </nav>
         </div>
     </header>
@@ -44,30 +45,30 @@
             <div class="admin-grid">
                 <!-- DADOS DO JOGADOR -->
                 <section class="card">
-                    <h2 class="card-title"><span class="card-step">1</span>Dados do jogador</h2>
+                    <h2 class="card-title"><span class="card-step">1</span>Dados do jogador<svg class="icon card-title__icon" aria-hidden="true"><use href="#i-shirt"></use></svg></h2>
 
                     <div class="form-grid form-grid--stack">
                         <div class="form-group">
-                            <label for="posicao">Posição<span class="required">*</span></label>
+                            <label for="posicao"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"></use></svg>Posição<span class="required">*</span></label>
                             <select id="posicao" required>
                                 <option value="">Selecione</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="idade">Idade<span class="required">*</span></label>
+                            <label for="idade"><svg class="icon" aria-hidden="true"><use href="#i-cake"></use></svg>Idade<span class="required">*</span></label>
                             <input type="number" id="idade" min="15" max="45" step="1" placeholder="25" inputmode="numeric" required>
                             <p class="help-text">Entre 15 e 45 anos</p>
                         </div>
 
                         <div class="form-group">
-                            <label for="overall">Overall<span class="required">*</span></label>
+                            <label for="overall"><svg class="icon" aria-hidden="true"><use href="#i-star"></use></svg>Overall<span class="required">*</span></label>
                             <input type="number" id="overall" min="60" max="94" step="1" placeholder="85" inputmode="numeric" required>
                             <p class="help-text">Entre 60 e 94</p>
                         </div>
 
                         <div class="form-group">
-                            <label for="perfilJogador">Perfil psicológico
+                            <label for="perfilJogador"><svg class="icon" aria-hidden="true"><use href="#i-user"></use></svg>Perfil psicológico
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="A personalidade do jogador. 'Mercenários' exigem luvas altas para aceitar multas altas. 'Fiéis' valorizam salário longo. 'Ambiciosos' travam a multa para facilitar a saída.">?</span>
                             </label>
                             <select id="perfilJogador" required>
@@ -82,11 +83,11 @@
 
                 <!-- CONTRATO -->
                 <section class="card">
-                    <h2 class="card-title"><span class="card-step">2</span>Contrato</h2>
+                    <h2 class="card-title"><span class="card-step">2</span>Contrato<svg class="icon card-title__icon" aria-hidden="true"><use href="#i-file-signature"></use></svg></h2>
 
                     <div class="form-grid form-grid--stack">
                         <div class="form-group">
-                            <label for="anosContrato">Duração do contrato (anos)<span class="required">*</span>
+                            <label for="anosContrato"><svg class="icon" aria-hidden="true"><use href="#i-calendar-clock"></use></svg>Duração do contrato (anos)<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Impacta o Valor Total (VTC). Contratos longos aumentam a exigência financeira. Se você não subir o salário proporcionalmente, a multa cairá (Déficit).">?</span>
                             </label>
                             <input type="number" id="anosContrato" min="1" max="5" step="1" value="1" inputmode="numeric" required>
@@ -94,7 +95,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="salarioOferecido">Salário mensal<span class="required">*</span>
+                            <label for="salarioOferecido"><svg class="icon" aria-hidden="true"><use href="#i-banknote"></use></svg>Salário mensal<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Pagamento mensal. É o fator de maior peso na estabilidade. Aumentos aqui geram mais impacto na multa do que nas luvas (exceto para Mercenários).">?</span>
                             </label>
                             <div class="input-group-with-buttons">
@@ -109,7 +110,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="luvasOferecidas">Luvas (total do contrato)<span class="required">*</span>
+                            <label for="luvasOferecidas"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"></use></svg>Luvas (total do contrato)<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Prêmio de assinatura (pagamento único). O sistema dilui esse valor pelos anos de contrato. Para contratos longos, luvas baixas têm pouco efeito na multa.">?</span>
                             </label>
                             <div class="input-group-with-buttons">
@@ -127,11 +128,11 @@
 
                 <!-- CONSTANTES DA FÓRMULA -->
                 <section class="card">
-                    <h2 class="card-title"><span class="card-step">3</span>Constantes da fórmula</h2>
+                    <h2 class="card-title"><span class="card-step">3</span>Constantes da fórmula<svg class="icon card-title__icon" aria-hidden="true"><use href="#i-sliders-horizontal"></use></svg></h2>
 
                     <div class="form-grid form-grid--stack">
                         <div class="form-group">
-                            <label for="satisfacao">Satisfação do jogador<span class="required">*</span>
+                            <label for="satisfacao"><svg class="icon" aria-hidden="true"><use href="#i-smile"></use></svg>Satisfação do jogador<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Nível de felicidade do jogador com o clube. Impacto conservador: até ±10%.">?</span>
                             </label>
                             <input type="number" id="satisfacao" min="0" max="100" step="1" placeholder="50" value="50" inputmode="numeric" data-min="0" data-max="100" required>
@@ -139,7 +140,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fatorSatisfacao">Fator de satisfação<span class="required">*</span>
+                            <label for="fatorSatisfacao"><svg class="icon" aria-hidden="true"><use href="#i-gauge"></use></svg>Fator de satisfação<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Divisor da fórmula de satisfação. 500 = ±10%, 250 = ±20%, 1000 = ±5%. Menor valor = maior impacto.">?</span>
                             </label>
                             <input type="number" id="fatorSatisfacao" min="100" max="2000" step="50" value="500" data-min="100" data-max="2000" required>
@@ -147,7 +148,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="kBase">Mult. base (K)<span class="required">*</span>
+                            <label for="kBase"><svg class="icon" aria-hidden="true"><use href="#i-badge-percent"></use></svg>Mult. base (K)<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Sua margem de lucro inicial. 1.1 significa que você quer vender por 10% a mais que comprou. Perfis 'Ambiciosos' rejeitam margens altas.">?</span>
                             </label>
                             <input type="number" id="kBase" min="0.5" max="5" step="0.1" value="1.1" required>
@@ -157,12 +158,13 @@
 
                     <!-- INFLUÊNCIAS EXTERNAS -->
                     <div class="form-divider">
-                        <label>Influências externas
+                        <label><svg class="icon" aria-hidden="true"><use href="#i-zap"></use></svg>Influências externas
                             <span class="tooltip-icon" tabindex="0" data-tooltip="Ajustes manuais de cenário. Use para simular lesões (-), rivalidade (+), liderança (+) ou problemas extracampo (-).">?</span>
                         </label>
                         <div class="influencia-container" id="influenciasContainer"></div>
                         <button type="button" class="btn-add-dashed" id="btnAdicionarInfluencia">
-                            + Adicionar influência
+                            
+                            <svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>Adicionar influência
                         </button>
                     </div>
                 </section>
@@ -170,8 +172,8 @@
 
             <!-- AÇÕES -->
             <div class="button-group">
-                <button type="submit" class="btn-primary">Calcular multa</button>
-                <button type="reset" class="btn-secondary">Limpar</button>
+                <button type="submit" class="btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-calculator"></use></svg>Calcular multa</button>
+                <button type="reset" class="btn-secondary"><svg class="icon" aria-hidden="true"><use href="#i-rotate-ccw"></use></svg>Limpar</button>
             </div>
         </form>
 
@@ -184,7 +186,7 @@
                 <div class="result-scoreboard">
                     <div class="score-card suggested">
                         <div class="score-label">
-                            Multa sugerida <span class="score-badge" id="labelPerfil">Padrão</span>
+                            <svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg>Multa sugerida <span class="score-badge" id="labelPerfil">Padrão</span>
                         </div>
                         <div class="score-value-brl" id="multaSugBRL">£D 0</div>
                         <div class="score-value-eur" id="multaSugEUR">€ 0</div>
@@ -195,7 +197,7 @@
                     </div>
 
                     <div class="score-card maximum">
-                        <div class="score-label">Teto máximo (limite)</div>
+                        <div class="score-label"><svg class="icon" aria-hidden="true"><use href="#i-trending-up"></use></svg>Teto máximo (limite)</div>
                         <div class="score-value-brl" id="multaMaxBRL">£D 0</div>
                         <div class="score-value-eur" id="multaMaxEUR">€ 0</div>
                         <div class="score-meta">
@@ -207,7 +209,7 @@
 
                 <!-- FÓRMULA VISUAL -->
                 <div class="math-visual-container">
-                    <div class="math-title">Composição do multiplicador (sugerido)</div>
+                    <div class="math-title"><svg class="icon" aria-hidden="true"><use href="#i-sigma"></use></svg>Composição do multiplicador (sugerido)</div>
                     <div class="math-steps">
                         <div class="math-step" id="stepKBase" data-tooltip="">
                             <span class="step-label">K Base</span>
@@ -244,7 +246,7 @@
 
                 <!-- DETALHES -->
                 <div class="result-block">
-                    <h3 class="result-block__title">Detalhes</h3>
+                    <h3 class="result-block__title"><svg class="icon" aria-hidden="true"><use href="#i-list"></use></svg>Detalhes</h3>
                     <div class="result-grid">
                         <div class="result-item">
                             <div class="result-item-label">Valor de mercado</div>
@@ -299,7 +301,8 @@
 
                 <!-- AÇÃO - PROPOSTA -->
                 <button type="button" id="btnIrParaProposta" class="btn-primary btn-block">
-                    Montar proposta com estes valores →
+                    <svg class="icon" aria-hidden="true"><use href="#i-file-signature"></use></svg>
+                    Montar proposta com estes valores <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                 </button>
             </div>
         </div>

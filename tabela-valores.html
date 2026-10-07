@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/tabela.css">
 </head>
 <body>
+    <script src="assets/js/icons.js"></script>
     <!-- HEADER -->
     <header class="site-header">
         <div class="site-header__inner">
@@ -24,9 +25,9 @@
                 </span>
             </a>
             <nav class="site-nav" aria-label="Navegação principal">
-                <a href="index.html" class="nav-link">Calculadora</a>
-                <a href="tabela-valores.html" class="nav-link is-active" aria-current="page">Tabela de Valores</a>
-                <a href="como-funciona.html" class="nav-link">Como Funciona</a>
+                <a href="index.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-calculator"></use></svg>Calculadora</a>
+                <a href="tabela-valores.html" class="nav-link is-active" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-table-2"></use></svg>Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-circle-help"></use></svg>Como Funciona</a>
             </nav>
         </div>
     </header>
@@ -42,47 +43,47 @@
         <div class="container">
             <!-- FILTROS -->
             <section class="card">
-                <h2 class="card-title">Filtros</h2>
+                <h2 class="card-title">Filtros<svg class="icon card-title__icon" aria-hidden="true"><use href="#i-funnel"></use></svg></h2>
 
                 <div class="filters-grid">
                     <div class="form-group">
-                        <label for="filterPosicao">Posição</label>
+                        <label for="filterPosicao"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"></use></svg>Posição</label>
                         <select id="filterPosicao">
                             <option value="">Todas as posições</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="filterOverallMin">Overall mín.</label>
+                        <label for="filterOverallMin"><svg class="icon" aria-hidden="true"><use href="#i-star"></use></svg>Overall mín.</label>
                         <input type="number" id="filterOverallMin" min="60" max="99" placeholder="60" inputmode="numeric">
                     </div>
 
                     <div class="form-group">
-                        <label for="filterOverallMax">Overall máx.</label>
+                        <label for="filterOverallMax"><svg class="icon" aria-hidden="true"><use href="#i-star"></use></svg>Overall máx.</label>
                         <input type="number" id="filterOverallMax" min="60" max="99" placeholder="99" inputmode="numeric">
                     </div>
 
                     <div class="form-group">
-                        <label for="filterIdadeMin">Idade mín.</label>
+                        <label for="filterIdadeMin"><svg class="icon" aria-hidden="true"><use href="#i-cake"></use></svg>Idade mín.</label>
                         <input type="number" id="filterIdadeMin" min="15" max="45" placeholder="15" inputmode="numeric">
                     </div>
 
                     <div class="form-group">
-                        <label for="filterIdadeMax">Idade máx.</label>
+                        <label for="filterIdadeMax"><svg class="icon" aria-hidden="true"><use href="#i-cake"></use></svg>Idade máx.</label>
                         <input type="number" id="filterIdadeMax" min="15" max="45" placeholder="45" inputmode="numeric">
                     </div>
                 </div>
 
                 <div class="filters-actions">
-                    <button id="btnFiltrar" class="btn-primary">Filtrar</button>
-                    <button id="btnLimpar" class="btn-ghost-danger">Limpar</button>
+                    <button id="btnFiltrar" class="btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-funnel"></use></svg>Filtrar</button>
+                    <button id="btnLimpar" class="btn-ghost-danger"><svg class="icon" aria-hidden="true"><use href="#i-rotate-ccw"></use></svg>Limpar</button>
                 </div>
             </section>
 
             <!-- RESULTADOS -->
             <section class="card card--table">
                 <div class="table-toolbar">
-                    <h2 class="card-title">Resultados</h2>
+                    <h2 class="card-title"><svg class="icon card-title__lead" aria-hidden="true"><use href="#i-table-2"></use></svg>Resultados</h2>
                     <div id="contadorRegistros" class="table-counter">Exibindo 0 de 0 registros</div>
                 </div>
 
@@ -90,12 +91,12 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th><button class="sort-btn" data-sort="posicao">Posição <span class="sort-icon">⇅</span></button></th>
-                                <th><button class="sort-btn" data-sort="idade">Idade <span class="sort-icon">⇅</span></button></th>
-                                <th><button class="sort-btn" data-sort="overall">Overall <span class="sort-icon">⇅</span></button></th>
-                                <th class="num"><button class="sort-btn" data-sort="valor_brl">Valor Mercado <span class="sort-icon">⇅</span></button></th>
-                                <th class="num"><button class="sort-btn" data-sort="salario_brl">Salário Base <span class="sort-icon">⇅</span></button></th>
-                                <th class="num"><button class="sort-btn" data-sort="luvas_brl">Luvas Base Anuais <span class="sort-icon">⇅</span></button></th>
+                                <th><button class="sort-btn" data-sort="posicao">Posição <span class="sort-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-down"></use></svg></span></button></th>
+                                <th><button class="sort-btn" data-sort="idade">Idade <span class="sort-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-down"></use></svg></span></button></th>
+                                <th><button class="sort-btn" data-sort="overall">Overall <span class="sort-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-down"></use></svg></span></button></th>
+                                <th class="num"><button class="sort-btn" data-sort="valor_brl">Valor Mercado <span class="sort-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-down"></use></svg></span></button></th>
+                                <th class="num"><button class="sort-btn" data-sort="salario_brl">Salário Base <span class="sort-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-down"></use></svg></span></button></th>
+                                <th class="num"><button class="sort-btn" data-sort="luvas_brl">Luvas Base Anuais <span class="sort-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-down"></use></svg></span></button></th>
                             </tr>
                         </thead>
                         <tbody id="tabelaBody">
@@ -106,9 +107,9 @@
 
                 <!-- PAGINAÇÃO -->
                 <div class="pagination">
-                    <button id="btnAnterior" class="btn-paginacao">← Anterior</button>
+                    <button id="btnAnterior" class="btn-paginacao"><svg class="icon" aria-hidden="true"><use href="#i-chevron-left"></use></svg>Anterior</button>
                     <div id="paginacaoInfo" class="pagination-info">Página 1 de 1</div>
-                    <button id="btnProximo" class="btn-paginacao">Próximo →</button>
+                    <button id="btnProximo" class="btn-paginacao">Próximo<svg class="icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg></button>
                 </div>
             </section>
         </div>

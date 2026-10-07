@@ -397,13 +397,45 @@
     margin-bottom: 14px;
 }
 
-.result-block__title::before,
-.math-title::before {
-    content: "";
-    width: 14px;
-    height: 10px;
-    transform: skewX(var(--skew));
-    background: var(--brand);
+.result-block__title .icon,
+.math-title .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--brand);
+}
+
+.score-label .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--brand);
+}
+
+.score-card.maximum .score-label .icon {
+    color: var(--brand-gray);
+}
+
+.result-empty h2 .icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    color: var(--brand);
+    vertical-align: -0.2em;
+}
+
+.compare-label .icon,
+.result-item-label .icon {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+    color: var(--brand);
+    vertical-align: -0.15em;
+}
+
+.btn-add-dashed .icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 4px;
+    vertical-align: -0.2em;
 }
 
 /* Grade de itens (valor de mercado, jogador...) */

@@ -120,7 +120,8 @@ multa-draence/
 │   │   ├── calculadora.js   # Core lógico (cálculo da multa, máscaras de input)
 │   │   ├── proposta.js      # Montador de propostas
 │   │   ├── tabela-valores.js# Filtros, ordenação e paginação da tabela
-│   │   └── easter-egg.js    # Acesso ao modo admin pelo rodapé
+│   │   ├── easter-egg.js    # Acesso ao modo admin pelo rodapé
+│   │   └── icons.js         # Conjunto de ícones (sprite SVG, Lucide - ISC)
 │   └── img/
 │       └── pes-drae.png     # Logo Draence
 │

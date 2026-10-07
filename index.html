@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/calculadora.css">
 </head>
 <body>
+    <script src="assets/js/icons.js"></script>
     <!-- HEADER -->
     <header class="site-header">
         <div class="site-header__inner">
@@ -24,9 +25,9 @@
                 </span>
             </a>
             <nav class="site-nav" aria-label="Navegação principal">
-                <a href="index.html" class="nav-link is-active" aria-current="page">Calculadora</a>
-                <a href="tabela-valores.html" class="nav-link">Tabela de Valores</a>
-                <a href="como-funciona.html" class="nav-link">Como Funciona</a>
+                <a href="index.html" class="nav-link is-active" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-calculator"></use></svg>Calculadora</a>
+                <a href="tabela-valores.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-table-2"></use></svg>Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-circle-help"></use></svg>Como Funciona</a>
             </nav>
         </div>
     </header>
@@ -44,30 +45,30 @@
             <form id="formCalculo" class="calc-form">
                 <!-- DADOS DO JOGADOR -->
                 <section class="card">
-                    <h2 class="card-title"><span class="card-step">1</span>Dados do jogador</h2>
+                    <h2 class="card-title"><span class="card-step">1</span>Dados do jogador<svg class="icon card-title__icon" aria-hidden="true"><use href="#i-shirt"></use></svg></h2>
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="posicao">Posição<span class="required">*</span></label>
+                            <label for="posicao"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"></use></svg>Posição<span class="required">*</span></label>
                             <select id="posicao" required>
                                 <option value="">Selecione</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="idade">Idade<span class="required">*</span></label>
+                            <label for="idade"><svg class="icon" aria-hidden="true"><use href="#i-cake"></use></svg>Idade<span class="required">*</span></label>
                             <input type="number" id="idade" min="15" max="45" step="1" placeholder="25" inputmode="numeric" data-min="15" data-max="45" required>
                             <p class="help-text">Entre 15 e 45 anos</p>
                         </div>
 
                         <div class="form-group">
-                            <label for="overall">Overall<span class="required">*</span></label>
+                            <label for="overall"><svg class="icon" aria-hidden="true"><use href="#i-star"></use></svg>Overall<span class="required">*</span></label>
                             <input type="number" id="overall" min="60" max="94" step="1" placeholder="85" inputmode="numeric" data-min="60" data-max="94" required>
                             <p class="help-text">Entre 60 e 94</p>
                         </div>
 
                         <div class="form-group">
-                            <label for="satisfacao">Satisfação com o clube<span class="required">*</span>
+                            <label for="satisfacao"><svg class="icon" aria-hidden="true"><use href="#i-smile"></use></svg>Satisfação com o clube<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Nível de felicidade do jogador. 0 = Quer sair (Reduz multa); 100 = Ama o clube (Aumenta multa).">?</span>
                             </label>
                             <input type="number" id="satisfacao" min="0" max="100" step="1" placeholder="50" value="50" inputmode="numeric" data-min="0" data-max="100" required>
@@ -78,11 +79,11 @@
 
                 <!-- CONTRATO -->
                 <section class="card">
-                    <h2 class="card-title"><span class="card-step">2</span>Contrato</h2>
+                    <h2 class="card-title"><span class="card-step">2</span>Contrato<svg class="icon card-title__icon" aria-hidden="true"><use href="#i-file-signature"></use></svg></h2>
 
                     <div class="form-grid form-grid--stack">
                         <div class="form-group">
-                            <label for="anosContrato">Duração (anos)<span class="required">*</span>
+                            <label for="anosContrato"><svg class="icon" aria-hidden="true"><use href="#i-calendar-clock"></use></svg>Duração (anos)<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Impacta o Valor Total (VTC). Contratos longos aumentam a exigência financeira.">?</span>
                             </label>
                             <input type="number" id="anosContrato" min="1" max="5" step="1" value="1" inputmode="numeric" required>
@@ -90,7 +91,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="salarioOferecido">Salário mensal<span class="required">*</span>
+                            <label for="salarioOferecido"><svg class="icon" aria-hidden="true"><use href="#i-banknote"></use></svg>Salário mensal<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Pagamento mensal. Fator de maior peso na estabilidade.">?</span>
                             </label>
                             <div class="input-group-with-buttons">
@@ -106,7 +107,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="luvasOferecidas">Luvas (total do contrato)<span class="required">*</span>
+                            <label for="luvasOferecidas"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"></use></svg>Luvas (total do contrato)<span class="required">*</span>
                                 <span class="tooltip-icon" tabindex="0" data-tooltip="Prêmio de assinatura (pagamento único).">?</span>
                             </label>
                             <div class="input-group-with-buttons">
@@ -125,8 +126,8 @@
 
                 <!-- AÇÕES -->
                 <div class="button-group">
-                    <button type="submit" class="btn-primary">Calcular multa</button>
-                    <button type="reset" class="btn-secondary">Limpar</button>
+                    <button type="submit" class="btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-calculator"></use></svg>Calcular multa</button>
+                    <button type="reset" class="btn-secondary"><svg class="icon" aria-hidden="true"><use href="#i-rotate-ccw"></use></svg>Limpar</button>
                 </div>
             </form>
 
@@ -138,7 +139,7 @@
                     <!-- MULTA SUGERIDA -->
                     <div class="score-card suggested">
                         <div class="score-label">
-                            Multa sugerida <span class="score-badge" id="labelPerfil">Padrão</span>
+                            <svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg>Multa sugerida <span class="score-badge" id="labelPerfil">Padrão</span>
                         </div>
                         <div class="score-value-brl" id="multaSugBRL">£D 0</div>
                         <div class="score-value-eur" id="multaSugEUR">€ 0</div>
@@ -150,14 +151,14 @@
 
                     <!-- REFERÊNCIA -->
                     <div class="result-block">
-                        <h3 class="result-block__title">Referência</h3>
+                        <h3 class="result-block__title"><svg class="icon" aria-hidden="true"><use href="#i-target"></use></svg>Referência</h3>
                         <div class="result-grid">
                             <div class="result-item">
-                                <div class="result-item-label">Valor de mercado</div>
+                                <div class="result-item-label"><svg class="icon" aria-hidden="true"><use href="#i-chart-column"></use></svg>Valor de mercado</div>
                                 <div class="result-item-value" id="valorMercado">£D 0</div>
                             </div>
                             <div class="result-item">
-                                <div class="result-item-label">Jogador</div>
+                                <div class="result-item-label"><svg class="icon" aria-hidden="true"><use href="#i-shirt"></use></svg>Jogador</div>
                                 <div class="result-item-value" id="dadosJogador">-</div>
                             </div>
                         </div>
@@ -165,7 +166,7 @@
 
                     <!-- COMPARATIVO BASE x OFERTA -->
                     <div class="result-block">
-                        <h3 class="result-block__title">Comparativo da oferta</h3>
+                        <h3 class="result-block__title"><svg class="icon" aria-hidden="true"><use href="#i-scale"></use></svg>Comparativo da oferta</h3>
                         <div class="compare">
                             <div class="compare-head">
                                 <span></span>
@@ -174,7 +175,7 @@
                             </div>
 
                             <div class="compare-row">
-                                <div class="compare-label">Salário<small>mensal</small></div>
+                                <div class="compare-label"><svg class="icon" aria-hidden="true"><use href="#i-banknote"></use></svg>Salário<small>mensal</small></div>
                                 <div class="compare-base" id="salarioBase">£D 0</div>
                                 <div class="compare-offer has-percent" id="salarioOferecidoShow">
                                     <span id="salarioOferecidoValue">£D 0</span>
@@ -183,7 +184,7 @@
                             </div>
 
                             <div class="compare-row">
-                                <div class="compare-label">Luvas<small>total do período</small></div>
+                                <div class="compare-label"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"></use></svg>Luvas<small>total do período</small></div>
                                 <div class="compare-base" id="luvasBase">£D 0</div>
                                 <div class="compare-offer has-percent" id="luvasOferecidasShow">
                                     <span id="luvasOferecidasValue">£D 0</span>
@@ -192,7 +193,7 @@
                             </div>
 
                             <div class="compare-row">
-                                <div class="compare-label">VTC<small>valor total do contrato</small></div>
+                                <div class="compare-label"><svg class="icon" aria-hidden="true"><use href="#i-file-signature"></use></svg>VTC<small>valor total do contrato</small></div>
                                 <div class="compare-base" id="vtcBase">£D 0</div>
                                 <div class="compare-offer has-percent" id="vtcOferecidoShow">
                                     <span id="vtcOferecidoValue">£D 0</span>
@@ -204,7 +205,8 @@
 
                     <!-- AÇÃO - PROPOSTA -->
                     <button type="button" id="btnIrParaProposta" class="btn-primary btn-block">
-                        Montar proposta com estes valores →
+                        <svg class="icon" aria-hidden="true"><use href="#i-file-signature"></use></svg>
+                        Montar proposta com estes valores <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                     </button>
                 </div>
 
@@ -226,7 +228,7 @@
                             <circle cx="282" cy="100" r="2.5" fill="currentColor"/>
                         </svg>
                     </div>
-                    <h2>Aguardando o apito inicial</h2>
+                    <h2><svg class="icon" aria-hidden="true"><use href="#i-whistle"></use></svg>Aguardando o apito inicial</h2>
                     <p>Preencha os dados do jogador e do contrato e clique em <strong>Calcular multa</strong> para ver o placar.</p>
                     <ol class="result-empty__steps">
                         <li><span>1</span>Posição, idade e overall do jogador</li>

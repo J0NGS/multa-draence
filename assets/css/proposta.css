@@ -241,3 +241,29 @@
         padding-bottom: 76px;
     }
 }
+
+/* ---------- Ícones ---------- */
+.btn-add-item .icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.6;
+}
+
+.preview-header__icon {
+    width: 16px;
+    height: 16px;
+    color: #00a884;
+}
+
+/* Ícone do botão de copiar via CSS: o script troca o textContent do botão
+   ("✅ Copiado!") e um <svg> no HTML seria apagado ao restaurar o texto. */
+.btn-copy::after {
+    content: "";
+    order: -1;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2' /%3E %3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' /%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2' /%3E %3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' /%3E%3C/svg%3E") center / contain no-repeat;
+}

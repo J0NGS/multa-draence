@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/proposta.css">
 </head>
 <body>
+    <script src="assets/js/icons.js"></script>
     <!-- HEADER -->
     <header class="site-header">
         <div class="site-header__inner">
@@ -24,9 +25,9 @@
                 </span>
             </a>
             <nav class="site-nav" aria-label="Navegação principal">
-                <a href="index.html" class="nav-link">← Voltar à Calculadora</a>
-                <a href="tabela-valores.html" class="nav-link">Tabela de Valores</a>
-                <a href="como-funciona.html" class="nav-link">Como Funciona</a>
+                <a href="index.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg>Voltar à Calculadora</a>
+                <a href="tabela-valores.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-table-2"></use></svg>Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link"><svg class="icon" aria-hidden="true"><use href="#i-circle-help"></use></svg>Como Funciona</a>
             </nav>
         </div>
     </header>
@@ -45,11 +46,12 @@
                 <section class="card" id="card-negociacao">
                     <h2 class="card-title">
                         <span class="card-step">1</span>Dados da negociação
+                        <svg class="icon card-title__icon" aria-hidden="true"><use href="#i-handshake"></use></svg>
                         <span class="card-status" id="status-negociacao" title="Campos obrigatórios"></span>
                     </h2>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="tipoNegociacao">Tipo de negociação<span class="required">*</span></label>
+                            <label for="tipoNegociacao"><svg class="icon" aria-hidden="true"><use href="#i-handshake"></use></svg>Tipo de negociação<span class="required">*</span></label>
                             <select id="tipoNegociacao">
                                 <option value="">Selecione</option>
                                 <option value="Compra">Compra Definitiva</option>
@@ -59,15 +61,15 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nomeJogador">Nome do jogador<span class="required">*</span></label>
+                            <label for="nomeJogador"><svg class="icon" aria-hidden="true"><use href="#i-shirt"></use></svg>Nome do jogador<span class="required">*</span></label>
                             <input type="text" id="nomeJogador" placeholder="Ex: Haaland">
                         </div>
                         <div class="form-group">
-                            <label for="timeAtual">Clube atual</label>
+                            <label for="timeAtual"><svg class="icon" aria-hidden="true"><use href="#i-goal"></use></svg>Clube atual</label>
                             <input type="text" id="timeAtual" placeholder="Ex: Manchester City">
                         </div>
                         <div class="form-group">
-                            <label for="anosContrato">Duração (temporadas)<span class="required">*</span></label>
+                            <label for="anosContrato"><svg class="icon" aria-hidden="true"><use href="#i-calendar-clock"></use></svg>Duração (temporadas)<span class="required">*</span></label>
                             <input type="number" id="anosContrato" min="1" max="10" placeholder="3" inputmode="numeric">
                         </div>
                     </div>
@@ -77,29 +79,30 @@
                 <section class="card" id="card-financeiro">
                     <h2 class="card-title">
                         <span class="card-step">2</span>Termos financeiros
+                        <svg class="icon card-title__icon" aria-hidden="true"><use href="#i-wallet"></use></svg>
                         <span class="card-status" id="status-financeiro" title="Campos obrigatórios"></span>
                     </h2>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="valorCompra">💲 Valor de compra / passe<span class="required">*</span></label>
+                            <label for="valorCompra"><svg class="icon" aria-hidden="true"><use href="#i-coins"></use></svg>Valor de compra / passe<span class="required">*</span></label>
                             <div class="input-wrapper">
                                 <input type="text" id="valorCompra" class="input-money" placeholder="£D 0" inputmode="numeric" autocomplete="off">
                                 <span class="magnitude-badge"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="formaPagamento">💳 Forma de pagamento</label>
+                            <label for="formaPagamento"><svg class="icon" aria-hidden="true"><use href="#i-credit-card"></use></svg>Forma de pagamento</label>
                             <input type="text" id="formaPagamento" placeholder="Ex: À vista">
                         </div>
                         <div class="form-group">
-                            <label for="luvasOferecidas">💰 Luvas (assinatura)<span class="required">*</span></label>
+                            <label for="luvasOferecidas"><svg class="icon" aria-hidden="true"><use href="#i-hand-coins"></use></svg>Luvas (assinatura)<span class="required">*</span></label>
                             <div class="input-wrapper">
                                 <input type="text" id="luvasOferecidas" class="input-money" placeholder="£D 0" inputmode="numeric" autocomplete="off" data-min="0" data-max="999999999">
                                 <span class="magnitude-badge"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="salarioOferecido">💵 Salário mensal<span class="required">*</span></label>
+                            <label for="salarioOferecido"><svg class="icon" aria-hidden="true"><use href="#i-banknote"></use></svg>Salário mensal<span class="required">*</span></label>
                             <div class="input-wrapper">
                                 <input type="text" id="salarioOferecido" class="input-money" placeholder="£D 0" inputmode="numeric" autocomplete="off" data-min="0" data-max="999999999">
                                 <span class="magnitude-badge"></span>
@@ -112,18 +115,19 @@
                 <section class="card" id="card-multas">
                     <h2 class="card-title">
                         <span class="card-step">3</span>Multas e cláusulas
+                        <svg class="icon card-title__icon" aria-hidden="true"><use href="#i-shield"></use></svg>
                         <span class="card-status" id="status-multas" title="Campos obrigatórios"></span>
                     </h2>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="multaDraence">🚫 Multa de saída (Draence)</label>
+                            <label for="multaDraence"><svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg>Multa de saída (Draence)</label>
                             <div class="input-wrapper input-readonly">
                                 <input type="text" id="multaDraence" class="input-money" placeholder="£D 0" inputmode="numeric" autocomplete="off">
                                 <span class="magnitude-badge"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="multaExterior">🌍 Multa exterior (€)</label>
+                            <label for="multaExterior"><svg class="icon" aria-hidden="true"><use href="#i-globe"></use></svg>Multa exterior (€)</label>
                             <div class="input-wrapper input-readonly">
                                 <input type="text" id="multaExterior" class="input-money" placeholder="€ 0" inputmode="numeric" autocomplete="off">
                                 <span class="magnitude-badge"></span>
@@ -131,19 +135,19 @@
                         </div>
 
                         <div class="form-group full-width">
-                            <label for="inputPremiacao">🏆 Premiações / bônus</label>
+                            <label for="inputPremiacao"><svg class="icon" aria-hidden="true"><use href="#i-trophy"></use></svg>Premiações / bônus</label>
                             <div class="dynamic-input-group">
                                 <input type="text" id="inputPremiacao" placeholder="Ex: 1M se for artilheiro" onkeypress="handleEnter(event, 'addPremiacao')">
-                                <button type="button" class="btn-add-item" onclick="adicionarPremiacao()" aria-label="Adicionar premiação">+</button>
+                                <button type="button" class="btn-add-item" onclick="adicionarPremiacao()" aria-label="Adicionar premiação"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg></button>
                             </div>
                             <div id="listaPremiacoes" class="dynamic-list-container"></div>
                         </div>
 
                         <div class="form-group full-width">
-                            <label for="inputClausula">📋 Cláusulas extras</label>
+                            <label for="inputClausula"><svg class="icon" aria-hidden="true"><use href="#i-scroll-text"></use></svg>Cláusulas extras</label>
                             <div class="dynamic-input-group">
                                 <input type="text" id="inputClausula" placeholder="Ex: Multa de 50M para rivais" onkeypress="handleEnter(event, 'addClausula')">
-                                <button type="button" class="btn-add-item" onclick="adicionarClausula()" aria-label="Adicionar cláusula">+</button>
+                                <button type="button" class="btn-add-item" onclick="adicionarClausula()" aria-label="Adicionar cláusula"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg></button>
                             </div>
                             <div id="listaClausulas" class="dynamic-list-container"></div>
                         </div>
@@ -154,14 +158,14 @@
             <!-- PRÉVIA -->
             <aside class="proposal-preview-sidebar">
                 <div class="preview-header">
-                    <span class="preview-header__dot" aria-hidden="true"></span>
+                    <svg class="icon preview-header__icon" aria-hidden="true"><use href="#i-message-circle"></use></svg>
                     Prévia da mensagem
                 </div>
 
                 <div class="preview-box" id="textoPreview"></div>
 
                 <div class="action-bar">
-                    <button id="btnCopiar" class="btn-primary full-width-btn">
+                    <button id="btnCopiar" class="btn-primary full-width-btn btn-copy">
                         Copiar Proposta
                     </button>
                 </div>

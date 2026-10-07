@@ -877,3 +877,57 @@ button {
         font-size: 0.85em;
     }
 }
+
+/* ============================================
+   ÍCONES (sprite em assets/js/icons.js)
+   ============================================ */
+.icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: -0.125em;
+}
+
+.nav-link .icon {
+    width: 16px;
+    height: 16px;
+}
+
+label .icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 7px;
+    color: var(--brand);
+}
+
+.card-title__icon {
+    margin-left: auto;
+    width: 22px !important;
+    height: 22px !important;
+    color: var(--brand);
+    opacity: 0.6;
+}
+
+.card-title__icon + .card-status {
+    margin-left: 12px;
+}
+
+.btn-primary .icon,
+.btn-secondary .icon,
+.btn-ghost-danger .icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.4;
+}
+
+.icon-inline {
+    width: 1.05em;
+    height: 1.05em;
+    margin-right: 4px;
+    color: var(--brand);
+}

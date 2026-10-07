@@ -182,3 +182,27 @@
         padding: 18px 16px;
     }
 }
+
+/* ---------- Ícones ---------- */
+.step-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: var(--brand);
+    vertical-align: -0.2em;
+}
+
+.curiosity-title .icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    color: var(--brand);
+    vertical-align: -0.25em;
+}
+
+.curiosity-text .icon-inline {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: -0.2em;
+}
