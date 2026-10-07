@@ -3,158 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1120">
     <title>Como Funciona - Calculadora de Multa Rescisória</title>
+    <link rel="icon" type="image/png" href="assets/img/pes-drae.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/guia.css">
 </head>
 <body>
-    <div class="page-wrapper">
-        <!-- HEADER -->
-        <header>
-            <div class="logo-section">
-                <img src="Pes_drae.png" alt="Draence Logo">
-                <div class="logo-text">
-                    <h1>MULTAS DRAENCE</h1>
-                    <p>Como Funciona</p>
-                </div>
-            </div>
-            <div class="header-spacer"></div>
-            <a href="index.html" class="status-badge" style="cursor: pointer; text-decoration: none;">← Voltar</a>
-        </header>
-
-        <!-- HERO SECTION -->
-        <div class="guide-hero">
-            <h1 class="hero-title"> O Guia Prático de como usar o simulador de multas</h1>
-            <p class="hero-subtitle">Como gerar contratos justos e propostas oficiais em 4 passos simples</p>
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="index.html" class="brand">
+                <img src="assets/img/pes-drae.png" alt="Draence Logo">
+                <span class="brand__text">
+                    <strong>MULTAS DRAENCE</strong>
+                    <small>Como Funciona</small>
+                </span>
+            </a>
+            <nav class="site-nav" aria-label="Navegação principal">
+                <a href="index.html" class="nav-link">🧮 Calculadora</a>
+                <a href="tabela-valores.html" class="nav-link">📊 Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link is-active" aria-current="page">❓ Como Funciona</a>
+            </nav>
         </div>
+    </header>
 
-        <!-- MAIN CONTENT -->
+    <main class="page-wrapper guide">
+        <!-- HERO -->
+        <section class="page-intro guide-hero">
+            <span class="eyebrow">Guia prático</span>
+            <h1>Como usar o simulador de multas</h1>
+            <p>Como gerar contratos justos e propostas oficiais em 4 passos simples.</p>
+        </section>
+
         <div class="container">
-            <!-- STEP 1: OS DADOS (INPUT) -->
-            <div class="card">
-                <div class="step-card">
-                    <div class="step-number">1️⃣</div>
-                    <div class="step-content">
-                        <h3>Os Dados (Posição, Idade, Overall)</h3>
-                        <p>
-                            Tudo começa aqui. Você insere os <strong>atributos do jogador</strong>: sua posição no campo, idade e rating (Overall). 
-                            O sistema busca na <strong>tabela oficial da liga</strong> qual é o "Valor de Mercado Base" — o preço padrão para um jogador com esse perfil e gera uma multa baseado na sua proposta de contrato e do valor base.
-                        </p>
-                        <p>
-                            Pense assim: um goleiro 24 anos com Overall 85 tem um valor diferente de um zagueiro 32 anos com Overall 78 além de cobrarem valores diferentes. O sistema já sabe isso.
-                        </p>
-                    </div>
+            <!-- PASSO 1: OS DADOS -->
+            <article class="card step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Os dados (posição, idade, overall)</h3>
+                    <p>
+                        Tudo começa aqui. Você insere os <strong>atributos do jogador</strong>: sua posição no campo, idade e rating (Overall).
+                        O sistema busca na <strong>tabela oficial da liga</strong> qual é o "Valor de Mercado Base" — o preço padrão para um jogador com esse perfil e gera uma multa baseado na sua proposta de contrato e do valor base.
+                    </p>
+                    <p>
+                        Pense assim: um goleiro 24 anos com Overall 85 tem um valor diferente de um zagueiro 32 anos com Overall 78 além de cobrarem valores diferentes. O sistema já sabe isso.
+                    </p>
                 </div>
-            </div>
+            </article>
 
-            <!-- STEP 2: O CONTRATO (AJUSTE) -->
-            <div class="card">
-                <div class="step-card">
-                    <div class="step-number">2️⃣</div>
-                    <div class="step-content">
-                        <h3>O Contrato (Você Ajusta os Termos)</h3>
-                        <p>
-                            Agora você <strong>negocia com o jogador</strong>. Aqui é onde a mágica acontece:
-                        </p>
-                        <ul>
-                            <li><strong>Salário:</strong> Quanto ele ganha por mês. Aumentar o salário valoriza o jogador e força a multa para cima.</li>
-                            <li><strong>Luvas:</strong> Dinheiro na assinatura do contrato. Ajuda a subir a multa com dinheiro rápido, especialmente com jogadores mercenários.</li>
-                            <li><strong>Duração:</strong> Quantos anos dura o contrato. Contratos mais longos podem diminuir a multa para jogadores que querem ter a opção de sair - Lembrem-se que o jogador também quer estabilidade, um contrato de 2 anos é o minimo esperado por um jogador.</li>
-                        </ul>
-                        <p style="margin-top: 15px; font-style: italic; color: var(--text-primary);">
-                            <strong>Exemplo:</strong> R$50k/mês por 3 anos + R$100k de luva = um contrato sólido. A multa será calculada baseada nesse valor total de 3 anos de salário mais as luvas.
-                        </p>
-                    </div>
+            <!-- PASSO 2: O CONTRATO -->
+            <article class="card step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>O contrato (você ajusta os termos)</h3>
+                    <p>
+                        Agora você <strong>negocia com o jogador</strong>. Aqui é onde a mágica acontece:
+                    </p>
+                    <ul>
+                        <li><strong>Salário:</strong> Quanto ele ganha por mês. Aumentar o salário valoriza o jogador e força a multa para cima.</li>
+                        <li><strong>Luvas:</strong> Dinheiro na assinatura do contrato. Ajuda a subir a multa com dinheiro rápido, especialmente com jogadores mercenários.</li>
+                        <li><strong>Duração:</strong> Quantos anos dura o contrato. Contratos mais longos podem diminuir a multa para jogadores que querem ter a opção de sair - Lembrem-se que o jogador também quer estabilidade, um contrato de 2 anos é o minimo esperado por um jogador.</li>
+                    </ul>
+                    <p class="step-note">
+                        <strong>Exemplo:</strong> R$50k/mês por 3 anos + R$100k de luva = um contrato sólido. A multa será calculada baseada nesse valor total de 3 anos de salário mais as luvas.
+                    </p>
                 </div>
-            </div>
+            </article>
 
-            <!-- STEP 3: A MULTA SUGERIDA (O RESULTADO) -->
-            <div class="card">
-                <div class="step-card">
-                    <div class="step-number">3️⃣</div>
-                    <div class="step-content">
-                        <h3>A Multa Sugerida (O Resultado)</h3>
-                        <p>
-                            Você clica em <strong>"Calcular"</strong> e o sistema faz toda a matemática. 
-                            Ele considera automaticamente:
-                        </p>
-                        <ul>
-                            <li><strong>Satisfação dos Jogadores:</strong> Um valor de 0 a 100 que indica a satisfação do jogador com clube que ele está/vai.</li>
-                            <li><strong>Perfil Psicológico do Jogador:</strong> A CDF pode simular perfis psicologico dos jogadores, Se ele quer sair fácil ou quer ficar. Por isso os jogadores podem exigir multa um pouco menor do que a sugerida, assim como também podem aceitar multa um pouco maior.</li>
-                            <li><strong>Valores da Liga:</strong> Todos os valores utilizados como base são os valores oficiais disponibilizados pela CDF, podendo ser consultado na tabela de valores.</li>
-                        </ul>
-                        <p style="margin-top: 15px;">
-                            <strong>Resultado:</strong> Uma multa rescisória <strong>justa e realista</strong>, sem você precisar brigar com contas.
-                        </p>
-                    </div>
+            <!-- PASSO 3: A MULTA SUGERIDA -->
+            <article class="card step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>A multa sugerida (o resultado)</h3>
+                    <p>
+                        Você clica em <strong>"Calcular"</strong> e o sistema faz toda a matemática.
+                        Ele considera automaticamente:
+                    </p>
+                    <ul>
+                        <li><strong>Satisfação dos Jogadores:</strong> Um valor de 0 a 100 que indica a satisfação do jogador com clube que ele está/vai.</li>
+                        <li><strong>Perfil Psicológico do Jogador:</strong> A CDF pode simular perfis psicologico dos jogadores, Se ele quer sair fácil ou quer ficar. Por isso os jogadores podem exigir multa um pouco menor do que a sugerida, assim como também podem aceitar multa um pouco maior.</li>
+                        <li><strong>Valores da Liga:</strong> Todos os valores utilizados como base são os valores oficiais disponibilizados pela CDF, podendo ser consultado na tabela de valores.</li>
+                    </ul>
+                    <p>
+                        <strong>Resultado:</strong> Uma multa rescisória <strong>justa e realista</strong>, sem você precisar brigar com contas.
+                    </p>
                 </div>
-            </div>
+            </article>
 
-            <!-- STEP 4: A PROPOSTA (AÇÃO) -->
-            <div class="card">
-                <div class="step-card">
-                    <div class="step-number">4️⃣</div>
-                    <div class="step-content">
-                        <h3>A Proposta (Gera o Documento)</h3>
-                        <p>
-                            Clique em <strong>"Montar Proposta"</strong> e o sistema gera automaticamente o <strong>texto padrão</strong> pronto para enviar para a CDF.
-                        </p>
-                        <p>
-                            O texto já vem formatado com:
-                        </p>
-                        <ul>
-                            <li>Tipo de negociação (Compra, Empréstimo, Renovação, etc)</li>
-                            <li>Dados do jogador e clubes</li>
-                            <li>Salário, luvas, duração</li>
-                            <li>Multas calculadas</li>
-                            <li>Premiações e cláusulas especiais (se adicionadas)</li>
-                        </ul>
-                        <p style="margin-top: 15px;">
-                            <strong>Tudo pronto:</strong> Copie e cole na conversa com o agente. Sem erros, sem retrabalho.
-                        </p>
-                    </div>
+            <!-- PASSO 4: A PROPOSTA -->
+            <article class="card step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>A proposta (gera o documento)</h3>
+                    <p>
+                        Clique em <strong>"Montar Proposta"</strong> e o sistema gera automaticamente o <strong>texto padrão</strong> pronto para enviar para a CDF.
+                    </p>
+                    <p>O texto já vem formatado com:</p>
+                    <ul>
+                        <li>Tipo de negociação (Compra, Empréstimo, Renovação, etc)</li>
+                        <li>Dados do jogador e clubes</li>
+                        <li>Salário, luvas, duração</li>
+                        <li>Multas calculadas</li>
+                        <li>Premiações e cláusulas especiais (se adicionadas)</li>
+                    </ul>
+                    <p>
+                        <strong>Tudo pronto:</strong> Copie e cole na conversa com o agente. Sem erros, sem retrabalho.
+                    </p>
                 </div>
-            </div>
+            </article>
 
             <!-- CURIOSIDADE: BASTIDORES -->
-            <div class="curiosity-box">
-                <div class="curiosity-title">🔍 Curiosidade: Como a Mágica Acontece?</div>
+            <section class="curiosity-box">
+                <h2 class="curiosity-title">🔍 Curiosidade: como a mágica acontece?</h2>
                 <div class="curiosity-text">
-                    <p style="margin: 0 0 12px;">
-                        Por trás daquela multa "sugerida" tem muita coisa acontecendo:
-                    </p>
-                    <p style="margin: 0 0 12px;">
+                    <p>Por trás daquela multa "sugerida" tem muita coisa acontecendo:</p>
+                    <p>
                         🛡️ <strong>CDF tem um sistema parecido:</strong> A CDF tem disponivel um sistema parecido, porém com algumas diferenças sutis para poder fazer a simulação mais realista. O sistema disponibilizado hoje é totalmente baseado no da CDF gerando uma multa próxima mas não igual a que a CDF gera.
                     </p>
-                    <p style="margin: 0 0 12px;">
+                    <p>
                         ⚙️ <strong>Perfil Psicológico do Jogador:</strong> O sistema da detecta automaticamente se ele é mercenário (quer grana), fiel (quer estabilidade), ambicioso (quer sair para Europa) ou padrão (equilibrado). Cada tipo reage diferente aos termos do contrato.
                     </p>
-                    <p style="margin: 0 0 12px;">
+                    <p>
                         📊 <strong>Satisfação do jogador:</strong> O jogador tem uma satisfação de 0 a 100 que influencia diretamente na multa, quanto menor a satisfação com aquele clube, menor a multa que ele quer.
                     </p>
-                    <p style="margin: 0 0 12px;">
+                    <p>
                         ⚡ <strong>Fair Play Financeiro:</strong> O sistema respeita as regras da liga para evitar que propostas fiquem absurdas ou irrealistas.
                     </p>
-                    <p style="margin: 0;">
+                    <p>
                         <strong>Resultado:</strong> Uma multa que é justa, realista e que os agentes entendem. Você não precisa entender a fórmula — mas pode ter certeza que funciona.
                     </p>
                 </div>
-            </div>
+            </section>
 
             <!-- CTA -->
-            <div class="cta-section">
+            <section class="cta-section">
                 <p class="cta-text">
-                    <strong>Pronto para começar?</strong> Volte para a Calculadora, teste alguns cenários e veja a mágica acontecer. 
+                    <strong>Pronto para começar?</strong> Volte para a Calculadora, teste alguns cenários e veja a mágica acontecer.
                     Cada contrato é diferente — mas agora você tem a ferramenta certa para cada negociação.
                 </p>
-                <a href="index.html" class="btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none;">Ir para a Calculadora</a>
-            </div>
+                <a href="index.html" class="btn-primary">Ir para a Calculadora</a>
+            </section>
         </div>
-    </div>
+    </main>
 
     <footer class="main-footer">
-        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9em;">
-            Desenvolvido por <a href="https://github.com/J0NGS" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 500;">J0NGS</a><br>
-            Draence Calculator v4.0.0 • Todos os direitos reservados © <span onclick="this.textContent = '2024 (Ei, achou o easter egg!)'" style="cursor: pointer;">2026</span>
+        <p>
+            Desenvolvido por <a href="https://github.com/J0NGS" target="_blank" rel="noopener">J0NGS</a><br>
+            Draence Calculator v4.0.0 • Todos os direitos reservados © <span class="easter-egg" onclick="this.textContent = '2024 (Ei, achou o easter egg!)'">2026</span>
         </p>
     </footer>
+</body>
+</html>

@@ -3,228 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1120">
     <title>Calculadora de Multa Rescisória - Draence</title>
+    <link rel="icon" type="image/png" href="assets/img/pes-drae.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/calculadora.css">
 </head>
 <body>
-    <div class="page-wrapper">
-        <!-- HEADER -->
-        <header>
-            <div class="logo-section">
-                <img src="Pes_drae.png" alt="Draence Logo">
-                <div class="logo-text">
-                    <h1>DRAENCE</h1>
-                    <p>Simulador de Multas</p>
-                </div>
-            </div>
-            <div class="header-spacer"></div>
-            <div class="header-actions">
-                <a href="tabela-valores.html" class="header-button">📊 Tabela de Valores</a>
-                <a href="como-funciona.html" class="header-button">❓ Como Funciona</a>
-                <div class="status-badge">🟢 Sistema Online</div>
-            </div>
-        </header>
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="index.html" class="brand">
+                <img src="assets/img/pes-drae.png" alt="Draence Logo">
+                <span class="brand__text">
+                    <strong>DRAENCE</strong>
+                    <small>Simulador de Multas</small>
+                </span>
+            </a>
+            <nav class="site-nav" aria-label="Navegação principal">
+                <a href="index.html" class="nav-link is-active" aria-current="page">🧮 Calculadora</a>
+                <a href="tabela-valores.html" class="nav-link">📊 Tabela de Valores</a>
+                <a href="como-funciona.html" class="nav-link">❓ Como Funciona</a>
+            </nav>
+        </div>
+    </header>
 
-        <!-- MAIN CONTENT -->
-        <div class="container">
-            <!-- ERROR MESSAGE -->
-            <div class="error-box" id="erro"></div>
+    <!-- MAIN CONTENT -->
+    <main class="page-wrapper">
+        <section class="page-intro">
+            <span class="eyebrow">Calculadora</span>
+            <h1>Simulador de multa rescisória</h1>
+            <p>Informe os dados do jogador e os termos do contrato para obter a multa sugerida e compará-la com os valores de referência da liga.</p>
+        </section>
 
-            <!-- FORM SECTION -->
-            <form id="formCalculo">
-                <div class="user-grid">
-                    <!-- DADOS DO JOGADOR -->
-                    <div class="card">
-                        <div class="card-title">Dados do Jogador</div>
+        <div class="calc-layout">
+            <!-- FORMULÁRIO -->
+            <form id="formCalculo" class="calc-form">
+                <!-- DADOS DO JOGADOR -->
+                <section class="card">
+                    <h2 class="card-title"><span class="card-step">1</span>Dados do jogador</h2>
 
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="posicao">Posição *</label>
-                                <select id="posicao" required>
-                                    <option value="">-- Selecione --</option>
-                                </select>
-                                <p class="help-text">Selecione a posição</p>
-                            </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="posicao">Posição<span class="required">*</span></label>
+                            <select id="posicao" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="idade">Idade *</label>
-                                <input type="number" id="idade" min="15" max="45" step="1" placeholder="25" data-min="15" data-max="45" required>
-                                <p class="help-text">15-45 anos</p>
-                            </div>
+                        <div class="form-group">
+                            <label for="idade">Idade<span class="required">*</span></label>
+                            <input type="number" id="idade" min="15" max="45" step="1" placeholder="25" inputmode="numeric" data-min="15" data-max="45" required>
+                            <p class="help-text">Entre 15 e 45 anos</p>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="overall">Overall *</label>
-                                <input type="number" id="overall" min="60" max="94" step="1" placeholder="85" data-min="60" data-max="94" required>
-                                <p class="help-text">60-94</p>
-                            </div>
+                        <div class="form-group">
+                            <label for="overall">Overall<span class="required">*</span></label>
+                            <input type="number" id="overall" min="60" max="94" step="1" placeholder="85" inputmode="numeric" data-min="60" data-max="94" required>
+                            <p class="help-text">Entre 60 e 94</p>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="satisfacao">Satisfação com o Clube *
-                                    <span class="tooltip-icon" data-tooltip="Nível de felicidade do jogador. 0 = Quer sair (Reduz multa); 100 = Ama o clube (Aumenta multa).">?</span>
-                                </label>
-                                <input type="number" id="satisfacao" min="0" max="100" step="1" placeholder="50" value="50" data-min="0" data-max="100" required>
-                                <p class="help-text">0-100 (50 = Neutro)</p>
-                            </div>
+                        <div class="form-group">
+                            <label for="satisfacao">Satisfação com o clube<span class="required">*</span>
+                                <span class="tooltip-icon" tabindex="0" data-tooltip="Nível de felicidade do jogador. 0 = Quer sair (Reduz multa); 100 = Ama o clube (Aumenta multa).">?</span>
+                            </label>
+                            <input type="number" id="satisfacao" min="0" max="100" step="1" placeholder="50" value="50" inputmode="numeric" data-min="0" data-max="100" required>
+                            <p class="help-text">0 a 100 · 50 = neutro</p>
                         </div>
                     </div>
+                </section>
 
-                    <!-- DADOS DA NEGOCIAÇÃO - CONTRATO -->
-                    <div class="card">
-                        <div class="card-title">Contrato</div>
+                <!-- CONTRATO -->
+                <section class="card">
+                    <h2 class="card-title"><span class="card-step">2</span>Contrato</h2>
 
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="anosContrato">Duração (Anos) *
-                                    <span class="tooltip-icon" data-tooltip="Impacta o Valor Total (VTC). Contratos longos aumentam a exigência financeira.">?</span>
-                                </label>
-                                <input type="number" id="anosContrato" min="1" max="5" step="1" value="1" required>
-                                <p class="help-text">1-5 anos</p>
-                            </div>
+                    <div class="form-grid form-grid--stack">
+                        <div class="form-group">
+                            <label for="anosContrato">Duração (anos)<span class="required">*</span>
+                                <span class="tooltip-icon" tabindex="0" data-tooltip="Impacta o Valor Total (VTC). Contratos longos aumentam a exigência financeira.">?</span>
+                            </label>
+                            <input type="number" id="anosContrato" min="1" max="5" step="1" value="1" inputmode="numeric" required>
+                            <p class="help-text">De 1 a 5 anos</p>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="salarioOferecido">Salário (£D) *
-                                    <span class="tooltip-icon" data-tooltip="Pagamento mensal. Fator de maior peso na estabilidade.">?</span>
-                                </label>
-                                <div class="input-group-with-buttons">
-                                    <button type="button" class="btn-adjust" id="btnSalarioMenos" title="Diminuir">−</button>
-                                    <input type="text" id="salarioOferecido" class="input-money" placeholder="50000" data-min="0" data-max="999999999" required>
-                                    <button type="button" class="btn-adjust" id="btnSalarioMais" title="Aumentar">+</button>
+                        <div class="form-group">
+                            <label for="salarioOferecido">Salário mensal<span class="required">*</span>
+                                <span class="tooltip-icon" tabindex="0" data-tooltip="Pagamento mensal. Fator de maior peso na estabilidade.">?</span>
+                            </label>
+                            <div class="input-group-with-buttons">
+                                <button type="button" class="btn-adjust" id="btnSalarioMenos" title="Diminuir" aria-label="Diminuir salário">−</button>
+                                <div class="money-field">
+                                    <span class="money-prefix">£D</span>
+                                    <input type="text" id="salarioOferecido" class="input-money" placeholder="50.000" inputmode="numeric" autocomplete="off" data-min="0" data-max="999999999" required>
+                                    <span class="magnitude-badge"></span>
                                 </div>
-                                <span class="magnitude-badge"></span>
+                                <button type="button" class="btn-adjust" id="btnSalarioMais" title="Aumentar" aria-label="Aumentar salário">+</button>
                             </div>
+                            <p class="help-text">Preenchido automaticamente com o salário base do overall</p>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="luvasOferecidas">Luvas (£D) *
-                                    <span class="tooltip-icon" data-tooltip="Prêmio de assinatura (pagamento único).">?</span>
-                                </label>
-                                <div class="input-group-with-buttons">
-                                    <button type="button" class="btn-adjust" id="btnLuvasMenos" title="Diminuir">−</button>
-                                    <input type="text" id="luvasOferecidas" class="input-money" placeholder="100000" data-min="0" data-max="999999999" required>
-                                    <button type="button" class="btn-adjust" id="btnLuvasMais" title="Aumentar">+</button>
+                        <div class="form-group">
+                            <label for="luvasOferecidas">Luvas (total do contrato)<span class="required">*</span>
+                                <span class="tooltip-icon" tabindex="0" data-tooltip="Prêmio de assinatura (pagamento único).">?</span>
+                            </label>
+                            <div class="input-group-with-buttons">
+                                <button type="button" class="btn-adjust" id="btnLuvasMenos" title="Diminuir" aria-label="Diminuir luvas">−</button>
+                                <div class="money-field">
+                                    <span class="money-prefix">£D</span>
+                                    <input type="text" id="luvasOferecidas" class="input-money" placeholder="100.000" inputmode="numeric" autocomplete="off" data-min="0" data-max="999999999" required>
+                                    <span class="magnitude-badge"></span>
                                 </div>
-                                <span class="magnitude-badge"></span>
+                                <button type="button" class="btn-adjust" id="btnLuvasMais" title="Aumentar" aria-label="Aumentar luvas">+</button>
                             </div>
+                            <p class="help-text">Luva base anual × anos de contrato</p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- BUTTONS -->
+                <!-- AÇÕES -->
                 <div class="button-group">
-                    <button type="submit" class="btn-primary">Calcular Multa</button>
+                    <button type="submit" class="btn-primary">Calcular multa</button>
                     <button type="reset" class="btn-secondary">Limpar</button>
                 </div>
             </form>
 
-            <!-- RESULT SECTION -->
-            <div class="result-section" id="resultado">
-                <!-- SCOREBOARD: Card Centrado (Apenas Multa Sugerida) -->
-                <div class="single-result-container">
+            <!-- RESULTADO -->
+            <aside class="calc-result" aria-live="polite">
+                <div class="error-box" id="erro" role="alert"></div>
+
+                <div class="result-section" id="resultado">
+                    <!-- MULTA SUGERIDA -->
                     <div class="score-card suggested">
                         <div class="score-label">
-                            Multa Sugerida <span class="score-badge" id="labelPerfil">Padrão</span>
+                            Multa sugerida <span class="score-badge" id="labelPerfil">Padrão</span>
                         </div>
                         <div class="score-value-brl" id="multaSugBRL">£D 0</div>
-                        <div class="score-percent-badge" id="percentMultaSug"></div>
                         <div class="score-value-eur" id="multaSugEUR">€ 0</div>
-                    </div>
-                </div>
-
-                <div class="result-grid">
-                    <div class="result-item">
-                        <div class="result-item-label">Valor de Mercado</div>
-                        <div class="result-item-value" id="valorMercado">£D 0</div>
-                    </div>
-
-                    <div class="result-item">
-                        <div class="result-item-label">Jogador</div>
-                        <div class="result-item-value" id="dadosJogador">-</div>
-                    </div>
-
-                    <div class="result-item">
-                        <div class="result-item-label">Salário Base</div>
-                        <div class="result-item-value" id="salarioBase">£D 0</div>
-                    </div>
-
-                    <div class="result-item">
-                        <div class="result-item-label">Salário Oferecido</div>
-                        <div class="result-item-value has-percent" id="salarioOferecidoShow">
-                            <span id="salarioOferecidoValue">£D 0</span>
-                            <span class="percent-badge" id="percentSalario"></span>
+                        <div class="score-meta">
+                            <span class="score-percent-badge" id="percentMultaSug"></span>
+                            <span class="score-meta__text">em relação ao valor de mercado</span>
                         </div>
                     </div>
 
-                    <div class="result-item">
-                        <div class="result-item-label">Luvas Base</div>
-                        <div class="result-item-value" id="luvasBase">£D 0</div>
-                    </div>
-
-                    <div class="result-item">
-                        <div class="result-item-label">Luvas Oferecidas</div>
-                        <div class="result-item-value has-percent" id="luvasOferecidasShow">
-                            <span id="luvasOferecidasValue">£D 0</span>
-                            <span class="percent-badge" id="percentLuvas"></span>
+                    <!-- REFERÊNCIA -->
+                    <div class="result-block">
+                        <h3 class="result-block__title">Referência</h3>
+                        <div class="result-grid">
+                            <div class="result-item">
+                                <div class="result-item-label">Valor de mercado</div>
+                                <div class="result-item-value" id="valorMercado">£D 0</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-item-label">Jogador</div>
+                                <div class="result-item-value" id="dadosJogador">-</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="result-item">
-                        <div class="result-item-label">VTC Base (Total do Contrato)</div>
-                        <div class="result-item-value" id="vtcBase">£D 0</div>
-                    </div>
+                    <!-- COMPARATIVO BASE x OFERTA -->
+                    <div class="result-block">
+                        <h3 class="result-block__title">Comparativo da oferta</h3>
+                        <div class="compare">
+                            <div class="compare-head">
+                                <span></span>
+                                <span>Base</span>
+                                <span>Oferecido</span>
+                            </div>
 
-                    <div class="result-item">
-                        <div class="result-item-label">VTC Oferecido (Total Oferta)</div>
-                        <div class="result-item-value has-percent" id="vtcOferecidoShow">
-                            <span id="vtcOferecidoValue">£D 0</span>
-                            <span class="percent-badge" id="percentVTC"></span>
+                            <div class="compare-row">
+                                <div class="compare-label">Salário<small>mensal</small></div>
+                                <div class="compare-base" id="salarioBase">£D 0</div>
+                                <div class="compare-offer has-percent" id="salarioOferecidoShow">
+                                    <span id="salarioOferecidoValue">£D 0</span>
+                                    <span class="percent-badge" id="percentSalario"></span>
+                                </div>
+                            </div>
+
+                            <div class="compare-row">
+                                <div class="compare-label">Luvas<small>total do período</small></div>
+                                <div class="compare-base" id="luvasBase">£D 0</div>
+                                <div class="compare-offer has-percent" id="luvasOferecidasShow">
+                                    <span id="luvasOferecidasValue">£D 0</span>
+                                    <span class="percent-badge" id="percentLuvas"></span>
+                                </div>
+                            </div>
+
+                            <div class="compare-row">
+                                <div class="compare-label">VTC<small>valor total do contrato</small></div>
+                                <div class="compare-base" id="vtcBase">£D 0</div>
+                                <div class="compare-offer has-percent" id="vtcOferecidoShow">
+                                    <span id="vtcOferecidoValue">£D 0</span>
+                                    <span class="percent-badge" id="percentVTC"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- BOTÃO DE AÇÃO - PROPOSTA -->
-                <div style="text-align: center; margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--border-color);">
-                    <button id="btnIrParaProposta" class="btn-primary" style="padding: 15px 40px; font-size: 1.1em; cursor: pointer;">
-                        📝 Montar Proposta com estes Valores
+                    <!-- AÇÃO - PROPOSTA -->
+                    <button type="button" id="btnIrParaProposta" class="btn-primary btn-block">
+                        📝 Montar proposta com estes valores
                     </button>
                 </div>
-            </div>
+
+                <!-- ESTADO VAZIO (oculto via CSS quando #resultado está visível) -->
+                <div class="result-empty">
+                    <div class="result-empty__icon" aria-hidden="true">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="18"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
+                    </div>
+                    <h2>A multa aparece aqui</h2>
+                    <p>Preencha os dados e clique em <strong>Calcular multa</strong> para ver o resultado.</p>
+                    <ol class="result-empty__steps">
+                        <li><span>1</span>Posição, idade e overall do jogador</li>
+                        <li><span>2</span>Ajuste duração, salário e luvas</li>
+                        <li><span>3</span>Calcule e monte a proposta</li>
+                    </ol>
+                </div>
+            </aside>
         </div>
-    </div>
+    </main>
 
     <footer class="main-footer">
-        <p style="color: var(--text-secondary); margin: 0; font-size: 0.9em;">
-            Desenvolvido por <a href="https://github.com/J0NGS" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 500;">J0NGS</a><br>
-            Draence Calculator v4.0.0 • Todos os direitos reservados © <span id="yearClickable" style="cursor: default;">2026</span>
+        <p>
+            Desenvolvido por <a href="https://github.com/J0NGS" target="_blank" rel="noopener">J0NGS</a><br>
+            Draence Calculator v4.0.0 • Todos os direitos reservados © <span id="yearClickable">2026</span>
         </p>
     </footer>
 
-    <script src="dados_inline.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // ============================================
-        // EASTER EGG: Acesso ao Modo Admin (Clique no 2026)
-        // ============================================
-        let yearClickCount = 0;
-        let yearClickTimeout;
-
-        const yearClickableEl = document.getElementById('yearClickable');
-        if (yearClickableEl) {
-            yearClickableEl.addEventListener('click', function() {
-                yearClickCount++;
-                
-                // Reseta o contador após 2 segundos
-                clearTimeout(yearClickTimeout);
-                yearClickTimeout = setTimeout(() => {
-                    yearClickCount = 0;
-                }, 2000);
-
-                // Se atingiu 5 cliques em 2 segundos, redireciona para admin
-                if (yearClickCount === 5) {
-                    yearClickCount = 0;
-                    globalThis.location.href = 'admin.html';
-                }
-            });
-        }
-    </script>
+    <script src="data/dados_inline.js"></script>
+    <script src="assets/js/calculadora.js"></script>
+    <script src="assets/js/easter-egg.js"></script>
 </body>
 </html>

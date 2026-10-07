@@ -1,0 +1,256 @@
+/* ============================================
+   DRAENCE — TABELA DE VALORES (tabela-valores.html)
+   ============================================ */
+
+/* Filtros */
+.filters-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.filters-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.filters-actions .btn-primary {
+    flex: 0 1 200px;
+}
+
+.filters-actions .btn-ghost-danger {
+    flex: 0 1 120px;
+}
+
+/* Card da tabela */
+.card--table {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding: 20px 24px 16px;
+}
+
+.table-toolbar .card-title {
+    margin-bottom: 0;
+}
+
+.table-counter {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+}
+
+.table-scroll {
+    overflow-x: auto;
+    border-top: 1px solid var(--border-color);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92em;
+    color: var(--text-primary);
+}
+
+.data-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #172138;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.data-table th.num {
+    text-align: right;
+}
+
+.data-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.15s ease;
+}
+
+.data-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.015);
+}
+
+.data-table tbody tr:hover {
+    background-color: var(--accent-primary-soft);
+}
+
+.data-table tbody td {
+    padding: 11px 16px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.data-table td:nth-child(4),
+.data-table td:nth-child(5),
+.data-table td:nth-child(6) {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.badge-posicao {
+    display: inline-block;
+    min-width: 44px;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-primary-soft);
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.money-brl {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.money-eur {
+    color: var(--text-muted);
+    font-size: 0.85em;
+}
+
+.font-bold {
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+/* Ordenação */
+.sort-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.78em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.sort-btn:hover {
+    color: var(--text-primary);
+}
+
+.sort-icon {
+    display: inline-block;
+    opacity: 0.4;
+    transition: opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.sort-btn:hover .sort-icon {
+    opacity: 1;
+}
+
+.sort-btn.sort-asc,
+.sort-btn.sort-desc {
+    color: var(--accent-primary);
+}
+
+.sort-btn.sort-asc .sort-icon {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+.sort-btn.sort-desc .sort-icon {
+    opacity: 1;
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.pagination-info {
+    min-width: 120px;
+    text-align: center;
+    font-size: 0.88em;
+    color: var(--text-secondary);
+}
+
+.btn-paginacao {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 0.88em;
+    font-weight: 500;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-paginacao:hover:not(:disabled) {
+    background: var(--accent-primary-soft);
+    border-color: var(--accent-primary);
+}
+
+.btn-paginacao:disabled {
+    cursor: not-allowed;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+    .filters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .filters-grid .form-group:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 760px) {
+    .filters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .filters-actions .btn-primary,
+    .filters-actions .btn-ghost-danger {
+        flex: 1;
+    }
+
+    .table-toolbar {
+        padding: 16px;
+    }
+
+    .data-table tbody td,
+    .data-table thead th {
+        padding: 10px 12px;
+    }
+
+    .pagination {
+        padding: 14px 16px 16px;
+        gap: 8px;
+    }
+
+    .pagination-info {
+        min-width: 0;
+        flex: 1;
+    }
+}
