@@ -163,7 +163,7 @@ O sistema não olha apenas o salário mensal. Ele calcula o pacote completo:
 
 ### Design & UX
 - **Identidade DraeWiki:** escala "sálvia" (brand), fundos e textos verde-acinzentados, acento cobre, tema claro/escuro (segue o sistema e pode ser alternado no header).
-- **Tipografia:** Big Shoulders Display (títulos), Fraunces (texto editorial), IBM Plex Sans (interface) e IBM Plex Mono (valores e dados).
+- **Tipografia:** Big Shoulders Display (títulos), IBM Plex Sans (interface e textos) e IBM Plex Mono (valores e dados).
 - **Feedback Visual:** Tooltips interativos e indicadores de cores (Verde/Vermelho) para status da negociação.
 - **Responsividade:** Totalmente adaptável para Mobile e Desktop.
 

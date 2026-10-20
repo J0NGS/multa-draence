@@ -92,7 +92,6 @@
     background: var(--brand-soft);
     border-left: 3px solid var(--brand);
     color: var(--text-primary) !important;
-    font-family: var(--font-editorial);
     font-style: italic;
 }
 

@@ -2,8 +2,8 @@
    DRAENCE — BASE
    Identidade visual alinhada à DraeWiki: escala "sálvia" (brand),
    fundos e textos verde-acinzentados, acento cobre e tema claro/escuro.
-   Tipografia: Big Shoulders Display (títulos), Fraunces (editorial),
-   IBM Plex Sans (interface) e IBM Plex Mono (dados).
+   Tipografia: Big Shoulders Display (títulos),
+   IBM Plex Sans (interface e textos) e IBM Plex Mono (dados).
    Tokens, reset, layout, header/nav, formulários,
    botões, cards, tooltips e footer (todas as páginas)
    ============================================ */
@@ -76,7 +76,6 @@
     /* Tipografia */
     --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
-    --font-editorial: 'Fraunces', Georgia, 'Times New Roman', serif;
     --font-data: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
 
     /* Sombras e layout */
@@ -461,9 +460,8 @@ a {
 }
 
 .page-intro p {
-    font-family: var(--font-editorial);
     color: var(--text-secondary);
-    font-size: 1.12em;
+    font-size: 1.05em;
     line-height: 1.65;
     max-width: 620px;
 }
