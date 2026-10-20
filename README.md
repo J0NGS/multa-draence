@@ -111,7 +111,7 @@ multa-draence/
 │
 ├── assets/
 │   ├── css/
-│   │   ├── base.css         # Tokens, layout, header/nav, formulários, botões, footer
+│   │   ├── base.css         # Tokens (tema claro/escuro), layout, header/nav, formulários, botões, footer
 │   │   ├── calculadora.css  # Calculadora e admin (resultado, comparativo, fórmula)
 │   │   ├── proposta.css     # Montador de propostas
 │   │   ├── tabela.css       # Tabela de valores
@@ -121,6 +121,7 @@ multa-draence/
 │   │   ├── proposta.js      # Montador de propostas
 │   │   ├── tabela-valores.js# Filtros, ordenação e paginação da tabela
 │   │   ├── easter-egg.js    # Acesso ao modo admin pelo rodapé
+│   │   ├── theme.js         # Alternador de tema claro/escuro (salvo no navegador)
 │   │   └── icons.js         # Conjunto de ícones (sprite SVG, Lucide - ISC)
 │   └── img/
 │       └── pes-drae.png     # Logo Draence
@@ -157,11 +158,12 @@ O sistema não olha apenas o salário mensal. Ele calcula o pacote completo:
 
 ### Front-end
 - **HTML5** - Estrutura semântica.
-- **CSS3** - Layout responsivo com Flexbox/Grid, Variáveis CSS (Custom Properties) e Design System "Dark Slate".
+- **CSS3** - Layout responsivo com Flexbox/Grid e Variáveis CSS (Custom Properties), com tema claro e escuro.
 - **JavaScript (ES6+)** - Lógica de cálculo, manipulação do DOM e injeção de dados.
 
 ### Design & UX
-- **Design System Próprio:** Interface escura focada em dados (Dashboard-like).
+- **Identidade DraeWiki:** escala "sálvia" (brand), fundos e textos verde-acinzentados, acento cobre, tema claro/escuro (segue o sistema e pode ser alternado no header).
+- **Tipografia:** Big Shoulders Display (títulos), IBM Plex Sans (interface e textos) e IBM Plex Mono (valores e dados).
 - **Feedback Visual:** Tooltips interativos e indicadores de cores (Verde/Vermelho) para status da negociação.
 - **Responsividade:** Totalmente adaptável para Mobile e Desktop.
 

@@ -1,60 +1,175 @@
 /* ============================================
    DRAENCE — BASE
-   Identidade PES Draence: verde-sálvia do logo, grafite,
-   tipografia larga (Archivo Expanded) e linguagem de futebol.
+   Identidade visual alinhada à DraeWiki: escala "sálvia" (brand),
+   fundos e textos verde-acinzentados, acento cobre e tema claro/escuro.
+   Tipografia: Big Shoulders Display (títulos),
+   IBM Plex Sans (interface e textos) e IBM Plex Mono (dados).
    Tokens, reset, layout, header/nav, formulários,
    botões, cards, tooltips e footer (todas as páginas)
    ============================================ */
 
 :root {
-    /* Marca (extraído do logo) */
-    --brand: #b5d38a;
-    --brand-bright: #cde8a4;
-    --brand-deep: #8fb35c;
-    --brand-ink: #10160c;          /* texto sobre a cor da marca */
-    --brand-gray: #8a8a8a;
-    --brand-soft: rgba(181, 211, 138, 0.10);
-    --brand-line: rgba(181, 211, 138, 0.16);
+    color-scheme: light;
 
-    /* Superfícies (noite de estádio) */
-    --bg-body: #0a0d09;
-    --bg-card: #12170f;
-    --bg-card-2: #171e13;
-    --bg-input: #0d110b;
-    --bg-subtle: rgba(181, 211, 138, 0.05);
+    /* Escala brand (sálvia) — mesma da DraeWiki */
+    --brand-0: #f1f4ef;
+    --brand-1: #e2e8de;
+    --brand-2: #c5d1bf;
+    --brand-3: #a6ba9e;
+    --brand-4: #8ba681;
+    --brand-5: #749466;
+    --brand-6: #608052;
+    --brand-7: #576352;
+    --brand-8: #45523f;
+    --brand-9: #34402e;
+
+    /* Marca no tema claro: tom 7 para preenchimentos e texto */
+    --brand: var(--brand-7);
+    --brand-bright: var(--brand-8);   /* hover */
+    --brand-deep: var(--brand-9);     /* active */
+    --brand-ink: #f8faf4;             /* texto sobre a cor da marca */
+    --brand-gray: #74806d;
+    --brand-soft: rgba(87, 99, 82, 0.10);
+    --brand-line: rgba(87, 99, 82, 0.18);
+
+    /* Superfícies (page / surface / subtle) */
+    --bg-body: #eef3e1;
+    --bg-card: #f8faf4;
+    --bg-card-2: #f8faf4;
+    --bg-input: #f8faf4;
+    --bg-subtle: #e3ead5;
+    --bg-overlay: rgba(238, 243, 225, 0.88);
+    --bg-tooltip: #252b23;
+    --text-tooltip: #e9eedf;
 
     /* Texto */
-    --text-primary: #eef3e6;
-    --text-secondary: #a4ad98;
-    --text-muted: #6d7564;
+    --text-primary: #252b23;
+    --text-secondary: #5c6658;
+    --text-muted: #74806d;
+
+    /* Acento (cobre) */
+    --accent: #c88d56;
+    --accent-ink: #2a1a0a;
+    --accent-soft: rgba(200, 141, 86, 0.14);
+    --accent-text: #8f5a26;           /* variante do acento com contraste AA sobre o fundo claro */
 
     /* Semântica (nomes mantidos: usados pelos scripts) */
     --accent-primary: var(--brand);
     --accent-primary-hover: var(--brand-bright);
     --accent-primary-soft: var(--brand-soft);
-    --accent-success: #b5d38a;
-    --accent-success-soft: rgba(181, 211, 138, 0.14);
-    --accent-danger: #ff6f5e;
-    --accent-danger-soft: rgba(255, 111, 94, 0.13);
-    --accent-warning: #f2c14e;
+    --accent-success: var(--brand);
+    --accent-success-soft: var(--brand-soft);
+    --accent-danger: #b4432f;
+    --accent-danger-ink: #fff7f4;
+    --accent-danger-soft: rgba(180, 67, 47, 0.10);
+    --accent-danger-line: rgba(180, 67, 47, 0.40);
+    --accent-danger-text: #8f3322;
+    --accent-warning: var(--accent);
 
     /* Bordas e forma */
-    --border-color: rgba(181, 211, 138, 0.12);
-    --border-strong: rgba(181, 211, 138, 0.24);
-    --border-radius: 14px;
-    --radius-sm: 8px;
+    --border-color: #d7e0c8;
+    --border-strong: #b9c7a6;
+    --border-radius: 8px;
+    --radius-sm: 4px;
     --radius-pill: 999px;
-    --skew: -12deg;
 
     /* Tipografia */
-    --font-body: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Archivo', 'Arial Black', sans-serif;
+    --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --font-data: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
 
     /* Sombras e layout */
-    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 18px 40px -20px rgba(0, 0, 0, 0.85);
-    --focus-ring: 0 0 0 3px rgba(181, 211, 138, 0.28);
-    --header-height: 72px;
+    --shadow-card: 0 1px 2px rgba(37, 43, 35, 0.05), 0 8px 24px -16px rgba(37, 43, 35, 0.22);
+    --focus-ring: 0 0 0 3px rgba(87, 99, 82, 0.30);
+    --header-height: 68px;
     --page-max: 1200px;
+}
+
+/* Tema escuro: automático pelo sistema ou forçado via [data-theme="dark"] */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+
+        --brand: var(--brand-4);
+        --brand-bright: var(--brand-3);
+        --brand-deep: var(--brand-5);
+        --brand-ink: #171c14;
+        --brand-gray: #6e7a64;
+        --brand-soft: rgba(139, 166, 129, 0.14);
+        --brand-line: rgba(139, 166, 129, 0.22);
+
+        --bg-body: #171c14;
+        --bg-card: #242b1e;
+        --bg-card-2: #242b1e;
+        --bg-input: #1d2318;
+        --bg-subtle: #2c3527;
+        --bg-overlay: rgba(23, 28, 20, 0.86);
+        --bg-tooltip: #2c3527;
+        --text-tooltip: #e9eedf;
+
+        --text-primary: #e9eedf;
+        --text-secondary: #aebca1;
+        --text-muted: #6e7a64;
+
+        --accent: #e0a46e;
+        --accent-ink: #2a1a0a;
+        --accent-soft: rgba(224, 164, 110, 0.14);
+        --accent-text: #e0a46e;
+
+        --accent-danger: #e8806c;
+        --accent-danger-ink: #2a0e08;
+        --accent-danger-soft: rgba(232, 128, 108, 0.14);
+        --accent-danger-line: rgba(232, 128, 108, 0.45);
+        --accent-danger-text: #f0a597;
+
+        --border-color: #3a4432;
+        --border-strong: #52604a;
+
+        --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 14px 32px -18px rgba(0, 0, 0, 0.7);
+        --focus-ring: 0 0 0 3px rgba(139, 166, 129, 0.34);
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --brand: var(--brand-4);
+    --brand-bright: var(--brand-3);
+    --brand-deep: var(--brand-5);
+    --brand-ink: #171c14;
+    --brand-gray: #6e7a64;
+    --brand-soft: rgba(139, 166, 129, 0.14);
+    --brand-line: rgba(139, 166, 129, 0.22);
+
+    --bg-body: #171c14;
+    --bg-card: #242b1e;
+    --bg-card-2: #242b1e;
+    --bg-input: #1d2318;
+    --bg-subtle: #2c3527;
+    --bg-overlay: rgba(23, 28, 20, 0.86);
+    --bg-tooltip: #2c3527;
+    --text-tooltip: #e9eedf;
+
+    --text-primary: #e9eedf;
+    --text-secondary: #aebca1;
+    --text-muted: #6e7a64;
+
+    --accent: #e0a46e;
+    --accent-ink: #2a1a0a;
+    --accent-soft: rgba(224, 164, 110, 0.14);
+    --accent-text: #e0a46e;
+
+    --accent-danger: #e8806c;
+    --accent-danger-ink: #2a0e08;
+    --accent-danger-soft: rgba(232, 128, 108, 0.14);
+    --accent-danger-line: rgba(232, 128, 108, 0.45);
+    --accent-danger-text: #f0a597;
+
+    --border-color: #3a4432;
+    --border-strong: #52604a;
+
+    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 14px 32px -18px rgba(0, 0, 0, 0.7);
+    --focus-ring: 0 0 0 3px rgba(139, 166, 129, 0.34);
 }
 
 /* ---------- Reset ---------- */
@@ -80,12 +195,6 @@ body {
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
     background-color: var(--bg-body);
-    /* Holofotes + listras de gramado */
-    background-image:
-        radial-gradient(1100px 520px at 50% -180px, rgba(181, 211, 138, 0.13), transparent 70%),
-        radial-gradient(600px 400px at 100% 30%, rgba(181, 211, 138, 0.04), transparent 70%),
-        repeating-linear-gradient(90deg, rgba(181, 211, 138, 0.022) 0 90px, transparent 90px 180px);
-    background-attachment: fixed;
 }
 
 ::selection {
@@ -107,13 +216,11 @@ a {
     box-shadow: var(--focus-ring);
 }
 
-/* Títulos com a tipografia larga do logo */
+/* Títulos com a tipografia condensada da DraeWiki */
 .display {
     font-family: var(--font-display);
-    font-stretch: 125%;
     font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
+    line-height: 1.1;
 }
 
 /* ---------- Layout ---------- */
@@ -121,7 +228,7 @@ a {
     width: 100%;
     max-width: var(--page-max);
     margin: 0 auto;
-    padding: 40px 20px 64px;
+    padding: 44px 20px 72px;
     flex: 1;
 }
 
@@ -136,28 +243,17 @@ a {
     position: sticky;
     top: 0;
     z-index: 200;
-    background: rgba(10, 13, 9, 0.84);
-    backdrop-filter: saturate(140%) blur(14px);
-    -webkit-backdrop-filter: saturate(140%) blur(14px);
-}
-
-/* Faixa verde que esmaece nas pontas (igual à base do logo) */
-.site-header::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--brand) 25%, var(--brand) 75%, transparent);
-    opacity: 0.55;
+    background: var(--bg-overlay);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
 }
 
 .site-header__inner {
     max-width: var(--page-max);
     min-height: var(--header-height);
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 8px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -174,35 +270,35 @@ a {
 }
 
 .brand img {
-    height: 44px;
+    height: 40px;
     width: auto;
-    max-width: 190px;
+    max-width: 170px;
     object-fit: contain;
 }
 
 .brand__text {
     display: flex;
     flex-direction: column;
-    line-height: 1.15;
+    line-height: 1.1;
     padding-left: 14px;
     border-left: 1px solid var(--border-strong);
 }
 
 .brand__text strong {
     font-family: var(--font-display);
-    font-stretch: 125%;
-    font-size: 0.95em;
+    font-size: 1.45em;
     font-weight: 800;
     letter-spacing: 0.04em;
     color: var(--text-primary);
 }
 
 .brand__text small {
-    font-size: 0.74em;
+    font-family: var(--font-data);
+    font-size: 0.68em;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--brand);
+    color: var(--text-secondary);
     white-space: nowrap;
 }
 
@@ -210,9 +306,9 @@ a {
     display: inline-block;
     margin-left: 6px;
     padding: 0 6px;
-    transform: skewX(var(--skew));
-    background: var(--accent-danger);
-    color: #1a0805;
+    border-radius: 2px;
+    background: var(--accent);
+    color: var(--accent-ink);
     font-weight: 700;
 }
 
@@ -226,17 +322,15 @@ a {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     padding: 10px 14px;
     color: var(--text-secondary);
-    font-size: 0.78em;
-    font-weight: 600;
-    font-stretch: 112%;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: 0.86em;
+    font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
-    transition: color 0.15s ease;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s ease, background 0.15s ease;
 }
 
 .nav-link::after {
@@ -244,69 +338,121 @@ a {
     position: absolute;
     left: 14px;
     right: 14px;
-    bottom: 2px;
-    height: 3px;
-    transform: skewX(var(--skew)) scaleX(0);
-    transform-origin: left;
+    bottom: 3px;
+    height: 2px;
     background: var(--brand);
+    transform: scaleX(0);
+    transform-origin: left;
     transition: transform 0.2s ease;
 }
 
 .nav-link:hover {
     color: var(--text-primary);
-}
-
-.nav-link:hover::after {
-    transform: skewX(var(--skew)) scaleX(0.4);
+    background: var(--brand-soft);
 }
 
 .nav-link.is-active {
     color: var(--brand);
+    font-weight: 600;
 }
 
 .nav-link.is-active::after {
-    transform: skewX(var(--skew)) scaleX(1);
+    transform: scaleX(1);
 }
 
 .nav-link--danger,
 .nav-link--danger:hover {
-    color: var(--accent-danger);
+    color: var(--accent-danger-text);
 }
 
 .nav-link--danger::after {
     background: var(--accent-danger);
 }
 
+/* Alternador de tema (claro / escuro) */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--brand);
+    border-color: var(--brand);
+    background: var(--brand-soft);
+}
+
+.theme-toggle .icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* O ícone exibido indica o tema para o qual o clique troca */
+.theme-toggle .icon-sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+    display: block;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+        display: block;
+    }
+
+    :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+        display: none;
+    }
+}
+
 /* ---------- Introdução da página ---------- */
 .page-intro {
-    margin-bottom: 32px;
+    margin-bottom: 36px;
     max-width: 760px;
 }
 
-/* Tag inclinada, estilo menu do PES */
+/* Rótulo de seção em mono, com filete de acento */
 .eyebrow {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 14px;
-    padding: 4px 14px;
-    transform: skewX(var(--skew));
-    background: var(--brand);
-    color: var(--brand-ink);
-    font-size: 0.7em;
-    font-weight: 800;
-    font-stretch: 125%;
-    letter-spacing: 0.14em;
+    color: var(--accent-text);
+    font-family: var(--font-data);
+    font-size: 0.74em;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
 }
 
 .page-intro h1 {
     font-family: var(--font-display);
-    font-stretch: 125%;
     font-weight: 800;
-    font-size: clamp(1.55em, 3.6vw, 2.4em);
-    line-height: 1.08;
-    letter-spacing: -0.005em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+    font-size: clamp(2.3em, 5.4vw, 3.5em);
+    line-height: 1.02;
+    letter-spacing: 0.005em;
+    margin-bottom: 14px;
 }
 
 .page-intro h1 .hl {
@@ -315,30 +461,19 @@ a {
 
 .page-intro p {
     color: var(--text-secondary);
-    font-size: 1.02em;
+    font-size: 1.05em;
+    line-height: 1.65;
     max-width: 620px;
 }
 
 /* ---------- Cards ---------- */
 .card {
     position: relative;
-    background: linear-gradient(180deg, var(--bg-card-2), var(--bg-card));
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: 26px;
     box-shadow: var(--shadow-card);
-}
-
-/* Filete verde no topo do card */
-.card::before {
-    content: "";
-    position: absolute;
-    top: -1px;
-    left: 26px;
-    width: 56px;
-    height: 3px;
-    background: var(--brand);
-    border-radius: 0 0 3px 3px;
 }
 
 .card-title {
@@ -346,35 +481,39 @@ a {
     align-items: center;
     gap: 12px;
     font-family: var(--font-display);
-    font-stretch: 118%;
-    font-size: 0.95em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-size: 1.45em;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
     color: var(--text-primary);
     margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
 }
 
-/* Número do passo como "camisa" inclinada */
+/* Número do passo */
 .card-step {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 32px;
-    height: 26px;
+    min-width: 30px;
+    height: 30px;
     padding: 0 8px;
-    transform: skewX(var(--skew));
+    border-radius: var(--radius-sm);
     background: var(--brand);
     color: var(--brand-ink);
-    font-size: 0.85em;
-    font-weight: 800;
+    font-family: var(--font-data);
+    font-size: 0.6em;
+    font-weight: 600;
     flex-shrink: 0;
 }
 
 .card-subtitle {
     margin-left: auto;
-    font-size: 0.8em;
+    font-family: var(--font-body);
+    font-size: 0.55em;
     font-weight: 400;
+    letter-spacing: 0;
     color: var(--text-muted);
 }
 
@@ -403,17 +542,14 @@ a {
 label {
     display: flex;
     align-items: center;
-    font-size: 0.72em;
-    font-weight: 700;
-    font-stretch: 112%;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 0.84em;
+    font-weight: 600;
     color: var(--text-secondary);
     margin-bottom: 8px;
 }
 
 .required {
-    color: var(--brand);
+    color: var(--accent-text);
     margin-left: 3px;
 }
 
@@ -434,6 +570,10 @@ select {
     transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
+input[type="number"] {
+    font-family: var(--font-data);
+}
+
 input::placeholder {
     color: var(--text-muted);
     font-weight: 400;
@@ -450,7 +590,6 @@ input[type="text"]:focus,
 select:focus {
     outline: none;
     border-color: var(--brand);
-    background: #10160d;
     box-shadow: var(--focus-ring);
 }
 
@@ -466,7 +605,7 @@ select {
     appearance: none;
     -webkit-appearance: none;
     padding-right: 40px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b5d38a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238ba681' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
     cursor: pointer;
@@ -489,8 +628,10 @@ select option {
     position: absolute;
     right: 12px;
     top: 50%;
-    transform: translateY(-50%) skewX(var(--skew));
-    font-weight: 800;
+    transform: translateY(-50%);
+    border-radius: 2px;
+    font-family: var(--font-data);
+    font-weight: 600;
     font-size: 0.75em;
     padding: 1px 7px;
     pointer-events: none;
@@ -513,8 +654,8 @@ select option {
 /* Feedback quando um valor é corrigido para o limite min/máx */
 @keyframes flash-correction {
     0% {
-        border-color: var(--accent-warning);
-        box-shadow: 0 0 0 4px rgba(242, 193, 78, 0.22);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-soft);
     }
     100% {
         border-color: var(--border-color);
@@ -535,101 +676,60 @@ button {
 .btn-primary,
 .btn-secondary,
 .btn-ghost-danger {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    min-height: 50px;
-    padding: 12px 26px;
-    border: none;
-    background: none;
-    font-family: var(--font-display);
-    font-stretch: 118%;
-    font-size: 0.88em;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.94em;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     text-decoration: none;
-    isolation: isolate;
-    transition: color 0.15s ease, transform 0.15s ease;
-}
-
-/* Fundo inclinado (mantém o texto reto e o foco visível) */
-.btn-primary::before,
-.btn-secondary::before,
-.btn-ghost-danger::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    transform: skewX(var(--skew));
-    border-radius: 4px;
-    transition: background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
 .btn-primary {
+    background: var(--brand);
+    border-color: var(--brand);
     color: var(--brand-ink);
 }
 
-.btn-primary::before {
-    background: linear-gradient(180deg, var(--brand-bright), var(--brand));
-    box-shadow: 0 10px 28px -12px rgba(181, 211, 138, 0.75), inset 0 -2px 0 rgba(0, 0, 0, 0.18);
-}
-
 .btn-primary:hover {
-    transform: translateY(-1px);
-}
-
-.btn-primary:hover::before {
     background: var(--brand-bright);
-    box-shadow: 0 14px 32px -12px rgba(181, 211, 138, 0.9), inset 0 -2px 0 rgba(0, 0, 0, 0.18);
+    border-color: var(--brand-bright);
 }
 
 .btn-primary:active {
-    transform: translateY(0);
+    background: var(--brand-deep);
+    border-color: var(--brand-deep);
+    transform: translateY(1px);
 }
 
 .btn-secondary {
+    background: transparent;
+    border-color: var(--border-strong);
     color: var(--text-secondary);
 }
 
-.btn-secondary::before {
-    border: 1px solid var(--border-strong);
-    background: transparent;
-}
-
 .btn-secondary:hover {
+    background: var(--brand-soft);
+    border-color: var(--brand);
     color: var(--text-primary);
 }
 
-.btn-secondary:hover::before {
-    background: var(--bg-subtle);
-    border-color: var(--brand);
-}
-
 .btn-ghost-danger {
-    color: var(--accent-danger);
+    background: transparent;
+    border-color: var(--accent-danger-line);
+    color: var(--accent-danger-text);
 }
 
-.btn-ghost-danger::before {
-    border: 1px solid rgba(255, 111, 94, 0.45);
-}
-
-.btn-ghost-danger:hover::before {
+.btn-ghost-danger:hover {
     background: var(--accent-danger-soft);
-}
-
-.btn-primary:focus-visible,
-.btn-secondary:focus-visible,
-.btn-ghost-danger:focus-visible {
-    box-shadow: none;
-}
-
-.btn-primary:focus-visible::before,
-.btn-secondary:focus-visible::before,
-.btn-ghost-danger:focus-visible::before {
-    box-shadow: 0 0 0 3px var(--bg-body), 0 0 0 5px var(--brand);
+    border-color: var(--accent-danger);
 }
 
 .btn-block {
@@ -657,25 +757,13 @@ button {
     align-items: center;
     gap: 12px;
     background: var(--accent-danger-soft);
-    border: 1px solid rgba(255, 111, 94, 0.4);
+    border: 1px solid var(--accent-danger-line);
     border-left: 4px solid var(--accent-danger);
     border-radius: var(--radius-sm);
     padding: 12px 16px;
-    color: #ffb4aa;
+    color: var(--accent-danger-text);
     font-size: 0.92em;
     font-weight: 500;
-}
-
-/* "Cartão amarelo" */
-.error-box::before {
-    content: "";
-    width: 12px;
-    height: 17px;
-    border-radius: 2px;
-    background: var(--accent-warning);
-    transform: rotate(8deg);
-    flex-shrink: 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .error-box.show {
@@ -694,8 +782,9 @@ button {
     background: var(--brand-soft);
     border: 1px solid var(--border-strong);
     color: var(--brand);
+    font-family: var(--font-data);
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 600;
     cursor: help;
     position: relative;
     flex-shrink: 0;
@@ -709,15 +798,14 @@ button {
     transform: translateX(-50%) translateY(4px);
     width: 240px;
     padding: 10px 12px;
-    background: #1a2216;
-    border: 1px solid var(--border-strong);
-    border-top: 2px solid var(--brand);
+    background: var(--bg-tooltip);
+    border-top: 2px solid var(--accent);
     border-radius: var(--radius-sm);
-    box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.8);
-    color: var(--text-primary);
+    box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.5);
+    color: var(--text-tooltip);
+    font-family: var(--font-body);
     font-size: 12px;
     font-weight: 400;
-    font-stretch: 100%;
     line-height: 1.45;
     text-align: left;
     text-transform: none;
@@ -739,28 +827,18 @@ button {
 
 /* ---------- Footer ---------- */
 .main-footer {
-    position: relative;
-    background: rgba(0, 0, 0, 0.35);
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
     padding: 28px 20px;
     text-align: center;
     margin-top: auto;
 }
 
-.main-footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--brand) 30%, var(--brand) 70%, transparent);
-    opacity: 0.35;
-}
-
 .main-footer p {
     color: var(--text-muted);
-    font-size: 0.82em;
-    line-height: 1.8;
+    font-family: var(--font-data);
+    font-size: 0.78em;
+    line-height: 1.9;
 }
 
 .main-footer a {
@@ -824,7 +902,7 @@ button {
     }
 
     .brand img {
-        height: 34px;
+        height: 32px;
     }
 
     .brand__text {
@@ -837,10 +915,6 @@ button {
 
     .card {
         padding: 22px 16px 18px;
-    }
-
-    .card::before {
-        left: 16px;
     }
 
     .form-grid {
@@ -868,13 +942,12 @@ button {
     .btn-primary,
     .btn-secondary,
     .btn-ghost-danger {
-        font-size: 0.8em;
-        letter-spacing: 0.03em;
+        font-size: 0.88em;
         padding: 12px 18px;
     }
 
     .brand__text strong {
-        font-size: 0.85em;
+        font-size: 1.25em;
     }
 }
 
@@ -922,7 +995,7 @@ label .icon {
 .btn-ghost-danger .icon {
     width: 18px;
     height: 18px;
-    stroke-width: 2.4;
+    stroke-width: 2.2;
 }
 
 .icon-inline {
